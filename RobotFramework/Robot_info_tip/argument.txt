@@ -1,0 +1,6 @@
+#--rerunfailed report/output-20171217-134914.xml
+
+--outputdir report
+--console verbose
+#--timestampoutputs
+

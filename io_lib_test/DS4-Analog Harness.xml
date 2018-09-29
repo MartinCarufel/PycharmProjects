@@ -1,0 +1,24 @@
+<Map>
+  <Devices>
+    <Device model="8227" deviceNo="1">
+      <Port name="door" type="DigitalOutput" portNo="0" comment="20/22-Green" negateValue="false" />
+      <Port name="trunk" type="DigitalOutput" portNo="1" comment="19/22-Blue" negateValue="false" />
+      <Port name="hood" type="DigitalOutput" portNo="2" comment="21/22-Gray" negateValue="false" />
+      <Port name="e_brake" type="DigitalOutput" portNo="3" comment="17/22-Black/White" negateValue="false" />
+      <Port name="brake" type="DigitalOutput" portNo="4" comment="14/22-Brown" negateValue="false" />
+      <Port name="ignition" type="DigitalOutput" portNo="5" comment="12/22-Pink" negateValue="false" />
+      <Port name="activation_input" type="DigitalOutput" portNo="6" comment="15/22-White/Blue" negateValue="false" />
+      <Port name="trigger" type="DigitalOutput" portNo="7" comment="16/22-Red/Blue" negateValue="false" />
+      <Port name="lock" type="DigitalInput" portNo="0" comment="3/22-dk.Green/Black" negateValue="true" />
+      <Port name="unlock" type="DigitalInput" portNo="1" comment="9/22-dk.Blue/Black" negateValue="true" />
+      <Port name="trunk_rel" type="DigitalInput" portNo="2" comment="4/22-Red/White" negateValue="true" />
+      <Port name="siren" type="DigitalInput" portNo="3" comment="11/22-Brown/Red" negateValue="false" />
+      <Port name="gwr" type="DigitalInput" portNo="4" comment="2/22-Blue/White" negateValue="true" />
+      <Port name="relay1" type="DigitalInput" portNo="5" comment="Relay1" negateValue="false" />
+      <Port name="relay2" type="DigitalInput" portNo="6" comment="Relay2" negateValue="false" />
+      <Port name="relay3" type="DigitalInput" portNo="7" comment="Relay3" negateValue="false" />
+    </Device>
+  </Devices>
+  <Groups />
+  <BoolAnalogs />
+</Map>

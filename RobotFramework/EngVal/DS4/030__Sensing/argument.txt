@@ -1,0 +1,18 @@
+#--include sense
+#--include
+#--exclude
+#--exclude
+--test init
+
+
+#--test
+#--variable
+#--rerunfailed report/output-20171217-134914.xml
+#--critical
+#--critical
+#--noncritical
+#--noncritical
+--outputdir C:/Users/Martin/PycharmProjects/RobotFramework/EngVal/Output
+--console verbose
+#--timestampoutputs
+#verbose|dotted|quiet|none

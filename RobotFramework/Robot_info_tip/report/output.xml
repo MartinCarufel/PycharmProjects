@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.2 (Python 3.6.3 on win32)" generated="20180123 16:06:18.775">
+<suite id="s1" name="Robot user keyword" source="C:\Users\Martin\PycharmProjects\RobotFramework\Robot_info_tip\Robot_user_keyword.robot">
+<test id="s1-t1" name="Test title">
+<kw name="ask your info">
+<doc>This keyword ask for personal info and return a dictionary of info</doc>
+<arguments>
+<arg>Martin</arg>
+</arguments>
+<assign>
+<var>&amp;{my_info}</var>
+</assign>
+<kw name="Get Value From User" library="Dialogs">
+<doc>Pauses test execution and asks user to input a value.</doc>
+<arguments>
+<arg>What is you age ?</arg>
+</arguments>
+<assign>
+<var>${age}</var>
+</assign>
+<msg timestamp="20180123 16:06:21.296" level="INFO">${age} = 34</msg>
+<status status="PASS" starttime="20180123 16:06:18.845" endtime="20180123 16:06:21.296"></status>
+</kw>
+<kw name="Get Selection From User" library="Dialogs">
+<doc>Pauses test execution and asks user to select a value.</doc>
+<arguments>
+<arg>What is your gender ?</arg>
+<arg>Male</arg>
+<arg>Female</arg>
+</arguments>
+<assign>
+<var>${gender}</var>
+</assign>
+<msg timestamp="20180123 16:06:22.737" level="INFO">${gender} = Male</msg>
+<status status="PASS" starttime="20180123 16:06:21.296" endtime="20180123 16:06:22.737"></status>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<arguments>
+<arg>Name</arg>
+<arg>${name}</arg>
+<arg>age</arg>
+<arg>${age}</arg>
+<arg>gender</arg>
+<arg>${gender}</arg>
+</arguments>
+<assign>
+<var>&amp;{per_info}</var>
+</assign>
+<msg timestamp="20180123 16:06:22.737" level="INFO">&amp;{per_info} = { Name=Martin | age=34 | gender=Male }</msg>
+<status status="PASS" starttime="20180123 16:06:22.737" endtime="20180123 16:06:22.737"></status>
+</kw>
+<msg timestamp="20180123 16:06:22.737" level="INFO">&amp;{my_info} = { Name=Martin | age=34 | gender=Male }</msg>
+<status status="PASS" starttime="20180123 16:06:18.845" endtime="20180123 16:06:22.737"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${empty}</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.737" endtime="20180123 16:06:22.737"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>----------------------------------</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Your name is &amp;{my_info}[Name]</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>You have &amp;{my_info}[age] years old</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>You be &amp;{my_info}[gender] human</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>----------------------------------</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>${empty}</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<tags>
+<tag>DEBUG</tag>
+</tags>
+<status status="PASS" starttime="20180123 16:06:18.835" endtime="20180123 16:06:22.747" critical="yes"></status>
+</test>
+<test id="s1-t2" name="Variable in keyword name">
+<kw name="send lock">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'lock'</arg>
+<arg>log to console</arg>
+<arg>Do lock command</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Do lock command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'unlock'</arg>
+<arg>log to console</arg>
+<arg>Do unlock command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.747"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'trunk'</arg>
+<arg>log to console</arg>
+<arg>Do trunk command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.757" endtime="20180123 16:06:22.757"></status>
+</kw>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.757"></status>
+</kw>
+<kw name="send unlock">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'lock'</arg>
+<arg>log to console</arg>
+<arg>Do lock command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.758" endtime="20180123 16:06:22.758"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'unlock'</arg>
+<arg>log to console</arg>
+<arg>Do unlock command</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Do unlock command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.760" endtime="20180123 16:06:22.761"></status>
+</kw>
+<status status="PASS" starttime="20180123 16:06:22.758" endtime="20180123 16:06:22.761"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'trunk'</arg>
+<arg>log to console</arg>
+<arg>Do trunk command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.761" endtime="20180123 16:06:22.761"></status>
+</kw>
+<status status="PASS" starttime="20180123 16:06:22.758" endtime="20180123 16:06:22.762"></status>
+</kw>
+<kw name="send trunk">
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'lock'</arg>
+<arg>log to console</arg>
+<arg>Do lock command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.762" endtime="20180123 16:06:22.763"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'unlock'</arg>
+<arg>log to console</arg>
+<arg>Do unlock command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.763" endtime="20180123 16:06:22.763"></status>
+</kw>
+<kw name="Run Keyword If" library="BuiltIn">
+<doc>Runs the given keyword with the given arguments, if ``condition`` is true.</doc>
+<arguments>
+<arg>'${function}' == 'trunk'</arg>
+<arg>log to console</arg>
+<arg>Do trunk command</arg>
+</arguments>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Do trunk command</arg>
+</arguments>
+<status status="PASS" starttime="20180123 16:06:22.764" endtime="20180123 16:06:22.764"></status>
+</kw>
+<status status="PASS" starttime="20180123 16:06:22.763" endtime="20180123 16:06:22.764"></status>
+</kw>
+<status status="PASS" starttime="20180123 16:06:22.762" endtime="20180123 16:06:22.764"></status>
+</kw>
+<status status="PASS" starttime="20180123 16:06:22.747" endtime="20180123 16:06:22.765" critical="yes"></status>
+</test>
+<doc>User Keyword</doc>
+<status status="PASS" starttime="20180123 16:06:18.779" endtime="20180123 16:06:22.766"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="2" fail="0">Critical Tests</stat>
+<stat pass="2" fail="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="1" fail="0">DEBUG</stat>
+</tag>
+<suite>
+<stat pass="2" fail="0" id="s1" name="Robot user keyword">Robot user keyword</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

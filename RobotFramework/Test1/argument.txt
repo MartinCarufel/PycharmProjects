@@ -1,0 +1,16 @@
+#--include sense
+#--include
+#--exclude
+#--exclude
+--test Sense Driver door
+#--test
+#--variable
+#--rerunfailed report/output-20171217-134914.xml
+#--critical
+#--critical
+#--noncritical
+#--noncritical
+--outputdir report
+--console verbose
+#--timestampoutputs
+#verbose|dotted|quiet|none

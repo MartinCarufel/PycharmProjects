@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 3.0.2 (Python 3.6.3 on win32)" generated="20171217 21:23:05.998">
+<suite id="s1" name="Eng val Sensing" source="C:\Users\Martin\PycharmProjects\RobotFramework\Test1\Eng_val_Sensing.robot">
+<test id="s1-t1" name="Sense Driver door">
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>Driver Door open and close</arg>
+</arguments>
+<assign>
+<var>${sensing}</var>
+</assign>
+<msg timestamp="20171217 21:23:06.088" level="INFO">${sensing} = Driver Door open and close</msg>
+<status status="PASS" starttime="20171217 21:23:06.088" endtime="20171217 21:23:06.088"></status>
+</kw>
+<kw name="Set Variable" library="BuiltIn">
+<doc>Returns the given values which can then be assigned to a variables.</doc>
+<arguments>
+<arg>5</arg>
+</arguments>
+<assign>
+<var>${exp_status}</var>
+</assign>
+<msg timestamp="20171217 21:23:06.088" level="INFO">${exp_status} = 5</msg>
+<status status="PASS" starttime="20171217 21:23:06.088" endtime="20171217 21:23:06.088"></status>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<doc>Logs the given message to the console.</doc>
+<arguments>
+<arg>Ceci est le test Sense Driver door</arg>
+</arguments>
+<status status="PASS" starttime="20171217 21:23:06.088" endtime="20171217 21:23:06.088"></status>
+</kw>
+<kw name="Pause Execution" library="Dialogs">
+<doc>Pauses test execution until user clicks ``Ok`` button.</doc>
+<arguments>
+<arg>Faire ${sensing} ${exp_status}x</arg>
+</arguments>
+<status status="PASS" starttime="20171217 21:23:06.088" endtime="20171217 21:23:07.858"></status>
+</kw>
+<kw name="count sensing">
+<arguments>
+<arg>Door open/close</arg>
+</arguments>
+<assign>
+<var>${nb_cycle}</var>
+</assign>
+<kw name="Get Value From User" library="Dialogs">
+<doc>Pauses test execution and asks user to input a value.</doc>
+<arguments>
+<arg>Indiquer le nombre de cycle ${sensing}</arg>
+</arguments>
+<assign>
+<var>${count}</var>
+</assign>
+<msg timestamp="20171217 21:23:11.854" level="INFO">${count} = 4</msg>
+<status status="PASS" starttime="20171217 21:23:07.858" endtime="20171217 21:23:11.854"></status>
+</kw>
+<kw name="Convert To Integer" library="BuiltIn">
+<doc>Converts the given item to an integer number.</doc>
+<arguments>
+<arg>${count}</arg>
+</arguments>
+<assign>
+<var>${count}</var>
+</assign>
+<msg timestamp="20171217 21:23:11.855" level="INFO">${count} = 4</msg>
+<status status="PASS" starttime="20171217 21:23:11.855" endtime="20171217 21:23:11.855"></status>
+</kw>
+<msg timestamp="20171217 21:23:11.855" level="INFO">${nb_cycle} = 4</msg>
+<status status="PASS" starttime="20171217 21:23:07.858" endtime="20171217 21:23:11.855"></status>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<doc>Fails if the given objects are unequal.</doc>
+<arguments>
+<arg>${nb_cycle}</arg>
+<arg>${5}</arg>
+<arg>Wrong D2D sensing</arg>
+</arguments>
+<msg timestamp="20171217 21:23:11.856" level="FAIL">Wrong D2D sensing: 4 != 5</msg>
+<status status="FAIL" starttime="20171217 21:23:11.856" endtime="20171217 21:23:11.856"></status>
+</kw>
+<tags>
+<tag>sense_front_door</tag>
+</tags>
+<status status="FAIL" starttime="20171217 21:23:06.078" endtime="20171217 21:23:11.857" critical="yes">Wrong D2D sensing: 4 != 5</status>
+</test>
+<doc>Suite description</doc>
+<status status="FAIL" starttime="20171217 21:23:05.998" endtime="20171217 21:23:11.858"></status>
+</suite>
+<statistics>
+<total>
+<stat pass="0" fail="1">Critical Tests</stat>
+<stat pass="0" fail="1">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1">sense_front_door</stat>
+</tag>
+<suite>
+<stat pass="0" fail="1" id="s1" name="Eng val Sensing">Eng val Sensing</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
