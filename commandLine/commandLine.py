@@ -15,11 +15,21 @@ pyautogui.typewrite("allo\n")
 pyautogui.typewrite("cd..\n")
 processId = p.pid
 print("Le process id est: {}" .format(processId))
+
+title = pyautogui.getWindow("system32")
+title.set_foreground()
+pyautogui.keyDown('altleft')
+pyautogui.keyDown('F4')
+
+pyautogui.keyUp('altleft')
+pyautogui.keyUp('F4')
+p.kill()
+
 #f = "some initial text data\n"
 #p.stdin.write(f)
 
 #rear, err = p.communicate(input="bonjour\n", timeout=5)
-#p.kill()
+
 
 #p = subprocess.Popen(["start", "cmd", "/k"], shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.STDOUT)
 
