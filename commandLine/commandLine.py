@@ -8,6 +8,7 @@ import pyautogui
 from time import sleep
 import re
 
+<<<<<<< HEAD
 sys.path.append('C:/Drive-W/Internal_tools/Libraries/IOLibrary/trunk/out')
 from IOWrapper import IOWrapper
 
@@ -16,6 +17,33 @@ def create_log():
     filename = currentDateTime + ".log"
     currentdir = os.getcwd()
     path = os.path.join(currentdir, "report", filename)
+=======
+commands = ["start", "cmd", "/k", "dir"]
+p = Popen(commands, shell=True, stdin=PIPE, stdout=PIPE, universal_newlines=True)
+sleep(0.3)
+title = pyautogui.getWindow("system32")
+title.set_foreground()
+print(title)
+pyautogui.typewrite("allo\n")
+pyautogui.typewrite("cd..\n")
+processId = p.pid
+print("Le process id est: {}" .format(processId))
+
+title = pyautogui.getWindow("system32")
+title.set_foreground()
+pyautogui.keyDown('altleft')
+pyautogui.keyDown('F4')
+
+pyautogui.keyUp('altleft')
+pyautogui.keyUp('F4')
+p.kill()
+
+#f = "some initial text data\n"
+#p.stdin.write(f)
+
+#rear, err = p.communicate(input="bonjour\n", timeout=5)
+
+>>>>>>> 66cc4876b013b4d211c4ae61919776b0d859f1a0
 
     if not os.path.exists(os.path.dirname(path)):
         try:
