@@ -1,0 +1,30 @@
+
+/send 22 10 91
+
+wake.
+54945.485: 22 D2D 91=FN_LOCK_REM1_ON
+54945.496: FE SCPP+ 00 hhu0r D4=Mode confirmation 00 7C 00
+54945.499: FE MAINP 06=armed
+54945.503: FE D2D 75=SET_EXTENDED_STATUS 01 00 80 Lock,Support_Chg
+54945.512: FE FUNC dest=DB channel#1 WriteValue 1, timeout=8.
+54945.517: FE SENS FF=all devices 00=any channel E1=WriteAlertBits FF
+54945.521: FE D2D 75=SET_EXTENDED_STATUS 01 00 90 Lock,RS_Arm,Support_Chg
+54945.526: FE SCPP+ C0 hhu0r bcast A0=Armed/locked 00 00 00=RS off,vOff,Arm,Lock
+54947.847: FE SCPP+ C0 hhu0r bcast AD=Update 00 00 00=RS off,vOff,Arm,Lock/send 22 10 92
+
+
+54950.239: 22 D2D 92=FN_UNLOCK_DR_REM1_ON
+54950.248: FE SCPP+ 00 hhu0r D4=Mode confirmation 00 00 00
+54950.252: FE MAINP 00=disarmed(idle)
+54950.256: FE D2D 75=SET_EXTENDED_STATUS 00 00 90 RS_Arm,Support_Chg
+54950.269: FE D2D 75=SET_EXTENDED_STATUS 00 00 80 Support_Chg
+54950.273: FE SCPP+ C0 hhu0r bcast AD=Update 00 00 01=RS off,vOff,!Arm,!Lock
+54950.278: FE SENS FF=all devices 00=any channel E1=WriteAlertBits 00
+54950.307: FE FUNC dest=DB channel#1 WriteValue 4, timeout=8.
+54950.358: FE SCPP+ 00 hhu0r A4=Disarm/Unlocked 00 00 04=RS off,vOff,!Arm,!Lock
+54952.847: FE SCPP+ C0 hhu0r bcast AD=Update 00 00 01=RS off,vOff,!Arm,!Lock
+54955.576: FE D2D 75=SET_EXTENDED_STATUS 04 00 80 Ign,Support_Chg
+54955.582: FE D2D FD=SET_IGN_ON
+54957.673: FE D2D 75=SET_EXTENDED_STATUS 00 00 80 Support_Chg
+54957.679: FE D2D 7D=SET_IGN_OFF
+54957.874: FE SCPP+ C0 hhu0r bcast D1=Ignition Off 00 00 00/log close

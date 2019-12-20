@@ -1,0 +1,53 @@
+<Map>
+  <Devices>
+    <Device model="8224" deviceNo="2">
+      <Port name="ignition" type="DigitalOutput" portNo="0" comment="12/22-Pink (+) Ignition Sense Input" negateValue="false" />
+      <Port name="door_pos" type="DigitalOutput" portNo="1" comment="13/22-Violet (+) Door Sense Input" negateValue="false" />
+      <Port name="brake" type="DigitalOutput" portNo="2" comment="14/22-Brown (+) Brake Sense Input" negateValue="false" />
+      <Port name="activation_input" type="DigitalOutput" portNo="4" comment="15/22-White/Blue (-) Activation Input" negateValue="false" />
+      <Port name="trigger" type="DigitalOutput" portNo="5" comment="16/22-Red/Blue (-) Aux3 Input" negateValue="false" />
+      <Port name="e_brake" type="DigitalOutput" portNo="6" comment="17/22-Black/White (-) Handbrake Sense Input" negateValue="false" />
+      <Port name="instant" type="DigitalOutput" portNo="3" comment="18/22-Orange/Black (+) Instant Trigger Input" negateValue="false" />
+      <Port name="trunk" type="DigitalOutput" portNo="7" comment="19/22-Blue (-) Trunk Sense Input" negateValue="false" />
+      <Port name="door" type="DigitalOutput" portNo="8" comment="20/22-Green (-) Door Sense Input" negateValue="false" />
+      <Port name="hood" type="DigitalOutput" portNo="9" comment="21/22-Gray (-) Hood Pin input" negateValue="false" />
+      <Port name="siren_pwr" type="DigitalOutput" portNo="10" comment="siren power" negateValue="false" />
+
+    </Device>
+    <Device model="8223" deviceNo="1">
+      <Port name="faa" type="DigitalInput" portNo="0" comment="1/22-Light Green/Black (-) Factory Alarm Arm Output" negateValue="true" />
+      <Port name="gwr" type="DigitalInput" portNo="1" comment="2/22-Blue/White (-) GWR/Status  Output" negateValue="true" />
+      <Port name="lock" type="DigitalInput" portNo="2" comment="3/22-Green/Black (-) Lock Output" negateValue="true" />
+      <Port name="trunk_rel" type="DigitalInput" portNo="3" comment="4/22-Red/White (-) Trunk release Output" negateValue="true" />
+      <Port name="horn_out" type="DigitalInput" portNo="4" comment="5/22-Brown/Black (-) Horn Output" negateValue="true" />
+      <Port name="aux_1_neg" type="DigitalInput" portNo="5" comment="6/22-Brown/White (-) Aux1 Neg Output" negateValue="true" />
+      <Port name="aux_1_pos" type="DigitalInput" portNo="8" comment="7/22-White (+) Aux1 Pos Output" negateValue="false" />
+      <Port name="aux_4_out" type="DigitalInput" portNo="9" comment="8/22-Violet/Black (+) Aux4 Output" negateValue="false" />
+      <Port name="unlock" type="DigitalInput" portNo="6" comment="9/22-Blue/Black (-) Unlock Output" negateValue="true" />
+      <Port name="fad" type="DigitalInput" portNo="7" comment="10/22-Light Blue/Black (-) Factory Alarm Disarm Output" negateValue="true" />
+      <Port name="siren" type="DigitalInput" portNo="10" comment="11/22-Brown/Red (+) Siren Output" negateValue="false" />
+      <Port name="relay1" type="DigitalInput" portNo="12" comment="3/12-Blue Relay COM Programmable" negateValue="false" />
+      <Port name="relay3" type="DigitalInput" portNo="14" comment="5/12-White Relay COM Parking light" negateValue="false" />
+      <Port name="relay2" type="DigitalInput" portNo="13" comment="8/12-Light Green Relay COM Programmable" negateValue="false" />
+      <Port name="flex_relay" type="DigitalInput" portNo="19" comment="4/10-Pink/White Selectable Flex Relay Output" negateValue="false" />
+      <Port name="starter_kill" type="DigitalInput" portNo="15" comment="6/10-Green N/A Starter Kill Key side" negateValue="false" />
+      <Port name="starter" type="DigitalInput" portNo="18" comment="7/10-Violet Selectable Starter Output" negateValue="false" />
+      <Port name="accessory" type="DigitalInput" portNo="17" comment="8/10-Orange Selectable Accessory Output" negateValue="false" />
+      <Port name="ignition_out" type="DigitalInput" portNo="16" comment="10/10-Pink (+) Ignition Output" negateValue="false" />
+      <Port name="ds4_led_red" type="DigitalInput" portNo="25" comment="pink-pink to Green/White (+) DS4 LED Red" negateValue="true" />
+      <Port name="ds4_led_green" type="DigitalInput" portNo="24" comment="green-green to Green/Black (+) DS4 LED Green" negateValue="true" />
+      <Port name="ds4_led_blue" type="DigitalInput" portNo="26" comment="blue-blue to White/Purple (+) DS4 LED Blue" negateValue="true" />
+    </Device>
+    <Device model="ArduinoTach" deviceNo="0">
+      <Port name="tack" type="FreqOut" portNo="0" />
+    </Device>
+  </Devices>
+  <Groups>
+    <Group name="ds4_leds">
+      <Port name="ds4_led_red" bitNo="0" />
+      <Port name="ds4_led_green" bitNo="1" />
+      <Port name="ds4_led_blue" bitNo="2" />
+    </Group>
+  </Groups>
+  <BoolAnalogs />
+</Map>

@@ -1,0 +1,30 @@
+--logtitle "%Project%"
+--reporttitle "%Project%"
+--outputdir output
+--variablefile variables.py
+#--test change priority unlock
+--include x
+#--include sync
+#--include door
+#--include rke
+#--include trunk
+#--include rke
+#--include hood
+#--include rpm
+#--include brake
+
+#--exclude hood
+#--exclude odo
+#--exclude sync
+#--exclude alarm
+
+#--rerunfailed ./output/output-20180103-073438.xml
+
+#--timestampoutputs
+
+--noncritical non-critical
+
+#this will prevent to generate Robot FW report
+--output NONE 
+--report NONE
+--log NONE

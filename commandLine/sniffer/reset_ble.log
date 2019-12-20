@@ -1,0 +1,20 @@
+
+/send 22 10 92
+
+wake.
+58422.429: 22 D2D 92=FN_UNLOCK_DR_REM1_ON
+58422.436: FE MAINP 00=disarmed(idle)
+58422.442: FE SCPP+ C0 hhu0r bcast AD=Update 00 00 01=RS off,vOff,!Arm,!Lock
+58422.447: FE SENS FF=all devices 00=any channel E1=WriteAlertBits 00
+58422.496: FE FUNC dest=28 channel#1 WriteValue 4, timeout=8.
+58422.528: FE SCPP+ 00 hhu0r A4=Disarm/Unlocked 00 00 04=RS off,vOff,!Arm,!Lock
+58424.782: FE SCPP+ C0 hhu0r bcast AD=Update 00 00 01=RS off,vOff,!Arm,!Lock
+58436.791:sleep...wake.
+58452.947:sleep...wake.
+58487.293: FE D2D 75=SET_EXTENDED_STATUS 04 00 80 Ign,Support_Chg
+58487.297: FE D2D FD=SET_IGN_ON
+58489.312: FE D2D F9=SET_BRAKE_ON
+58490.418: FE D2D 79=SET_BRAKE_OFF
+58490.429: FE D2D 75=SET_EXTENDED_STATUS 00 00 80 Support_Chg
+58490.433: FE D2D 7D=SET_IGN_OFF
+58490.629: FE SCPP+ C0 hhu0r bcast D1=Ignition Off 00 00 00/log close

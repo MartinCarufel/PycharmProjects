@@ -1,0 +1,26 @@
+
+class dei_feat_output_15():
+    faa = '01'
+    gwa = '02'
+    fad = '03'
+    lock = '04'
+    gwl = '05'
+    unlock = '06'
+    po2u = '07'
+    gwu = '08'
+    trunk = '09'
+    aux1 = '0a'
+    aux2 = '0b'
+
+class dei_feat_output_14():
+    faa = '01'
+    gwa = '02'
+    fad = '03'
+    lock = '04'
+    gwl = '05'
+    unlock = '06'
+    po2u = '07'
+    gwu = '08'
+    trunk = '09'
+    aux1 = '0a'
+    aux2 = 'ff'

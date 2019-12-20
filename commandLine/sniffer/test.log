@@ -1,0 +1,36 @@
+wake.
+91705.084: D2 SCPP+ A0 hhu0 rsvp A1=Unlock and disarm
+91705.101: FE SCPP+ A4 hhu0s rsvp D4=Mode confirmation 00 00 00 = REJECTED
+91705.118: FE SCPP+ A4 hhu0s rsvp D4=Mode confirmation 00 00 00
+91705.118: FE MAINP 00=disarmed(idle)
+91705.128: FE SCPP+ A4 hhu0s rsvp A4=Disarm/Unlocked 00 00 04=RS off,vOff,!Arm,!Lock
+91705.134: FE SENS FF=all devices 00=any channel E1=WriteAlertBits 00
+91705.151: FE FUNC dest=C7 channel#1 WriteValue 4, timeout=8.
+91707.911: FE SCPP+ C4 hhu0s bcast AD=Update 00 00 01=RS off,vOff,!Arm,!Lock
+91713.217: C7 SENS dest=FE channel#4 F0=StatusReport 01 00
+91715.218: C7 AID 00
+AID 00 Self-Disconnect
+91727.041:sleep...wake.
+91736.085:sleep...wake.
+92806.821: FE D2D 75=SET_EXTENDED_STATUS 04 00 80 Ign,Support_Chg
+92806.821: FE D2D FD=SET_IGN_ON
+92808.224: FE MAINP 00=disarmed(idle)
+92808.224: FE D2D 75=SET_EXTENDED_STATUS 04 01 80 Ign,Door,Support_Chg
+92808.234: FE D2D F8=SET_OTHER_OPEN
+92810.074: FE MAINP 00=disarmed(idle)
+92810.086: FE D2D 75=SET_EXTENDED_STATUS 04 00 80 Ign,Support_Chg
+92810.091: FE D2D 78=SET_OTHER_CLOSE
+92810.921: FE D2D F9=SET_BRAKE_ON
+92812.957: 9B AID 9B 6C 49 A5 02 44 45 49 2D 42 4C 45 20 00 00 00 00
+AID 9B Claim by DEI-BLE  #6C49A502=1816765698
+
+92812.974: 9B FIO dest=FE B4=Cmd:read 12, 7,"ID"
+92812.974: FE FIO dest=9B 10=Rsp:cnt+data 7, 38 34 37 39 30 32 33
+92813.974: 9B RESET+ 9B 01 B6 B6 8D CB F8 DE 33 0F B1 1B 06 1C 7D 2C D5 00 00 00 00
+92813.991: FE FAIL+ 9B F9 3D 60 4A 1D 3B CE 07 83 32 E1 F6 DB C2 D9 88 D2 FF B3 C9
+92814.458: 9B MAINP+ 0E=request scanning-wireless
+92814.474: FE MAINP 0E=scanning-wireless
+92814.484: FE D2D 79=SET_BRAKE_OFF
+92814.901: FE SCPP+ A4 hhu0s rsvp D4=Mode confirmation 00 00 00
+92818.457: FE MAINP 00=disarmed(idle)
+92833.641:sleep...
