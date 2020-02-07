@@ -5,26 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57d4b632-a7ae-48a5-842c-d4917f4f9752" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/dictionaries/martin_carufel.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Auto_formation/ex2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Auto_formation/module1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Auto_formation/tirage_49.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commandLine/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commandLine/sniffer/d2d2_sniffer.bat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commandLine/sniffer/d2d2_sniffer.exe" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/commandLine/sniffer/d2d2_sniffer.pdb" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/graph_plot/line_plot.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shock_tilt/DS4-Analog Harness_3.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/shock_tilt/d2d_com.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/switch_case/switch.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test_cmd/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vehicle_profile/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vehicle_profile/vp1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/PycharmProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PycharmProjects.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RobotFramework/Test1/report/output.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RobotFramework/Test1/report/output.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/commandLine/commandLine.py" beforeDir="false" afterPath="$PROJECT_DIR$/commandLine/commandLine.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -46,8 +28,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Auto_formation/ex_time.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
             </state>
           </provider>
         </entry>
@@ -55,7 +37,7 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/time.pyi">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
+            <state relative-caret-position="170">
               <caret line="25" column="34" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="34" />
               <folding>
                 <element signature="e#90#100#0" expanded="true" />
@@ -150,33 +132,13 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane" />
       <pane id="Scope" />
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="PycharmProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PycharmProjects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PycharmProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PycharmProjects" type="462c0819:PsiDirectoryNode" />
-              <item name="Auto_formation" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="PycharmProjects" type="b2602c69:ProjectViewProjectNode" />
-              <item name="PycharmProjects" type="462c0819:PsiDirectoryNode" />
-              <item name="Ex_switch_case" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CAN_bug" />
     <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Custom" />
   </component>
   <component name="PyConsoleOptionsProvider">
@@ -208,27 +170,6 @@
     </option>
   </component>
   <component name="RunManager" selected="Python.ex_time">
-    <configuration name="CANInterface" type="PythonConfigurationType" factoryName="Python">
-      <module name="PycharmProjects" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="C:/Drive-W/Internal_tools/Libraries/CANOBDIILibrary/trunk/out" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="C:/Drive-W/Internal_tools/Libraries/CANOBDIILibrary/trunk/out/CANInterface.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="ex2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PycharmProjects" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -335,12 +276,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.CANInterface" />
+      <item itemvalue="Python.ex2" />
+      <item itemvalue="Python.ex_time" />
       <item itemvalue="Python.line_plot" />
       <item itemvalue="Python.prog" />
       <item itemvalue="Python.test_switch" />
-      <item itemvalue="Python.ex2" />
-      <item itemvalue="Python.ex_time" />
     </list>
     <recent_temporary>
       <list>
@@ -376,14 +316,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="1912" y="-23" width="1936" height="1056" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49952152" visible="true" weight="0.14699684" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49952152" visible="true" weight="0.14699684" />
       <window_info id="Structure" order="1" sideWeight="0.50047845" side_tool="true" weight="0.18272775" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.2533482" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.24972737" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.24972737" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -653,6 +592,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Auto_formation/ex_time.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Ex_switch_case/ex2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1054">
@@ -660,16 +606,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Auto_formation/ex_time.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/time.pyi">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
+        <state relative-caret-position="170">
           <caret line="25" column="34" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="34" />
           <folding>
             <element signature="e#90#100#0" expanded="true" />
