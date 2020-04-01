@@ -46,14 +46,14 @@ class TTL_7408:
                 self.storage_register = self.shift_register
 
             if pin.pin[self.name + 'oe'] == 0:
-                pin.pin[self.name + 'qa'] = ~~(self.storage_register & 0x01)
-                pin.pin[self.name + 'qb'] = ~~(self.storage_register & 0x02)
-                pin.pin[self.name + 'qc'] = ~~(self.storage_register & 0x04)
-                pin.pin[self.name + 'qd'] = ~~(self.storage_register & 0x08)
-                pin.pin[self.name + 'qe'] = ~~(self.storage_register & 0x10)
-                pin.pin[self.name + 'qf'] = ~~(self.storage_register & 0x20)
-                pin.pin[self.name + 'qg'] = ~~(self.storage_register & 0x40)
-                pin.pin[self.name + 'qh'] = ~~(self.storage_register & 0x80)
+                pin.pin[self.name + 'qa'] = int(bool(self.storage_register & 0x01))
+                pin.pin[self.name + 'qb'] = int(bool(self.storage_register & 0x02))
+                pin.pin[self.name + 'qc'] = int(bool(self.storage_register & 0x04))
+                pin.pin[self.name + 'qd'] = int(bool(self.storage_register & 0x08))
+                pin.pin[self.name + 'qe'] = int(bool(self.storage_register & 0x10))
+                pin.pin[self.name + 'qf'] = int(bool(self.storage_register & 0x20))
+                pin.pin[self.name + 'qg'] = int(bool(self.storage_register & 0x40))
+                pin.pin[self.name + 'qh'] = int(bool(self.storage_register & 0x80))
 
             self.srclk = pin.pin[self.name + 'srclk']
             self.rclk = pin.pin[self.name + 'rclk']
