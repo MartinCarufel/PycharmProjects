@@ -1,0 +1,12 @@
+|||:HP SN|:03-000193|:-|:-
+||USB-C side (A/B)|A|-|-
+||Pod SN|XVP-03|-|-
+||-|Dp Frame|HP Disc.|Comments
+||1|11|y|-
+||2|0|y|disc à 40s.
+||3|0|n|-
+||4|5|n|-
+||5|0|y|disc. à 24s
+||6|0|n|-
+||7|3|y|disc. à 53s
+||8|0|y|disc. à 50s
