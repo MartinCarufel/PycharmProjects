@@ -5,6 +5,7 @@ from openpyxl import load_workbook
 from tkinter import filedialog
 
 
+
 def check_cell_name(cell_name):
     result = re.search("^[A-Z]+[0-9]+$", cell_name.upper())
     print()
@@ -32,7 +33,8 @@ while True:
     result = re.search("^[A-Z]+[0-9]+$", last_cel.upper())
     if result != None:
         break
-
+print(first_cel + " : " + last_cel)
+print(type(first_cel))
 for row in ws[first_cel:last_cel]:
     data_cols = []
     for cell in row:
@@ -73,5 +75,4 @@ for line in range(x_size):
     # text_line = "|" + "|".join(row_list)
     with open("table.txt", 'a+', encoding='utf8') as tbl:
         tbl.writelines(text_line)
-
 print("Finish ! File table.txt created")

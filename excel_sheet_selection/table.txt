@@ -1,0 +1,8 @@
+|||:-|:qte|:pris ch|:tot
+||traverse principale boite 10|5|99.99|499.95
+||traverse principale un|3|10|30
+||traverse secondaire 10|14|46.99|657.86
+||tuile boite 16|8|35.81|286.48
+||tuile un|-|2.25|0
+||fixation 10|32|21.99|703.68
+||-|-|-|2177.97
