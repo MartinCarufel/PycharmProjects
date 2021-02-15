@@ -112,7 +112,7 @@ class StackLayoutEx(StackLayout, MainWidget):
                 tbl.writelines(text_line)
 
         print("Finish ! File table.txt created")
-        self.wb.close()
+        # self.wb.close()
 
     def callback(self, event):
         self.ws = event.text
