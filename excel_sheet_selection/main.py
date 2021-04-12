@@ -55,7 +55,7 @@ class StackLayoutEx(StackLayout, MainWidget):
         self.end_cell_input.bind(text=self.on_text)
         self.add_widget(self.end_cell_input)
 
-        validate = Button(text="Validate")
+        validate = Button(text="Convert", size_hint=(None, None), size=(dp(260), dp(60)))
         validate.bind(on_press=self.validate)
         self.add_widget(validate)
 
