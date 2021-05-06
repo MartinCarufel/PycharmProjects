@@ -10,7 +10,8 @@ import numpy as np
 
 def ask_for_new_file():
     while True:
-        cont = input("Do you want to load a new file (Y/N)")
+        cont = input("\nDo you want to load a new file (Y/N)")
+
         if cont.upper() == 'Y':
             return True
         elif cont.upper() == 'N':
@@ -24,8 +25,15 @@ def main():
     lookup_string = "|    490"
     split_pattern = "\| *"
     data = []
+    loaded_file_list = []
     while load_new_file:
         path = tkinter.filedialog.askopenfilename()
+
+        loaded_file_list.append(path.split("/")[-1])
+        print("Already loaded file: ")
+        # print(", ".join(loaded_file_list))
+        for i in loaded_file_list:
+            print(i)
         with open(path, mode='r') as f:
             for line in f:
                 if line.startswith(lookup_string):
@@ -43,7 +51,7 @@ def main():
 
     df = pd.DataFrame(data, columns=["df"])
     df["avg"] = data_mean
-    print(df)
+    # print(df)
     plt.plot(df)
     plt.legend(df)
     plt.ylabel("Nb dropframe")
