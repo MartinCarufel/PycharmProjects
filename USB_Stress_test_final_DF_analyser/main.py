@@ -6,6 +6,7 @@ import re
 import matplotlib.pyplot as plt
 from statistics import mean
 import numpy as np
+from sys import argv
 
 
 def ask_for_new_file():
@@ -26,6 +27,11 @@ def main():
     split_pattern = "\| *"
     data = []
     loaded_file_list = []
+
+    try:
+        last_data_avg = int(argv[1])
+    except IndexError:
+        last_data_avg = 25
     while load_new_file:
         path = tkinter.filedialog.askopenfilename()
 
@@ -44,16 +50,20 @@ def main():
 
     data_mean = []
     for data_id in range(len(data)):
-        if data_id < 25:
+        if data_id < last_data_avg:
             data_mean.append(np.nan)
         else:
-            data_mean.append(mean(data[data_id-25:data_id]))
+            data_mean.append(mean(data[data_id-last_data_avg:data_id]))
 
     df = pd.DataFrame(data, columns=["df"])
     df["avg"] = data_mean
     # print(df)
+    f = plt.figure()
+    f.set_figwidth(15)
+    f.set_figheight(6)
     plt.plot(df)
     plt.legend(df)
+    plt.subplots_adjust(left=0.05, right=0.99, top=0.95, bottom=0.1)
     plt.ylabel("Nb dropframe")
     plt.xlabel("USB Stress test cycle")
     plt.title("Number of dropframe per USB test cycle")
