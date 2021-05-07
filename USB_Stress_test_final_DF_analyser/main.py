@@ -47,7 +47,7 @@ def main():
         if data_id < 25:
             data_mean.append(np.nan)
         else:
-            data_mean.append(mean(data[data_id-24:data_id]))
+            data_mean.append(mean(data[data_id-25:data_id]))
 
     df = pd.DataFrame(data, columns=["df"])
     df["avg"] = data_mean
