@@ -57,6 +57,7 @@ def main():
     plt.ylabel("Nb dropframe")
     plt.xlabel("USB Stress test cycle")
     plt.title("Number of dropframe per USB test cycle")
+    plt.grid(axis="y")
     plt.show()
 
 
