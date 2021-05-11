@@ -4,6 +4,7 @@ import tkinter.filedialog
 from time import sleep
 from os import system
 
+
 def main():
     data = []
     log_data = False
@@ -39,6 +40,7 @@ def main():
             indice += 1
     filename = path[:-4] + "_clean" + ".txt"
     print("File created: ", filename)
+
 
 if __name__ == "__main__":
     main()
