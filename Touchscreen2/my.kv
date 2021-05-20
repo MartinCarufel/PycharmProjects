@@ -1,0 +1,40 @@
+
+MyWindowManager:
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    Screen:
+        name: "Menu 1"
+        BoxLayout:
+            orientation: 'vertical'
+            ToggleButton:
+                text:"Continue previous test run"
+                size_hint: 0.5, 0.2
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+                group: "a1"
+                id: continue
+                state: "down"
+                on_press:
+            ToggleButton:
+                text:"Start a new test run"
+                size_hint: 0.5, 0.2
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+                group: "a1"
+                id: new
+                on_press:
+            Button:
+                text: "Start"
+                size_hint: 0.5, 0.5
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+                on_press: app.root.current = "Second"
+#                on_press: root.selection_set()
+
+<SecondWindow>:
+    name: "Second"
+
+    Button:
+        text: "Previous"
+        on_release:
+            app.root.current = "Menu 1"
+            root.manager.transition.direction = "right"

@@ -1,0 +1,30 @@
+#:import navigation_screen_manager navigation_screen_manager
+
+# No stack
+#MyWindowManager:
+#    MainWindow:
+#    SecondWindow:
+
+# With stack
+#MyScreenManager:
+#    MainWindow:
+#    SecondWindow:
+
+
+<MainWindow>:
+    Screen:
+        name: "Main"
+        Button:
+            text: "Next"
+#            on_release:
+#                app.manager.push("Second")
+
+<SecondWindow>:
+    Screen:
+
+        name: "Second"
+        Button:
+            text: "Previous"
+#            on_release:
+#                app.root.current = "Main"
+#                root.manager.transition.direction = "right"

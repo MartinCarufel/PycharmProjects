@@ -1,0 +1,21 @@
+
+MyWindowManager:
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    name: "Main"
+    Button:
+        text: "Next"
+        on_release:
+            app.root.current = "Second"
+            root.manager.transition.direction = "left"
+
+<SecondWindow>:
+    name: "Second"
+
+    Button:
+        text: "Previous"
+        on_release:
+            app.root.current = "Main"
+            root.manager.transition.direction = "right"

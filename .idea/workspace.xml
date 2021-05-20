@@ -5,57 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57d4b632-a7ae-48a5-842c-d4917f4f9752" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/Exercice/Debugger/debug1.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Exercice_diver/Using_kargs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/PycharmProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PycharmProjects.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercice/.idea/Exercice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Exercice/.idea/Exercice.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercice/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Exercice/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Exercice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Exercice/.idea/workspace.xml" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ex_switch_case/test_switch.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="493">
-              <caret line="29" selection-start-line="29" selection-end-line="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Auto_formation/ex_time.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="85">
-              <caret line="5" selection-start-line="5" selection-end-line="5" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/time.pyi">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="170">
-              <caret line="25" column="34" selection-start-line="25" selection-start-column="25" selection-end-line="25" selection-end-column="34" />
-              <folding>
-                <element signature="e#90#100#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Ex_switch_case/ex2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1054">
-              <caret line="62" column="18" selection-start-line="62" selection-start-column="18" selection-end-line="62" selection-end-column="18" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -84,7 +46,7 @@
       <list>
         <option value="$PROJECT_DIR$/Auto_formation/var control.py" />
         <option value="$PROJECT_DIR$/commandLine/sniffer/do_unlock.log" />
-        <option value="C:/Drive-W/Internal_tools/Libraries/IOLibrary/trunk/out/IOWrapper.py" />
+        <option value="$PROJECT_DIR$/../../../../../Drive-W/Internal_tools/Libraries/IOLibrary/trunk/out/IOWrapper.py" />
         <option value="$PROJECT_DIR$/commandLine/testSys.py" />
         <option value="$PROJECT_DIR$/commandLine/sniffer/test reg.py" />
         <option value="$PROJECT_DIR$/commandLine/testreg.py" />
@@ -113,6 +75,7 @@
     <option name="width" value="1779" />
     <option name="height" value="1029" />
   </component>
+  <component name="ProjectId" id="1qcPyNxoa98up6PSUsI47WyffgR" />
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
       <profile-state>
@@ -136,10 +99,14 @@
       <pane id="Scope" />
     </panes>
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../CAN_bug" />
-    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Custom" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -157,19 +124,28 @@
       <recent name="C:\Users\martin.carufel\Documents\PycharmProjects\commandLine\sniffer" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.ex_time">
+  <component name="RunManager" selected="Python.Using_kargs">
+    <configuration name="Using_kargs" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="PycharmProjects" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Exercice_diver" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Exercice_diver/Using_kargs.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="ex2" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="PycharmProjects" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -204,27 +180,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Auto_formation/ex_time.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="line_plot" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="PycharmProjects" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/graph_plot" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/graph_plot/line_plot.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -276,22 +231,23 @@
       <method v="2" />
     </configuration>
     <list>
+      <item itemvalue="Python.Using_kargs" />
       <item itemvalue="Python.ex2" />
       <item itemvalue="Python.ex_time" />
-      <item itemvalue="Python.line_plot" />
       <item itemvalue="Python.prog" />
       <item itemvalue="Python.test_switch" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.Using_kargs" />
         <item itemvalue="Python.ex_time" />
         <item itemvalue="Python.test_switch" />
         <item itemvalue="Python.ex2" />
         <item itemvalue="Python.prog" />
-        <item itemvalue="Python.line_plot" />
       </list>
     </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -355,8 +311,31 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/Exercice_diver/Using_kargs.py</url>
+          <line>5</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
   <component name="editorHistoryManager">
-    <entry file="file://C:/Drive-W/internal_tools/Libraries/IOLibrary/trunk/out/IOWrapper.py">
+    <entry file="file://$PROJECT_DIR$/../../../../../Drive-W/internal_tools/Libraries/IOLibrary/trunk/out/IOWrapper.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1411">
           <caret line="93" column="39" selection-start-line="93" selection-start-column="8" selection-end-line="93" selection-end-column="39" />
@@ -477,8 +456,8 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2018.2/system/python_stubs/1636319966/builtins.py" />
-    <entry file="file://C:/Python27/Lib/random.py" />
-    <entry file="file://C:/Drive-W/internal_tools/Libraries/CANOBDIILibrary/trunk/out/CANInterface.py">
+    <entry file="file://$PROJECT_DIR$/../../../../../Python27/Lib/random.py" />
+    <entry file="file://$PROJECT_DIR$/../../../../../Drive-W/internal_tools/Libraries/CANOBDIILibrary/trunk/out/CANInterface.py">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <folding>

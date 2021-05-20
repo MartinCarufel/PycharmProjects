@@ -1,0 +1,136 @@
+
+<FirstScreen>:
+    Screen:
+        name: "Menu 1"
+        BoxLayout:
+            orientation: 'vertical'
+            ToggleButton:
+                text:"Continue previous test run"
+                size_hint: 0.5, 0.2
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+                group: "a1"
+                id: continue
+                state: "down"
+
+            ToggleButton:
+                text:"Start a new test run"
+                size_hint: 0.5, 0.2
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+                group: "a1"
+                id: new
+
+            Button:
+                text: "Start"
+                size_hint: 0.5, 0.5
+                pos_hint:{"center_x":0.5,"center_y":0.5}
+
+                on_press: root.manager.current = "Screen 1"
+
+<SecondScreen>:
+    Screen:
+        name: "Screen 1"
+        GridLayout:
+            cols: 3
+
+            AnchorLayout:
+                anchor_x: "left"
+                anchor_y: "top"
+                ToggleButton:
+                    text: "1"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "top"
+                ToggleButton:
+                    text: "2"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "right"
+                anchor_y: "top"
+                ToggleButton:
+                    text: "3"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "left"
+                anchor_y: "center"
+                ToggleButton:
+                    text: "4"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "center"
+                ToggleButton:
+                    text: "5"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "right"
+                anchor_y: "center"
+                ToggleButton:
+                    text: "6"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "left"
+                anchor_y: "bottom"
+                ToggleButton:
+                    text: "7"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "center"
+                anchor_y: "bottom"
+                ToggleButton:
+                    text: "8"
+                    size_hint: None, None
+                    size: 60, 60
+                    on_state: root.toggle_state_change(self)
+
+            AnchorLayout:
+                anchor_x: "right"
+                anchor_y: "bottom"
+                AnchorLayout:
+                    anchor_x: "left"
+                    anchor_y: "bottom"
+                    Button:
+                        text: "OK"
+                        size_hint: None, None
+                        size: 60, 60
+                        on_press:
+#                            root.manager.current = "Screen 3"
+                            root.validate_touchPoint()
+                AnchorLayout:
+                    anchor_x: "right"
+                    anchor_y: "bottom"
+                    ToggleButton:
+                        text: "9"
+                        size_hint: None, None
+                        size: 60, 60
+                        on_state: root.toggle_state_change(self)
+
+<ThirdScreen>:
+    Screen:
+        name: "Screen 3"
+
+        canvas:
+            Rectangle:
+                pos: 10, 10
+                size: 400, 20
