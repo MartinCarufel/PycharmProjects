@@ -5,17 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="7b447538-f874-4cbc-85e5-4b6e9e54cc1b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/../Exercice/Debugger/debug1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Exercice_diver/Using_kargs.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../touch_screen_test/navigation_screen_manager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/PycharmProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/PycharmProjects.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercice/.idea/Exercice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Exercice/.idea/Exercice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercice/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Exercice/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Exercice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Exercice/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/untitled.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/untitled.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
