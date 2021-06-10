@@ -21,6 +21,12 @@ def ask_for_new_file():
             print("Please answer by Y or N.")
 
 
+def create_fig_file_name(path):
+    path_list = path.split('/')
+    file_name = path_list[-1][:-4]
+    return file_name
+    print(file_name)
+
 def main():
     load_new_file = True
     lookup_string = "|    490"
@@ -68,6 +74,7 @@ def main():
     plt.xlabel("USB Stress test cycle")
     plt.title("Number of dropframe per USB test cycle")
     plt.grid(axis="y")
+    plt.savefig(path + ".pdf", bbox_inches='tight')
     plt.show()
 
 
