@@ -14,7 +14,7 @@ def create_fig_file_name(path):
 def create_plot(avg_df, path_file):
     avg_df.plot.bar(x='Frequency', y='dBA', figsize=(11, 6), )
     create_fig_file_name(path_file.name)
-    plt.savefig(str(create_fig_file_name(path_file.name)) + ".pdf", bbox_inches='tight')
+    plt.savefig(path_file.name[:-4] + ".pdf", bbox_inches='tight')
     plt.show()
 
 def create_avg_data(path_file):
