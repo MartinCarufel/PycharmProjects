@@ -11,23 +11,22 @@ def create_fig_file_name(path):
     return file_name
     print(file_name)
 
+
 def create_plot(avg_df, path_file):
-    avg_df.plot.bar(x='Frequency', y='dBA', figsize=(11, 6), )
+    avg_df.plot.bar(y='dBA', figsize=(11, 6), )
     create_fig_file_name(path_file.name)
     plt.savefig(path_file.name[:-4] + ".pdf", bbox_inches='tight')
     plt.show()
 
+
 def create_avg_data(path_file):
-    # avg_dba = {}
-    freq_list = []
-    value_avg = []
     df = pd.read_table(path_file, skiprows=8)
-    for col in df:
-        if col.endswith("Hz"):
-            freq_list.append(col)
-            value_avg.append(df[col].mean())
-    avg_df = pd.DataFrame({'Frequency': freq_list[:], 'dBA': value_avg[:]})
+    df = df.drop(columns=["Time (s):  / Midband frequencies"])
+    avg_df = df.mean(axis=0, )
+    avg_df = pd.DataFrame(avg_df, columns=["dBA"])
+    avg_df.to_csv("data.csv")
     return avg_df
+
 
 def main():
     path_file = filedialog.askopenfile()
