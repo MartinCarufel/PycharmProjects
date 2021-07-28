@@ -22,9 +22,13 @@ def get_all_file_to_analysis():
     new_file = True
     file_list = []
     while new_file:
-        file_list.append(filedialog.askopenfile().name)
-        system('cls')
-        print_file_loaded(file_list)
+        try:
+            file_list.append(filedialog.askopenfile().name)
+            system('cls')
+            print_file_loaded(file_list)
+        except AttributeError:
+            print("You did not select a file.")
+
         new_file = get_continue()
     return file_list
 
@@ -71,6 +75,8 @@ def plot_bar_graph(data, timestamp):
                 pass
     fig.subplots_adjust(top=0.975, bottom=0.05, left=0.025, right=0.99, hspace=0.5, wspace=0.2)
     plt.savefig("data_" + timestamp + ".png")
+    msg = "data_" + timestamp + ".png" + " was saved"
+    print(msg)
 
 
 def main():
@@ -87,9 +93,14 @@ def main():
     data = pd.DataFrame(data=data_analyser(file_list))
     try:
         data.to_csv("data_" + ct + ".csv")
+        msg = "data_" + ct + ".csv" + " was saved"
+        print(msg)
     except PermissionError:
         save_file_name = filedialog.asksaveasfile().name
         data.to_csv(save_file_name)
+        msg = save_file_name + " was saved"
+        print(msg)
+
 
     plot_bar_graph(data, ct)
     # plt.show()
@@ -98,6 +109,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-import os
-os.getgroups()
