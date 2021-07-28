@@ -29,16 +29,26 @@ def main():
     cont = True
     file_name_list = []
     avg_list = []
-    while cont:
-        path_file = filedialog.askopenfile()
-        file_name, avg = get_average(path_file)
-        file_name_list.append(file_name)
-        avg_list.append(avg)
-        cont = get_continue()
+
+    file_name_list = ["file 1", "file 2", "file 3"]
+    avg_list = [67.45, 70.5, 68.9]
+
+    # while cont:
+    #     path_file = filedialog.askopenfile()
+    #     file_name, avg = get_average(path_file)
+    #     file_name_list.append(file_name)
+    #     avg_list.append(avg)
+    #     cont = get_continue()
+
+
 
     summary_table = pd.DataFrame({"File Name":file_name_list, "Average":avg_list})
     summary_table.to_csv("Summary.csv")
-    
+    summary_table.plot.bar()
+    plt.title("Sound Pressure Level Slow ")
+    plt.ylabel("dBA")
+    plt.show()
+
 
 if __name__ == '__main__':
     """
