@@ -80,6 +80,11 @@ def plot_bar_graph(data, timestamp):
 
 
 def main():
+
+    """
+    This program create histogram for every freq band for every file imported. The file format is a tab speparated format
+    as exported by Android app Sound Analyser app by Dominique Rodrigues
+    """
     ct = datetime.now().isoformat(timespec='seconds').replace(':', '')
     file_list = get_all_file_to_analysis()
     # file_list = ["Spectrum_data_2021-07-05_10_58_39 golden unit.tsv",
