@@ -30,15 +30,15 @@ def main():
     file_name_list = []
     avg_list = []
 
-    file_name_list = ["file 1", "file 2", "file 3"]
-    avg_list = [67.45, 70.5, 68.9]
+    # file_name_list = ["file 1", "file 2", "file 3"]
+    # avg_list = [67.45, 70.5, 68.9]
 
-    # while cont:
-    #     path_file = filedialog.askopenfile()
-    #     file_name, avg = get_average(path_file)
-    #     file_name_list.append(file_name)
-    #     avg_list.append(avg)
-    #     cont = get_continue()
+    while cont:
+        path_file = filedialog.askopenfile()
+        file_name, avg = get_average(path_file)
+        file_name_list.append(file_name)
+        avg_list.append(avg)
+        cont = get_continue()
 
 
 
