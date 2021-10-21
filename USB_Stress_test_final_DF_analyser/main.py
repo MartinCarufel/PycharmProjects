@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 from statistics import mean
 import numpy as np
 from sys import argv
+import os
 
 
 def ask_for_new_file():
@@ -74,7 +75,26 @@ def main():
     plt.xlabel("USB Stress test cycle")
     plt.title("Number of dropframe per USB test cycle")
     plt.grid(axis="y")
-    plt.savefig(path + ".pdf", bbox_inches='tight')
+
+    if os.path.isfile(path + ".pdf"):
+        overwrite = input("File already exist, overwrite (y/n)")
+        if overwrite.upper() == 'Y':
+            try:
+                plt.savefig(path + ".pdf", bbox_inches='tight')
+
+            except:
+                print("Could not ovewrite the file, a copy saved.")
+                plt.savefig(path + "_copy" + ".pdf", bbox_inches='tight')
+        else:
+            file_suffix = input("Enter the file suffix: ")
+            try:
+                plt.savefig(path + "_" + file_suffix + ".pdf", bbox_inches='tight')
+
+            except:
+                print("Could not ovewrite the file, a copy saved.")
+                plt.savefig(path + "_" + file_suffix + "_copy" + ".pdf", bbox_inches='tight')
+    else:
+        plt.savefig(path + ".pdf", bbox_inches='tight')
     plt.show()
 
 
