@@ -8,6 +8,7 @@ import pandas as pd
 import sys
 
 input_file = sys.argv[1]
+daily_h_log = sys.argv[2]
 
 def convert_date(pd_serie):
 	new_date_format = []
@@ -54,5 +55,12 @@ df_new["Temp (°C)"] = df_org["CH2 (C)"]
 df_new["Press Atm (mb)"] = df_org["CH3 (mb)"]
 # print(rh)
 print(df_new)
+df_result = df_new.loc[df_new["Time"].str.contains(daily_h_log)]
+print(df_result)
 
-df_new.to_excel("log.xlsx")
+
+writer = pd.ExcelWriter("log.xlsx", engine = 'xlsxwriter')
+df_new.to_excel(writer, sheet_name = 'Full log')
+df_result.to_excel(writer, sheet_name = 'Daily log')
+writer.save()
+writer.close()
