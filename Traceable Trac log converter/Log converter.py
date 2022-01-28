@@ -1,4 +1,13 @@
+"""
+Program to re format the data from Treacable Trac to excel
+
+Usage: python "Log converter.py" <file name to convert>
+
+"""
 import pandas as pd
+import sys
+
+input_file = sys.argv[1]
 
 def convert_date(pd_serie):
 	new_date_format = []
@@ -14,9 +23,10 @@ def convert_rh(pd_serie):
 
 
 #input file
-fin = open("B9C3826B.CSV", "rt")
+fin = open(input_file, "rt")
 #output file to write the result to
-fout = open("B9C3826B_mod.CSV", "wt")
+file_out_name = input_file[:-4] + "_mod.CSV"
+fout = open(file_out_name, "wt")
 #for each line in the input file
 for line in fin:
 	#read replace the string and write to output file
@@ -25,7 +35,7 @@ for line in fin:
 fin.close()
 fout.close()
 
-df_org = pd.read_csv("B9C3826B_mod.CSV", skiprows=5)
+df_org = pd.read_csv(file_out_name, skiprows=5)
 date_converted = []
 time = []
 rh = []
