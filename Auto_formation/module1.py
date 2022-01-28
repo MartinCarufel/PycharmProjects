@@ -7,6 +7,3 @@ def say_hello():
 def get_input():
     vget = input('Say something ')
     print(vget)
-
-
-
