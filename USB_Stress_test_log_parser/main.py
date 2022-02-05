@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 import sys
+import os
 
 def Average(lst):
     return sum(lst) / len(lst)
@@ -56,11 +57,34 @@ for i in range(0, nb_line):
         avg_fps.append(df["avg. fps"].iloc[i])
 
 
-df.to_excel("Export_data " + hp_serial +".xlsx")
+# df.to_excel("Export_data " + hp_serial +".xlsx")
 df_sumarry = pd.DataFrame()
 df_sumarry["Total Drop Frame"] = total_drop
+df_sumarry["Total Drop Frame"] = df_sumarry["Total Drop Frame"].astype(int)
 df_sumarry["Avg FPS"] = avg_fps_list
-df_sumarry.to_excel("Export_summary " + hp_serial +".xlsx")
-print(total_drop)
-print(avg_fps_list)
-print(df_sumarry)
+df_sumarry["Avg FPS"] = df_sumarry["Avg FPS"].round(decimals=3)
+# df_sumarry.to_excel("Export_summary " + hp_serial +".xlsx")
+# print(total_drop)
+# print(avg_fps_list)
+# print(df_sumarry)
+# print(df_sumarry.dtypes)
+
+if not os.path.exists("Data_summary.csv"):
+    data_summary = open("Data_summary.csv", mode='w')
+    data_summary.close()
+
+if os.path.getsize("Data_summary.csv") == 0:
+    data_summary = open("Data_summary.csv", mode = 'w')
+    data_summary.writelines("Min 1 Drop Frame,Min 1 Avg FPS,Min 2 Drop Frame,Min 2 Avg FPS,Min 3 Drop Frame,Min 3 Avg FPS,Min 4 Drop Frame,Min 4 Avg FPS,Min 5 Drop Frame,Min 5 Avg FPS,Min 6 Drop Frame,Min 6 Avg FPS,Min 7 Drop Frame,Min 7 Avg FPS,Min 8 Drop Frame,Min 8 Avg FPS,Min 9 Drop Frame,Min 9 Avg FPS,Min 10 Drop Frame,Min 10 Avg FPS\n")
+    for index, row in df_sumarry.iterrows():
+        data_summary.write(str(row["Total Drop Frame"]) + ',' + str(row["Avg FPS"]) + ',')
+    data_summary.write("\n")
+    data_summary.close()
+
+else:
+    data_summary = open("Data_summary.csv", mode='a')
+    for index, row in df_sumarry.iterrows():
+        # print(int(row["Total Drop Frame"]))
+        data_summary.write(str(int(row["Total Drop Frame"])) + ',' + str(row["Avg FPS"]) + ',')
+    data_summary.write("\n")
+    data_summary.close()
