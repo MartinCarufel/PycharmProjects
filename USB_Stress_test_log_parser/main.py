@@ -144,7 +144,6 @@ def get_path_list_from_file(file):
     :param file:
     :return: list
     """
-
     with open(file, mode='r') as f:
         path_list = []
         for line in f:

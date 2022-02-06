@@ -1,3 +1,4 @@
+import re
 import unittest
 import main
 
@@ -40,15 +41,24 @@ class Test_main(unittest.TestCase):
         self.assertTrue(True)
         pass
 
+    def test_get_path_list_from_file_BS_to_FS(self):
+        """
+        Test the function get_path_list_from_file conversion the backslash into forwardslash
+        """
+        function_result = main.get_path_list_from_file("Test_file.txt")
+
+        for file in function_result:
+            self.assertNotRegex(text=file, unexpected_regex="\\\\")
+            self.assertNotRegex(text=file, unexpected_regex="\\n")
+
+        # print(function_result)
+
 class Test_secondary(unittest.TestCase):
     def test_get_path_list_from_file_not_empty(self):
         file_list = main.get_path_list_from_file("new 1.txt")
         self.assertTrue(len(file_list) > 0)
         # print(file_list)
         pass
-
-    def test_ttt(self):
-        main.ttt()
 
 if __name__ == '__main__':
     unittest.main()
