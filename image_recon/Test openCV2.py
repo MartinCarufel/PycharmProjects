@@ -30,22 +30,29 @@ with mss.mss() as sct:
     # print(img_rgb)
 
 # image = cv2.imread("monitor-1.png")
-template = cv2.imread("2022-02-11 19_32_01-Calculatrice.png")
+# template = cv2.imread("2022-02-11 19_32_01-Calculatrice.png")
+template = cv2.imread("afficheur.png")
+mask = cv2.imread("afficheur_mask.png")
 image_gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
 template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
-result = cv2.matchTemplate(image_gray, template_gray, cv2.TM_CCOEFF_NORMED)
+template_mask = cv2.cvtColor(mask, cv2.COLOR_RGB2GRAY)
+result = cv2.matchTemplate(image=image_gray, templ=template_gray, method=cv2.TM_CCOEFF_NORMED, mask=None)
 (minVal, maxVal, minLoc, maxLoc) = cv2.minMaxLoc(result)
-print(minLoc, maxLoc)
-print("Score: ",maxVal)
+# print(minLoc, maxLoc)
+
 if maxVal > 0.70:
+    print("Score: ",maxVal)
     (startX, startY) = maxLoc
     endX = startX + template.shape[1]
     endY = startY + template.shape[0]
     cv2.rectangle(image, (startX, startY), (endX, endY), (255, 0, 0), 3)
+    cv2.imshow("Output", image)
+    cv2.waitKey(0)
 else:
+    print("Score: ", maxVal)
     print("Not found")
-cv2.imshow("Output", image)
-cv2.waitKey(0)
+# cv2.imshow("Output", image)
+# cv2.waitKey(0)
 
 
 """import cv2
