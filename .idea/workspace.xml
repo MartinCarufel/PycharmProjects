@@ -4,16 +4,7 @@
     <bookmark url="file://$PROJECT_DIR$/switch_case/switch2.py" line="2" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="57d4b632-a7ae-48a5-842c-d4917f4f9752" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Exercice/Debugger/debug1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Exercice_diver/Using_kargs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/PycharmProjects.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/PycharmProjects.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercice/.idea/Exercice.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Exercice/.idea/Exercice.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercice/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Exercice/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Exercice/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Exercice/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="57d4b632-a7ae-48a5-842c-d4917f4f9752" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -104,6 +95,8 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="editing.templates" />
@@ -321,7 +314,6 @@
         </entry>
       </map>
     </option>
-    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
