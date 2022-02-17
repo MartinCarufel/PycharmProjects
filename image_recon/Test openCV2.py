@@ -34,9 +34,10 @@ with mss.mss() as sct:
 template = cv2.imread("afficheur.png")
 mask = cv2.imread("afficheur_mask.png")
 image_gray = cv2.cvtColor(image, cv2.COLOR_RGB2GRAY)
+print(image_gray)
 template_gray = cv2.cvtColor(template, cv2.COLOR_BGR2GRAY)
 template_mask = cv2.cvtColor(mask, cv2.COLOR_RGB2GRAY)
-result = cv2.matchTemplate(image=image_gray, templ=template_gray, method=cv2.TM_CCOEFF_NORMED, mask=None)
+result = cv2.matchTemplate(image=image_gray, templ=template_gray, method=cv2.TM_CCOEFF_NORMED, mask=template_mask)
 (minVal, maxVal, minLoc, maxLoc) = cv2.minMaxLoc(result)
 # print(minLoc, maxLoc)
 
