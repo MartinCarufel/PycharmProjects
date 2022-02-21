@@ -1,0 +1,24 @@
+import win32api, win32con
+from time import sleep
+
+def l_click(x,y, hold=0):
+    win32api.SetCursorPos((x,y))
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTDOWN,x,y,0,0)
+    sleep(hold)
+    win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP,x,y,0,0)
+
+def r_click(x,y, hold=0):
+    win32api.SetCursorPos((x,y))
+    win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTDOWN,x,y,0,0)
+    sleep(hold)
+    win32api.mouse_event(win32con.MOUSEEVENTF_RIGHTUP,x,y,0,0)
+
+
+l_click(950, 350)
+sleep(0.01)
+while True:
+    r_click(960,531)
+    sleep(0.05)
+
+    l_click(960,531,0.6)
+    sleep(0.05)
