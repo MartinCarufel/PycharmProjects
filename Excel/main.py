@@ -8,24 +8,32 @@ import xlrd
 
 
 
-
-
 def first_row_empty(workbook, sheet, start_row, column):
     ind_col = column
     ind_row = start_row
     wb = openpyxl.load_workbook(workbook)
-    ws = wb.get_sheet_by_name(sheet)
+    ws = wb[sheet]
 
     cell_to_test = ws.cell(column = ind_col, row= ind_row)
+    
 
-    while cell_to_test.value != None:
+    read_row = ws.iter_rows(min_row=1, max_col=10, max_row=20, values_only=True)
+    print(read_row)
+    while read_row != None:
         ind_row += 1
         #print(cell_to_test.value)
-        cell_to_test = ws.cell(column=ind_col, row=ind_row)
+        read_row = ws.iter_rows(min_row=1, max_col=10, max_row=20, values_only=True)
+        # cell_to_test = ws.cell(column=ind_col, row=ind_row)
+
+    # while cell_to_test.value != None:
+    #     ind_row += 1
+        #print(cell_to_test.value)
+    #     read_row = ws.iter_rows(min_row=1, max_col=None, max_row=None, values_only=True)
+    #     cell_to_test = ws.cell(column=ind_col, row=ind_row)
 
     return cell_to_test.row
 
-print(first_row_empty("Exemple1.xlsx", "Patate", 2, 1))
+print(first_row_empty("Exemple1.xlsx", "Patate", 1, 2))
 
 """
 print ("wb est un objet de type {}".format(type(wb)))

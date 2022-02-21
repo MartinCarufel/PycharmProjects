@@ -1,11 +1,12 @@
 """
-Program to re format the data from Treacable Trac to excel
+Progaram to re format the data from Treacable Trac to excel
 
 Usage: python "Log converter.py" <file name to convert>
 
 """
 import pandas as pd
 import sys
+
 
 input_file = sys.argv[1]
 daily_h_log = sys.argv[2]
