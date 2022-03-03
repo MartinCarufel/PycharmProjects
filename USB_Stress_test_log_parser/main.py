@@ -14,6 +14,21 @@ def prog_setup():
     hp_serial = re.search(pattern=reg_ex, string=param_file_name).group()
     return (param_file_name, hp_serial)
 
+def check_for_USB_eror(input_file):
+    """
+    This function check for USB error. Take a text file and look for specific error string.
+
+    """
+    error_strings = ["Read to COM port failed with error code 995"]
+    usb_error_count = 0
+    print(input_file)
+    with open(input_file, mode='r') as f:
+        for line in f:
+            for error_str in error_strings:
+                if re.match(error_str, line) != None:
+                    usb_error_count += 1
+    return (input_file, usb_error_count)
+
 
 def extract_stress_test_data(input_file):
     """
@@ -156,15 +171,20 @@ def get_path_list_from_file(file):
 
 if __name__ == '__main__':
 
+    usb_err_summary = []
     for file in get_path_list_from_file('File_list_to_analyse.txt'):
         reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
         hp_serial = re.search(pattern=reg_ex, string=file).group()
         print("Process the log for HP {}.".format(hp_serial))
+        usb_err_summary.append(check_for_USB_eror(file))
         csv_data = extract_stress_test_data(file)
         df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
         summary = compile_test_data_per_minute(df, hp_serial)
         create_test_result_summary_csv(hp_serial, summary)
-
+    data_summary = open("Data_summary.csv", mode='a')
+    for file, num_err in usb_err_summary:
+        data_summary.write(file + ',' + str(num_err))
+        data_summary.write("\n")
     print('DONE !')
 
 

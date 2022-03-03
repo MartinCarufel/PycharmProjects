@@ -1,4 +1,3 @@
-C:\Users\mcarufel\OneDrive - STG-Business\DHF\100 Verification & Validation\101 Verification\Hardware\HP PCBA New Commercial FPGA\USB Stress Test log\usb_stress_testIO-04-000379.log
-C:\Users\mcarufel\OneDrive - STG-Business\DHF\100 Verification & Validation\101 Verification\Hardware\HP PCBA New Commercial FPGA\USB Stress Test log\usb_stress_testIO-04-000636.log
-C:\Users\mcarufel\OneDrive - STG-Business\DHF\100 Verification & Validation\101 Verification\Hardware\HP PCBA New Commercial FPGA\USB Stress Test log\usb_stress_testIO-04-000935.log
-C:\Users\mcarufel\OneDrive - STG-Business\DHF\100 Verification & Validation\101 Verification\Hardware\HP PCBA New Commercial FPGA\USB Stress Test log\usb_stress_testIO-04-001018.log
+C:\Users\mcarufel\OneDrive - STG-Business\Temp\LOG 3 psu\usb_stress_testIO-04-000979.log
+C:\Users\mcarufel\OneDrive - STG-Business\Temp\LOG 3 psu\usb_stress_testIO-04-001018.log
+C:\Users\mcarufel\OneDrive - STG-Business\Temp\LOG 3 psu\usb_stress_testIO-04-004063.log
