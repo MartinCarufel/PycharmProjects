@@ -86,9 +86,6 @@ def convert_listcsv_to_dataframe(csv_data, hp_serial="xxxxxxx"):
     df["Duration"] = df["Duration"].astype(float)
     df["avg. fps"] = df["avg. fps"].astype(float)
     df["# total dropped"] = df["# total dropped"].astype(int)
-    # print(df["avg. fps"].mean())
-    # print(df)
-    # df.info()
     df.to_excel("Export_data " + hp_serial + ".xlsx")
     return df
 
@@ -107,19 +104,12 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
             avg_fps_list.append(Average(avg_fps))
             avg_fps = []
             avg_fps.append(df["avg. fps"].iloc[i])
-
-
-    # df.to_excel("Export_data " + hp_serial +".xlsx")
     df_summary = pd.DataFrame()
     df_summary["Total Drop Frame"] = total_drop
     df_summary["Total Drop Frame"] = df_summary["Total Drop Frame"].astype(int)
     df_summary["Avg FPS"] = avg_fps_list
     df_summary["Avg FPS"] = df_summary["Avg FPS"].round(decimals=3)
     df_summary.to_excel("Export_summary " + hp_serial +".xlsx")
-    # print(total_drop)
-    # print(avg_fps_list)
-    # print(df_summary)
-    # print(df_summary.dtypes)
     return df_summary
 
 
@@ -135,22 +125,13 @@ def create_test_result_summary_csv(hp_serial, df_summary):
         data_summary = open("Data_summary.csv", mode='w')
         data_summary.close()
 
-    if os.path.getsize("Data_summary.csv") == 0:
-        data_summary = open("Data_summary.csv", mode='w')
-        data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
-        print('File Data_summary.csv created\n')
-        for index, row in df_summary.iterrows():
-            data_summary.write(hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
-            data_summary.write("\n")
-        data_summary.close()
-    else:
-        data_summary = open("Data_summary.csv", mode='a')
-        for index, row in df_summary.iterrows():
-            data_summary.write(hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
-            data_summary.write("\n")
-        data_summary.close()
-        print('File Data_summary.csv updated\n')
-
+    data_summary = open("Data_summary.csv", mode='w')
+    data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
+    print('File Data_summary.csv created\n')
+    for index, row in df_summary.iterrows():
+        data_summary.write(hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
+        data_summary.write("\n")
+    data_summary.close()
 
 
 def get_path_list_from_file(file):
@@ -168,9 +149,7 @@ def get_path_list_from_file(file):
     return path_list
 
 
-
-if __name__ == '__main__':
-
+def main():
     usb_err_summary = []
     for file in get_path_list_from_file('File_list_to_analyse.txt'):
         reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
@@ -188,13 +167,6 @@ if __name__ == '__main__':
     data_summary.close()
     print('DONE !')
 
-
-
-    # file_name = prog_setup()[0]
-    # hp_serial = prog_setup()[1]
-    # csv_data = extract_stress_test_data(file_name)
-    # df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
-    # summary = compile_test_data_per_minute(df, hp_serial)
-    # create_test_result_summary_csv(hp_serial, summary)
-
+if __name__ == '__main__':
+    main()
 
