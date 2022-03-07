@@ -4,17 +4,18 @@ import sys
 import os
 
 
-def Average(lst):
+def average(lst):
     return sum(lst) / len(lst)
 
 
 def prog_setup():
     param_file_name = str(sys.argv[1])
-    reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'    #Find in path/file the IO serial
+    reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'    # Find in path/file the IO serial
     hp_serial = re.search(pattern=reg_ex, string=param_file_name).group()
     return (param_file_name, hp_serial)
 
-def check_for_USB_eror(input_file):
+
+def check_for_usb_eror(input_file):
     """
     This function check for USB error. Take a text file and look for specific error string.
 
@@ -25,7 +26,7 @@ def check_for_USB_eror(input_file):
     with open(input_file, mode='r') as f:
         for line in f:
             for error_str in error_strings:
-                if re.match(error_str, line) != None:
+                if re.match(error_str, line) is not None:
                     usb_error_count += 1
     return (input_file, usb_error_count)
 
@@ -66,13 +67,15 @@ def extract_stress_test_data(input_file):
 
     with open(input_file, mode='r') as f:
         for line in f:
-            if re.match(match_data, line) != None:
+            if re.match(match_data, line) is not None:
                 new_line = re.sub(pattern=match_pattern, repl=",", string=line)[1:-2]
                 csv_data.append(new_line.split(sep=','))
     return csv_data
 
+
 header = ["Duration", "# Total Frame", "# total bad pkt",  "# total dropped", "# frames",
-            "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
+          "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
+
 
 def convert_listcsv_to_dataframe(csv_data, hp_serial="xxxxxxx"):
     """
@@ -89,6 +92,7 @@ def convert_listcsv_to_dataframe(csv_data, hp_serial="xxxxxxx"):
     df.to_excel("Export_data " + hp_serial + ".xlsx")
     return df
 
+
 def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     total_drop = []
     avg_fps_list = []
@@ -101,7 +105,7 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
             avg_fps.append(df["avg. fps"].iloc[i])
         else:
             total_drop.append(df["# total dropped"].iloc[i-1])
-            avg_fps_list.append(Average(avg_fps))
+            avg_fps_list.append(average(avg_fps))
             avg_fps = []
             avg_fps.append(df["avg. fps"].iloc[i])
     df_summary = pd.DataFrame()
@@ -109,7 +113,7 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     df_summary["Total Drop Frame"] = df_summary["Total Drop Frame"].astype(int)
     df_summary["Avg FPS"] = avg_fps_list
     df_summary["Avg FPS"] = df_summary["Avg FPS"].round(decimals=3)
-    df_summary.to_excel("Export_summary " + hp_serial +".xlsx")
+    df_summary.to_excel("Export_summary " + hp_serial + ".xlsx")
     return df_summary
 
 
@@ -143,8 +147,8 @@ def get_path_list_from_file(file):
     with open(file, mode='r') as f:
         path_list = []
         for line in f:
-            line = line.replace('\\','/')
-            line = line.replace('\n','')
+            line = line.replace('\\', '/')
+            line = line.replace('\n', '')
             path_list.append(line)
     return path_list
 
@@ -155,7 +159,7 @@ def main():
         reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
         hp_serial = re.search(pattern=reg_ex, string=file).group()
         print("Process the log for HP {}.".format(hp_serial))
-        usb_err_summary.append(check_for_USB_eror(file))
+        usb_err_summary.append(check_for_usb_eror(file))
         csv_data = extract_stress_test_data(file)
         df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
         summary = compile_test_data_per_minute(df, hp_serial)
@@ -167,6 +171,6 @@ def main():
     data_summary.close()
     print('DONE !')
 
+
 if __name__ == '__main__':
     main()
-
