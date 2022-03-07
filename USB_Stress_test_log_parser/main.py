@@ -15,7 +15,7 @@ def prog_setup():
     return (param_file_name, hp_serial)
 
 
-def check_for_usb_eror(input_file):
+def check_for_usb_error(input_file):
     """
     This function check for USB error. Take a text file and look for specific error string.
 
@@ -34,7 +34,7 @@ def check_for_usb_eror(input_file):
 def extract_stress_test_data(input_file):
     """
     This function get in input the file output log from the USB Stress test in format text
-    and convert only the test result data second per second into an two dim list of CSV string. Each column are split
+    and convert only the test result data second per second into a two dim list of CSV string. Each column are splits
     with comma.
 
     input_file: usb stress test log.txt
@@ -159,7 +159,7 @@ def main():
         reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
         hp_serial = re.search(pattern=reg_ex, string=file).group()
         print("Process the log for HP {}.".format(hp_serial))
-        usb_err_summary.append(check_for_usb_eror(file))
+        usb_err_summary.append(check_for_usb_error(file))
         csv_data = extract_stress_test_data(file)
         df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
         summary = compile_test_data_per_minute(df, hp_serial)
