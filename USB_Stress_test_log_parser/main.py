@@ -103,7 +103,7 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
         elif float(df["Duration"].iloc[i]) > float(df["Duration"].iloc[i-1]):
             avg_fps.append(df["avg. fps"].iloc[i])
         else:
-            total_drop.append(df["# total dropped"].iloc[i])
+            total_drop.append(df["# total dropped"].iloc[i-1])
             avg_fps_list.append(Average(avg_fps))
             avg_fps = []
             avg_fps.append(df["avg. fps"].iloc[i])
@@ -185,6 +185,7 @@ if __name__ == '__main__':
     for file, num_err in usb_err_summary:
         data_summary.write(file + ',' + str(num_err))
         data_summary.write("\n")
+    data_summary.close()
     print('DONE !')
 
 
