@@ -30,6 +30,25 @@ def check_for_usb_error(input_file):
                     usb_error_count += 1
     return (input_file, usb_error_count)
 
+def check_for_usb_error_v2(input_file, hp_serial):
+    """
+    This function check for USB error. Take a text file and look for specific error string.
+
+    """
+    data_summary = open("Data_summary.csv", mode='a')
+    error_strings = ["Read to COM port failed with error code 995",
+                     "USB error (update gain CAM2_ID): 1004"]
+    usb_error_count = 0
+    print(input_file)
+    with open(input_file, mode='r') as f:
+        for line in f:
+            for error_str in error_strings:
+                if re.match(error_str, line) is not None:
+                    usb_error_count += 1
+    for error in error_strings:
+        data_summary.write(hp_serial + ',' + error + ',' + str(usb_error_count)  + "\n")
+    # return (usb_error_count)
+
 
 def extract_stress_test_data(input_file):
     """
@@ -129,12 +148,18 @@ def create_test_result_summary_csv(hp_serial, df_summary):
         data_summary = open("Data_summary.csv", mode='w')
         data_summary.close()
 
-    data_summary = open("Data_summary.csv", mode='w')
+
+    data_summary = open("Data_summary.csv", mode='a')
     data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
     print('File Data_summary.csv created\n')
     for index, row in df_summary.iterrows():
         data_summary.write(hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
         data_summary.write("\n")
+    data_summary.write(hp_serial + ',' + 'Average drop frame,' + str(df_summary["Total Drop Frame"].mean()) + "\n")
+    data_summary.write(hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].max()) + "\n")
+    data_summary.write(hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].min()) + "\n")
+    data_summary.write(hp_serial + ',' + 'Avg FPS,' + str(df_summary["Avg FPS"].mean()) + "\n")
+
     data_summary.close()
 
 
@@ -164,11 +189,8 @@ def main():
         df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
         summary = compile_test_data_per_minute(df, hp_serial)
         create_test_result_summary_csv(hp_serial, summary)
-    data_summary = open("Data_summary.csv", mode='a')
-    for file, num_err in usb_err_summary:
-        data_summary.write(file + ',' + str(num_err))
-        data_summary.write("\n")
-    data_summary.close()
+        check_for_usb_error_v2(file, hp_serial)
+
     print('DONE !')
 
 

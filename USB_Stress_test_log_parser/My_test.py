@@ -6,12 +6,12 @@ import main
 class Test_main(unittest.TestCase):
 
     def test_data_extractor(self):
-        csv_data = main.extract_stress_test_data("usb_stress_testIO-04-000379.log")
+        csv_data = main.extract_stress_test_data("usb_stress_testIO-04-000979.log")
         # csv_data = []
         self.assertTrue(len(csv_data) != 0)
 
     def test_extractor_return_all_column_data(self):
-        csv_data = main.extract_stress_test_data("usb_stress_testIO-04-000379.log")
+        csv_data = main.extract_stress_test_data("usb_stress_testIO-04-000979.log")
         for row_id in range(len(csv_data)):
             self.assertTrue(len(csv_data[row_id]) == 12)
 
