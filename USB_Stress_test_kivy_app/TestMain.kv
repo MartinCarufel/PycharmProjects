@@ -1,0 +1,22 @@
+BoxLayoutEx:
+
+<BoxLayoutEx>:
+    BoxLayout:
+        orientation: "vertical"
+        TextInput:
+            id: text_field
+            # size: "200dp", "30dp"
+            # size_hint: 1, None
+    
+        Button:
+            text: "Validate"
+            size_hint: 1, None
+            height: "30dp"
+            on_press: root.get_text_box(text_field.text)
+       
+            
+
+        
+
+
+
