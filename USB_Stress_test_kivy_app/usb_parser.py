@@ -136,7 +136,7 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     return df_summary
 
 
-def create_test_result_summary_csv(hp_serial, df_summary):
+def create_test_result_summary_csv(hp_serial, df_summary, pod_serial="no POD SN found"):
     """
     This function create a CSV file that summarize for the given HP the total of drop frame and the average FPS
     for each thread
@@ -150,6 +150,8 @@ def create_test_result_summary_csv(hp_serial, df_summary):
 
 
     data_summary = open("Data_summary.csv", mode='a')
+    # data_summary.writelines("ALLO\n")
+    data_summary.write("POD Serial," + pod_serial + "\n")
     data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
     print('File Data_summary.csv created\n')
     for index, row in df_summary.iterrows():
@@ -183,11 +185,13 @@ def main():
     for file in get_path_list_from_file('File_list_to_analyse.txt'):
         reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
         hp_serial = re.search(pattern=reg_ex, string=file).group()
+        reg_ex2 = 'DWIOK-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the DWIOK serial
+        pod_serial = re.search(pattern=reg_ex2, string=file).group()
         print("Process the log for HP {}.".format(hp_serial))
         usb_err_summary.append(check_for_usb_error(file))
         csv_data = extract_stress_test_data(file)
         df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
-        summary = compile_test_data_per_minute(df, hp_serial)
+        summary = compile_test_data_per_minute(df, hp_serial, pod_serial)
         create_test_result_summary_csv(hp_serial, summary)
         check_for_usb_error_v2(file, hp_serial)
 
