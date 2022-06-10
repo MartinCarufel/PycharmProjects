@@ -32,7 +32,10 @@ class BoxLayoutEx(BoxLayout):
             reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
             hp_serial = re.search(pattern=reg_ex, string=line_list[line]).group()
             reg_ex2 = 'DWIOK-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the DWIOK serial
-            pod_serial = re.search(pattern=reg_ex2, string=line_list[line]).group()
+            try:
+                pod_serial = re.search(pattern=reg_ex2, string=line_list[line]).group()
+            except AttributeError:
+                pod_serial = None
             print("Process the log for HP {}.".format(hp_serial))
             usb_err_summary.append(check_for_usb_error(line_list[line]))
             csv_data = extract_stress_test_data(line_list[line])
@@ -40,8 +43,7 @@ class BoxLayoutEx(BoxLayout):
             summary = compile_test_data_per_minute(df, hp_serial)
             create_test_result_summary_csv(hp_serial, summary, pod_serial)
             check_for_usb_error_v2(line_list[line], hp_serial)
-
-    pass
+        print("Process terminated")
 
 class TestMainApp(App):
     pass

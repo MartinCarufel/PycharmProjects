@@ -151,7 +151,8 @@ def create_test_result_summary_csv(hp_serial, df_summary, pod_serial="no POD SN 
 
     data_summary = open("Data_summary.csv", mode='a')
     # data_summary.writelines("ALLO\n")
-    data_summary.write("POD Serial," + pod_serial + "\n")
+    if pod_serial != None:
+        data_summary.write("POD Serial," + pod_serial + "\n")
     data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
     print('File Data_summary.csv created\n')
     for index, row in df_summary.iterrows():
