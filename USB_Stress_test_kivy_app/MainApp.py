@@ -28,6 +28,8 @@ class BoxLayoutEx(BoxLayout):
         line_list = text_.split("\n")
         usb_err_summary = []
         for line in range(len(line_list)):
+            if len(line_list[line]) < 4:
+                continue
             line_list[line] = line_list[line].replace('\\', '/')
             reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
             hp_serial = re.search(pattern=reg_ex, string=line_list[line]).group()

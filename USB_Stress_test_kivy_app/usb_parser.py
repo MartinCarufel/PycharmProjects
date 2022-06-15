@@ -22,7 +22,6 @@ def check_for_usb_error(input_file):
     """
     error_strings = ["Read to COM port failed with error code 995"]
     usb_error_count = 0
-    print(input_file)
     with open(input_file, mode='r') as f:
         for line in f:
             for error_str in error_strings:
@@ -39,7 +38,6 @@ def check_for_usb_error_v2(input_file, hp_serial):
     error_strings = ["Read to COM port failed with error code 995",
                      "USB error (update gain CAM2_ID): 1004"]
     usb_error_count = 0
-    print(input_file)
     with open(input_file, mode='r') as f:
         for line in f:
             for error_str in error_strings:
@@ -118,12 +116,10 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     avg_fps = []
     nb_line, nb_col = df.shape
     thread_duration = int(df["Duration"].max())
-    print(thread_duration)
     for i in range(0, nb_line):
         if i == 0:
             avg_fps.append(df["avg. fps"].iloc[i])
         elif int(df["Duration"].iloc[i]) < thread_duration:
-            print(int(df["Duration"].iloc[i]))
             avg_fps.append(df["avg. fps"].iloc[i])
         else:
             total_drop.append(df["# total dropped"].iloc[i-1])
