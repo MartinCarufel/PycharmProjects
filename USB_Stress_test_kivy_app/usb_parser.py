@@ -117,10 +117,13 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     avg_fps_list = []
     avg_fps = []
     nb_line, nb_col = df.shape
+    thread_duration = int(df["Duration"].max())
+    print(thread_duration)
     for i in range(0, nb_line):
         if i == 0:
             avg_fps.append(df["avg. fps"].iloc[i])
-        elif float(df["Duration"].iloc[i]) > float(df["Duration"].iloc[i-1]):
+        elif int(df["Duration"].iloc[i]) < thread_duration:
+            print(int(df["Duration"].iloc[i]))
             avg_fps.append(df["avg. fps"].iloc[i])
         else:
             total_drop.append(df["# total dropped"].iloc[i-1])
@@ -156,7 +159,7 @@ def create_test_result_summary_csv(hp_serial, df_summary, pod_serial="no POD SN 
     data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
     print('File Data_summary.csv created\n')
     for index, row in df_summary.iterrows():
-        data_summary.write(hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
+        data_summary.write(hp_serial + ',' + str(int(index)) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
         data_summary.write("\n")
     data_summary.write(hp_serial + ',' + 'Average drop frame,' + str(df_summary["Total Drop Frame"].mean()) + "\n")
     data_summary.write(hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].max()) + "\n")
