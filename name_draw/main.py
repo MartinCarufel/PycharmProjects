@@ -3,6 +3,12 @@
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 import time
+
+"""
+Create exe with pytinstaller
+pyinstaller --onefile main.py
+"""
+
 from random import randint
 
 class Name_draw:
@@ -72,6 +78,7 @@ def main():
     while response.upper() != 'Y':
         o = Name_draw()
         o.participant_in = o.convert_file_to_list('participants.txt')
+        o.participant_out = o.convert_file_to_list('excluded_participants.txt')
         try:
             o.draw_name()
         except ValueError:
@@ -88,11 +95,6 @@ All participant may be moved to the file expluded_participants.txt
         response = o.accept_the_name()
         o.convert_list_to_file(o.participant_in, 'participants.txt')
         o.convert_list_to_file(o.participant_out, 'excluded_participants.txt')
-
-
-
-
-
 
 
 # Press the green button in the gutter to run the script.
