@@ -20,7 +20,8 @@ def convert_date(pd_serie):
 def convert_rh(pd_serie):
 	new_rh_format = []
 	for i in pd_serie:
-		new_rh_format.append(i[1:3])
+                
+		new_rh_format.append(str(i)[0:2])
 	return new_rh_format
 
 
