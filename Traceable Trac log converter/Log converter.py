@@ -50,11 +50,13 @@ rh = df_org["CH1 (%)"]
 df_new = pd.DataFrame()
 # df_new["Date"] = df_org["Date"]
 df_new["Date"] = convert_date(df_org["Date"])
+df_new["Date_for_sort"] = pd.to_datetime(df_new["Date"])
 df_new["Time"] = df_org["Time"]
 # df_new["RH (%)"] = df_org["CH1 (%)"]
 df_new["RH (%)"] = convert_rh(df_org["CH1 (%)"])
 df_new["Temp (°C)"] = df_org["CH2 (C)"]
 df_new["Press Atm (mb)"] = df_org["CH3 (mb)"]
+df_new = df_new.sort_values(by= "Date_for_sort")
 # print(rh)
 print(df_new)
 df_result = df_new.loc[df_new["Time"].str.contains(daily_h_log)]
