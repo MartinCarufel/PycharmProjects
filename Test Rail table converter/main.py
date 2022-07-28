@@ -120,13 +120,19 @@ class StackLayoutEx(StackLayout, MainWidget):
         test = self.wb[self.ws]
         last_empty_row = len(list(test.rows))
         l = list(self.wb[self.ws].iter_rows())
+        col = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V']
+        col_id = 0
         line_num = 1
         print(l)
         for i in l:
             print(line_num, end=' | ')
-            for cel in i:
-
-                print(cel.value, end=' | ')
+            if line_num == 1:
+                for cel in i:
+                    print(col[col_id], end=' | ')
+                    col_id += 1
+            else:
+                for cel in i:
+                    print(cel.value, end=' | ')
             line_num += 1
             print()
         # newbd = pd.DataFrame(l)
