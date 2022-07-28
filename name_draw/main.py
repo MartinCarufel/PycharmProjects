@@ -79,7 +79,7 @@ def main():
         o = Name_draw()
         o.participant_in = o.convert_file_to_list('participants.txt')
         o.participant_out = o.convert_file_to_list('excluded_participants.txt')
-        
+
         try:
             o.draw_name()
         except ValueError:

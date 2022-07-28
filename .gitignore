@@ -1,1 +1,7 @@
 .idea/
+/USB_Stress_test_kivy_app/Data_summary.csv
+/USB_Stress_test_kivy_app/Export_data IO-04-001018.xlsx
+/USB_Stress_test_kivy_app/Export_data IO-04-002819.xlsx
+/USB_Stress_test_kivy_app/Export_summary IO-04-001018.xlsx
+/USB_Stress_test_kivy_app/Export_summary IO-04-002819.xlsx
+/USB_Stress_test_kivy_app/*.xlsx

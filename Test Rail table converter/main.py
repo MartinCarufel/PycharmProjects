@@ -121,6 +121,7 @@ class StackLayoutEx(StackLayout, MainWidget):
         last_empty_row = len(list(test.rows))
         l = list(self.wb[self.ws].iter_rows())
         line_num = 1
+        print(l)
         for i in l:
             print(line_num, end=' | ')
             for cel in i:
