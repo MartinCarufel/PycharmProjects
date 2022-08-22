@@ -1,7 +1,9 @@
 """
 Progaram to re format the data from Treacable Trac to excel
 
-Usage: python "Log converter.py" <file name to convert>
+Usage: python "Log converter.py" <file name to convert> <hour to retrieve>
+
+ex: python "Log converter.py" "B9C3826A.CSV" "14:"      -- The retrieve all data at 14H (from 14:00 to 14:59)
 
 """
 import pandas as pd
