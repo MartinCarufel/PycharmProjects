@@ -1,6 +1,7 @@
 import pyautogui
 from pyautogui import *
 from time import sleep
+import win32gui
 
 
 class Auto_vivo:
@@ -75,7 +76,8 @@ class Auto_vivo:
             click(1800, 0)   # click empty place
             click(self.win_plan_editor_cood['next'][0], self.win_plan_editor_cood['next'][1])
 
-print(pyautogui.getAllWindows)
+
+print(win32gui.EnumWindows())
 test = Auto_vivo()
 test_list1 = [('mart1', 'upper18')]
 test.create_case_scan_mesh(test_list1)
