@@ -1,0 +1,10 @@
+|||:Task|:Owner|:Assistant|:Start plan date|:Finish plan date
+||Test spec and report form writing|MarCar|ChrAta|2020-07-21 00:00:00|2020-07-22 00:00:00
+||Techical review test spec|ChrAta|MarCar, RemLac|2020-07-22 00:00:00|2020-07-22 00:00:00
+||Test spec Doc and Q&R Review|DavKuh, LynTho|MarCar|2020-07-22 00:00:00|2020-07-23 00:00:00
+||Create test Report  1.1 empty doc|DavKuh|-|2020-07-22 00:00:00|2020-07-23 00:00:00
+||Test run|MarCar|ChrAta|2020-07-24 00:00:00|2020-07-24 00:00:00
+||Test report writing|MarCar|-|2020-07-24 00:00:00|2020-07-24 00:00:00
+||Test report technical review / conclusion|ChrAta, RemLac|MarVer|2020-07-24 00:00:00|2020-07-27 00:00:00
+||Test report Doc and Q&R Review|DavKuh, LynTho|MarCar|2020-07-27 00:00:00|2020-07-28 00:00:00
+||ECR push|TemBol|-|2020-07-28 00:00:00|2020-07-30 00:00:00

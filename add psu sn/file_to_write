@@ -1,0 +1,960 @@
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.997,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.997
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.997,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.997
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.997,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.997
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.997,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.997
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.997,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.997
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.997,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.997
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.997,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.997
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.998,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.998
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.993,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.993
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.999,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.999
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.995,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.995
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,29.996,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,29.996
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
+"hp serial,Thread,Total Drop Frame,Avg FPS
+"
+"IO-04-002819,1,0,30.0,
+"
+"IO-04-002819,Average drop frame,0.0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Max drop frame,0
+"
+"IO-04-002819,Avg FPS,30.0
+"
+"IO-04-002819,Read to COM port failed with error code 995,0
+"
+"IO-04-002819,USB error (update gain CAM2_ID): 1004,0
+"
