@@ -67,6 +67,7 @@ class Auto_vivo:
                         'monochrome': (1650, 230),
                         'next scan': 'next scan.png',    # (1836, 1040)
                         'abort scan': 'abort scan.png',
+                        'cancel scan': 'cancel scan.png',
                         }
         self.win_side_bar = {
                         'S': (40, 40),
@@ -77,6 +78,11 @@ class Auto_vivo:
                         }
 
     def create_case_scan_mesh(self, test_list):
+        print("Test will start in 5 seconds, don't move the mouse")
+        for i in range(5, 1, -1):
+            print(i)
+            sleep(1)
+
         for patient, tooth in test_list:
             pg.click(1000, 10, interval=self.delay_1)   # click to focus on Vivo
             pg.click(pg.locateCenterOnScreen(self.win_workspace['new case'], confidence=self.conf_lvl_hi), interval=self.delay_1)
@@ -99,7 +105,12 @@ class Auto_vivo:
             pg.click(pg.locateCenterOnScreen(self.win_scan_cood['next scan'], confidence=self.conf_lvl_hi), interval=0)
             sleep(15)
             pg.click(pg.locateCenterOnScreen(self.win_side_bar['ribbon workspace'], confidence=self.conf_lvl_hi), interval=self.delay_1)
-            pg.click(pg.locateCenterOnScreen(self.win_scan_cood['abort scan'], confidence=self.conf_lvl_hi), interval=self.delay_1)
+            cancel_scan_list = [self.win_scan_cood['abort scan'], self.win_scan_cood['cancel scan']]
+            for img in cancel_scan_list:
+                if pg.locateOnScreen(img) != None:
+                    pg.click(pg.locateCenterOnScreen(img))
+                    break
+            # pg.click(pg.locateCenterOnScreen(self.win_scan_cood['abort scan'], confidence=self.conf_lvl_hi), interval=self.delay_1)
 
 
     def test1(self):
@@ -107,17 +118,17 @@ class Auto_vivo:
 
 
 test = Auto_vivo()
-test_list1 = [('test1', 'upper18'), ('test1', 'upper17')]
-"""test_list1 = [('test1', 'upper18'), ('test2', 'upper17'),
+# test_list1 = [('test1', 'upper18'), ('test1', 'upper17')]
+test_list1 = [('test1', 'upper18'), ('test2', 'upper17'),
  ('test3', 'upper16'), ('test4', 'upper15'),
  ('test5', 'upper14'), ('test6', 'upper13'),
  ('test7', 'upper12'), ('test8', 'upper11'),
  ('test9', 'upper28'), ('test10', 'upper27'),
  ('test11', 'upper26'), ('tes12', 'upper25'),
  ('test13', 'upper24'), ('test14', 'upper23'),
- ('test15', 'upper22'), ('test16', 'upper21'), ]"""
-test.create_case_scan_mesh(test_list1)
-
+ ('test15', 'upper22'), ('test16', 'upper21')]
+for i in range(10):
+    test.create_case_scan_mesh(test_list1)
 
 
 
