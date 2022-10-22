@@ -28,10 +28,22 @@ def main():
     print("Fail code: {}" .format(fail_flag))
     print("USB Error: {}" .format(usb_error))
 
-
+def test_re():
+    import os
+    expression = "usb_stress_testIO-[0-9][0-9]-[0-9]{6}_ok.log"
+    dir_content = os.listdir(".")
+    print(dir_content)
+    for file in dir_content:
+        result = re.match(expression, file)
+        if result != None:
+            print(result, result.string)
+            break
+        else:
+            print("Not Found")
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    main()
+    test_re()
+    # main()
 
 
