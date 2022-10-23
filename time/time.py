@@ -1,6 +1,11 @@
 #coding:utf-8
 
-import _datetime
+from datetime import datetime
 
-now = _datetime.datetime.now()
+now = datetime.now()
 print(now)
+
+
+time_obj = datetime.now()
+time_str = time_obj.strftime("%Y-%m-%d_%H%M%S")
+print(time_str)

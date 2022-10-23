@@ -3,6 +3,8 @@ import os
 import sys
 import re
 import pandas as pd
+from datetime import datetime
+import shutil
 
 # sys.path.append("D:/user_data/Martin/OneDrive/Documents/git/PycharmProjects/USB_Stress_test_log_parser")
 sys.path.append("C:/Users/mcarufel/Documents/Github/PycharmProjects/USB_Stress_test_log_parser")
@@ -10,6 +12,101 @@ import log_parser
 
 
 usb_strest_test_path = "C:/tools/scanner-io-4.0.1-484-hptest/usb_stress_test.exe"
+
+
+def find_log():
+    expression = "usb_stress_testIO-[0-9][0-9]-[0-9]{6}.log"
+    dir_content = os.listdir(".")
+    # print(dir_content)
+    for i in range(len(dir_content)):
+        file_found = re.match(pattern=expression, string=dir_content[i])
+        # print(dir_content[i])
+        if file_found != None:
+            return file_found.group()
+
+def extract_serial_number(file_name):
+    reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
+    return re.search(pattern=reg_ex, string=file_name).group()
+
+def display_result(fail_code, usb_error):
+    pass_result =  """
+**************************************************
+*******************  PASS  ***********************
+**************************************************"""
+
+    fail_result =  """
+==================================================
+====== FAIL == FAIL == FAIL == FAIL == FAIL ======
+=================================================="""
+
+
+    if fail_code == 0 and usb_error == 0:
+        print(pass_result)
+    else:
+        print(fail_result)
+        print("----- Error Details -----")
+        if fail_code & 0x01:
+            print("Too many drop frame.")
+        if fail_code & 0x02:
+            print("Frame per second too low.")
+        if usb_error != 0:
+            print("USB connection issue or critical error.")
+
+def log_test_result(hp_serial, fail_code, usb_error):
+    time_obj = datetime.now()
+    time_str = time_obj.strftime("%Y-%m-%d_%H:%M:%S")
+    message = time_str + " - HP: " + hp_serial + " - "
+
+    if fail_code == 0 and usb_error == 0:
+        message = message + "*** PASS ***"
+    else:
+        message = message + "ERROR - "
+        if fail_code & 0x01:
+            message = message + "Fail dropframe, "
+        if fail_code & 0x02:
+            message = message + "Fail FPS, "
+        if usb_error != 0:
+            message = message + "USB or critical error"
+
+    with open("result.log", 'a') as f:
+        f.writelines("{}\n" .format(message))
+
+def file_archive(file):
+    time_obj = datetime.now()
+    time_str = time_obj.strftime("%Y-%m-%d_%H%M%S")
+    dest_base_path = "C:/test_data/"
+    dest_file = dest_base_path + file[:-4] + "_" + time_str + ".log"
+    try:
+        shutil.copy(file, dest_file)
+    except FileNotFoundError:
+        os.mkdir(dest_base_path)
+        shutil.copy(file, dest_file)
+
+
+def main2():
+    log_file = find_log()
+    # print(log_file)
+    hp_serial = extract_serial_number(log_file)
+    usb_error = log_parser.check_for_usb_error_v2(log_file, hp_serial)
+    df = log_parser.convert_listcsv_to_dataframe(log_parser.extract_stress_test_data(log_file))
+    fail_flag = log_parser.acceptance_test(df, drop_frame_criteria=7, fps_criteria=29.95)  # fps 29.95
+    display_result(fail_flag, usb_error)
+    log_test_result(hp_serial, fail_flag, usb_error)
+    file_archive(log_file)
+
+
+
+
+
+    # print("Fail code: {}".format(fail_flag))
+    # print("USB Error: {}".format(usb_error))
+    # pd.set_option('display.max_rows', None)
+    # pd.set_option('display.max_columns', None)
+    # print(df[df['Duration'].between(13.0, 13.9)][
+    #           '# total dropped'].max)  # Trouve la valeur max de toutes les lignes
+
+
+
 
 def main():
     # file = "usb_stress_testIO-04-000979_disc.log"
@@ -62,6 +159,6 @@ def test_re():
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # test_re()
-    main()
+    main2()
 
 

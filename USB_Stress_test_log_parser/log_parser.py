@@ -22,7 +22,7 @@ def check_for_usb_error(input_file):
     """
     error_strings = ["Read to COM port failed with error code 995"]
     usb_error_count = 0
-    print(input_file)
+    # print(input_file)
     with open(input_file, mode='r') as f:
         for line in f:
             for error_str in error_strings:
@@ -39,7 +39,7 @@ def check_for_usb_error_v2(input_file, hp_serial):
     error_strings = ["Read to COM port failed with error code 995",
                      "USB error (update gain CAM2_ID): 1004"]
     usb_error_count = 0
-    print(input_file)
+    # print(input_file)
     with open(input_file, mode='r') as f:
         for line in f:
             for error_str in error_strings:
