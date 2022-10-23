@@ -52,7 +52,7 @@ def display_result(fail_code, usb_error):
         if usb_error != 0:
             print("USB connection issue or critical error.")
 
-def log_test_result(hp_serial, fail_code, usb_error):
+def log_test_result(hp_serial, fail_code, usb_error, dest_base_path):
     time_obj = datetime.now()
     time_str = time_obj.strftime("%Y-%m-%d_%H:%M:%S")
     message = time_str + " - HP: " + hp_serial + " - "
@@ -67,14 +67,19 @@ def log_test_result(hp_serial, fail_code, usb_error):
             message = message + "Fail FPS, "
         if usb_error != 0:
             message = message + "USB or critical error"
+    try:
+        dest = dest_base_path + "result.log"
+        with open(dest, 'a') as f:
+            f.writelines("{}\n" .format(message))
+    except FileNotFoundError:
+        os.mkdir(dest_base_path)
+        with open(dest, 'a') as f:
+            f.writelines("{}\n" .format(message))
 
-    with open("result.log", 'a') as f:
-        f.writelines("{}\n" .format(message))
 
-def file_archive(file):
+def file_archive(file, dest_base_path):
     time_obj = datetime.now()
     time_str = time_obj.strftime("%Y-%m-%d_%H%M%S")
-    dest_base_path = "C:/test_data/"
     dest_file = dest_base_path + file[:-4] + "_" + time_str + ".log"
     try:
         shutil.copy(file, dest_file)
@@ -84,6 +89,9 @@ def file_archive(file):
 
 
 def main2():
+    test_data_dest_base_path = "C:/test_data/"
+    os.system(usb_strest_test_path)
+    print("USB ST finished")
     log_file = find_log()
     # print(log_file)
     hp_serial = extract_serial_number(log_file)
@@ -91,8 +99,8 @@ def main2():
     df = log_parser.convert_listcsv_to_dataframe(log_parser.extract_stress_test_data(log_file))
     fail_flag = log_parser.acceptance_test(df, drop_frame_criteria=7, fps_criteria=29.95)  # fps 29.95
     display_result(fail_flag, usb_error)
-    log_test_result(hp_serial, fail_flag, usb_error)
-    file_archive(log_file)
+    log_test_result(hp_serial, fail_flag, usb_error, test_data_dest_base_path)
+    file_archive(log_file, test_data_dest_base_path)
 
 
 
