@@ -7,7 +7,7 @@ from datetime import datetime
 import shutil
 
 # sys.path.append("D:/user_data/Martin/OneDrive/Documents/git/PycharmProjects/USB_Stress_test_log_parser")
-sys.path.append("C:/Users/mcarufel/Documents/Github/PycharmProjects/USB_Stress_test_log_parser")
+sys.path.append("../USB_Stress_test_log_parser")
 import log_parser
 
 
