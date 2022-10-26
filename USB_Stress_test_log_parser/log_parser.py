@@ -2,7 +2,9 @@ import pandas as pd
 import re
 import sys
 import os
+import shutil
 
+result_path = "./result/"
 
 def average(lst):
     return sum(lst) / len(lst)
@@ -35,7 +37,7 @@ def check_for_usb_error_v2(input_file, hp_serial):
     This function check for USB error. Take a text file and look for specific error string.
 
     """
-    data_summary = open("Data_summary.csv", mode='a')
+    data_summary = open(result_path + "Data_summary.csv", mode='a')
     error_strings = ["Read to COM port failed with error code 995",
                      "USB error (update gain CAM2_ID): 1004"]
     usb_error_count = 0
@@ -108,7 +110,7 @@ def convert_listcsv_to_dataframe(csv_data, hp_serial="xxxxxxx"):
     df["Duration"] = df["Duration"].astype(float)
     df["avg. fps"] = df["avg. fps"].astype(float)
     df["# total dropped"] = df["# total dropped"].astype(int)
-    df.to_excel("Export_data " + hp_serial + ".xlsx")
+    df.to_excel(result_path + "Export_data " + hp_serial + ".xlsx")
     return df
 
 
@@ -132,7 +134,7 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     df_summary["Total Drop Frame"] = df_summary["Total Drop Frame"].astype(int)
     df_summary["Avg FPS"] = avg_fps_list
     df_summary["Avg FPS"] = df_summary["Avg FPS"].round(decimals=3)
-    df_summary.to_excel("Export_summary " + hp_serial + ".xlsx")
+    df_summary.to_excel(result_path + "Export_summary " + hp_serial + ".xlsx")
     return df_summary
 
 def acceptance_test(df, hp_serial="xxxxxxx", drop_frame_criteria=6, fps_criteria=29.95):
@@ -181,12 +183,12 @@ def create_test_result_summary_csv(hp_serial, df_summary):
     :param df_summary:
     :return:
     """
-    if not os.path.exists("Data_summary.csv"):
-        data_summary = open("Data_summary.csv", mode='w')
+    if not os.path.exists(result_path + "Data_summary.csv"):
+        data_summary = open(result_path + "Data_summary.csv", mode='w')
         data_summary.close()
 
 
-    data_summary = open("Data_summary.csv", mode='a')
+    data_summary = open(result_path + "Data_summary.csv", mode='a')
     data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
     print('File Data_summary.csv created\n')
     for index, row in df_summary.iterrows():
@@ -217,6 +219,12 @@ def get_path_list_from_file(file):
 
 def main():
     usb_err_summary = []
+    print("\n\n********************************************************")
+    print("***** Previous result data will be erase/overwrite *****")
+    print("********************************************************\n")
+    input("    Press enter to continue?\n")
+    shutil.rmtree('result', ignore_errors=True)
+    os.mkdir("./result/")
     for file in get_path_list_from_file('File_list_to_analyse.txt'):
         reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
         hp_serial = re.search(pattern=reg_ex, string=file).group()
@@ -233,3 +241,6 @@ def main():
 
 if __name__ == '__main__':
     main()
+
+
+
