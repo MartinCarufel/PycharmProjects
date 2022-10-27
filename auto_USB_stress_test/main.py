@@ -82,7 +82,7 @@ def file_archive(file, dest_base_path):
     time_str = time_obj.strftime("%Y-%m-%d_%H%M%S")
     dest_file = dest_base_path + file[:-4] + "_" + time_str + ".log"
     try:
-        shutil.copy(file, dest_file)
+        shutil.move(file, dest_file)
     except FileNotFoundError:
         os.mkdir(dest_base_path)
         shutil.copy(file, dest_file)
