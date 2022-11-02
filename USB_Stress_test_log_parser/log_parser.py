@@ -39,7 +39,7 @@ def check_for_usb_error_v2(input_file, hp_serial):
     """
     data_summary = open(result_path + "Data_summary.csv", mode='a')
     error_strings = ["Read to COM port failed with error code 995",
-                     "USB error (update gain CAM2_ID): 1004"]
+                     "USB error (update gain CAM2_ID): 1004", "Cutoff reached"]
     usb_error_count = 0
     # print(input_file)
     with open(input_file, mode='r') as f:

@@ -1,4 +1,1 @@
-D:/user_data/Martin/OneDrive - Straumann Group/Temp/to analyse/usb_stress_testIO-04-000355.log
-D:/user_data/Martin/OneDrive - Straumann Group/Temp/to analyse/usb_stress_testIO-04-000778.log
-D:/user_data/Martin/OneDrive - Straumann Group/Temp/to analyse/usb_stress_testIO-04-001011.log
-D:/user_data/Martin/OneDrive - Straumann Group/Temp/to analyse/usb_stress_testIO-04-001790.log
+C:\Users\mcarufel\Documents\git\PycharmProjects\USB_Stress_test_log_parser\usb_stress_testIO-04-006197_try 1 (fail).log
