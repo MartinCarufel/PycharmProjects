@@ -38,18 +38,20 @@ def check_for_usb_error_v2(input_file, hp_serial):
 
     """
     data_summary = open(result_path + "Data_summary.csv", mode='a')
-    error_strings = ["Read to COM port failed with error code 995",
-                     "USB error (update gain CAM2_ID): 1004", "Cutoff reached"]
-    usb_error_count = 0
-    # print(input_file)
-    with open(input_file, mode='r') as f:
-        for line in f:
-            for error_str in error_strings:
-                if re.match(error_str, line) is not None:
-                    usb_error_count += 1
-    for error in error_strings:
-        data_summary.write(hp_serial + ',' + error + ',' + str(usb_error_count)  + "\n")
-    return (usb_error_count)
+    error_strings = {"Read to COM port failed with error code 995": 0,
+                     "USB error \(update gain CAM2_ID\): 1004": 0,
+                     "Cutoff reached": 0}
+
+    for error_str, err_count in error_strings.items():
+        with open(input_file, mode='r') as f:
+            for line in f:
+
+                if re.match(str(error_str), line) is not None:
+                    error_strings[error_str] += 1
+
+    for error_str, err_count in error_strings.items():
+        data_summary.write(hp_serial + ',' + error_str + ',' + str(err_count) + "\n")
+
 
 
 def extract_stress_test_data(input_file):
