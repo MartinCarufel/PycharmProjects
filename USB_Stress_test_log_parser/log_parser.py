@@ -38,18 +38,23 @@ def check_for_usb_error_v2(input_file, hp_serial):
 
     """
     data_summary = open(result_path + "Data_summary.csv", mode='a')
-    error_strings = ["Read to COM port failed with error code 995",
-                     "USB error (update gain CAM2_ID): 1004"]
-    usb_error_count = 0
-    # print(input_file)
-    with open(input_file, mode='r') as f:
-        for line in f:
-            for error_str in error_strings:
-                if re.match(error_str, line) is not None:
-                    usb_error_count += 1
-    for error in error_strings:
-        data_summary.write(hp_serial + ',' + error + ',' + str(usb_error_count)  + "\n")
-    return (usb_error_count)
+    error_strings = {"Read to COM port failed with error code 995": 0,
+                     "USB error \(update gain CAM2_ID\): 1004": 0,
+                     "Stop everything": 0,
+                     }
+
+    for error_str, err_count in error_strings.items():
+        with open(input_file, mode='r') as f:
+            for line in f:
+
+                if re.search(str(error_str), line) is not None:
+                    error_strings[error_str] += 1
+
+    for error_str, err_count in error_strings.items():
+        data_summary.write(hp_serial + ',' + error_str + ',' + str(err_count) + "\n")
+
+    return error_strings
+
 
 
 def extract_stress_test_data(input_file):
@@ -160,11 +165,17 @@ def acceptance_test(df, hp_serial="xxxxxxx", drop_frame_criteria=6, fps_criteria
             avg_fps.append(df["avg. fps"].iloc[i])
     df_summary = pd.DataFrame()
     fail_flag = 0x00
-    if max(total_drop) > drop_frame_criteria:
-        fail_flag = fail_flag | 0x01
-    if min(avg_fps_list) < fps_criteria:
-        fail_flag = fail_flag | 0x02
-
+    try:
+        if max(total_drop) > drop_frame_criteria:
+            fail_flag = fail_flag | 0x01
+    except ValueError:
+        print("Thread too short to perform dropframe calculation")
+    try:
+        if min(avg_fps_list) < fps_criteria:
+            fail_flag = fail_flag | 0x02
+    except ValueError:
+        print("Thread too short to perform average calculation")
+        
     return fail_flag
 
     # df_summary["Total Drop Frame"] = total_drop

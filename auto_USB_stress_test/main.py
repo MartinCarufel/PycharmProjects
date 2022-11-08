@@ -11,7 +11,10 @@ sys.path.append("../USB_Stress_test_log_parser")
 import log_parser
 
 
-usb_strest_test_path = "C:/tools/scanner-io-4.0.1-484-hptest/usb_stress_test.exe"
+usb_strest_test_path = "C:/Users/dwos/Desktop/WST/vivo-usb-test/usb_stress_test.exe"
+
+drop_frame_threshold = 7
+fps_threshold = 29.95
 
 
 def find_log():
@@ -38,9 +41,11 @@ def display_result(fail_code, usb_error):
 ==================================================
 ====== FAIL == FAIL == FAIL == FAIL == FAIL ======
 =================================================="""
+    error_sum = usb_error["Read to COM port failed with error code 995"] + \
+                usb_error["USB error \(update gain CAM2_ID\): 1004"] + \
+                usb_error["Stop everything"]
 
-
-    if fail_code == 0 and usb_error == 0:
+    if fail_code == 0 and error_sum == 0:
         print(pass_result)
     else:
         print(fail_result)
@@ -49,15 +54,18 @@ def display_result(fail_code, usb_error):
             print("Too many drop frame.")
         if fail_code & 0x02:
             print("Frame per second too low.")
-        if usb_error != 0:
+        if error_sum != 0:
             print("USB connection issue or critical error.")
 
 def log_test_result(hp_serial, fail_code, usb_error, dest_base_path):
     time_obj = datetime.now()
     time_str = time_obj.strftime("%Y-%m-%d_%H:%M:%S")
     message = time_str + " - HP: " + hp_serial + " - "
+    error_sum = usb_error["Read to COM port failed with error code 995"] + \
+                usb_error["USB error \(update gain CAM2_ID\): 1004"] + \
+                usb_error["Stop everything"]
 
-    if fail_code == 0 and usb_error == 0:
+    if fail_code == 0 and error_sum == 0:
         message = message + "*** PASS ***"
     else:
         message = message + "ERROR - "
@@ -65,7 +73,7 @@ def log_test_result(hp_serial, fail_code, usb_error, dest_base_path):
             message = message + "Fail dropframe, "
         if fail_code & 0x02:
             message = message + "Fail FPS, "
-        if usb_error != 0:
+        if error_sum != 0:
             message = message + "USB or critical error"
     try:
         dest = dest_base_path + "result.log"
@@ -96,8 +104,9 @@ def main2():
     # print(log_file)
     hp_serial = extract_serial_number(log_file)
     usb_error = log_parser.check_for_usb_error_v2(log_file, hp_serial)
+    # print(usb_error)
     df = log_parser.convert_listcsv_to_dataframe(log_parser.extract_stress_test_data(log_file))
-    fail_flag = log_parser.acceptance_test(df, drop_frame_criteria=7, fps_criteria=29.95)  # fps 29.95
+    fail_flag = log_parser.acceptance_test(df, drop_frame_criteria=drop_frame_threshold, fps_criteria=fps_threshold)  # fps 29.95
     display_result(fail_flag, usb_error)
     log_test_result(hp_serial, fail_flag, usb_error, test_data_dest_base_path)
     file_archive(log_file, test_data_dest_base_path)
@@ -127,7 +136,7 @@ def main():
 
     expression = "usb_stress_testIO-[0-9][0-9]-[0-9]{6}.log"
     dir_content = os.listdir(".")
-    print(dir_content)
+    # print(dir_content)
     for id in range(len(dir_content)):
     # for file in dir_content:
         result = re.match(expression, dir_content[id])
@@ -155,7 +164,7 @@ def test_re():
     import os
     expression = "usb_stress_testIO-[0-9][0-9]-[0-9]{6}.log"
     dir_content = os.listdir(".")
-    print(dir_content)
+    # print(dir_content)
     for file in dir_content:
         result = re.match(expression, file)
         if result != None:
