@@ -31,7 +31,7 @@ def extract_serial_number(file_name):
     reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
     return re.search(pattern=reg_ex, string=file_name).group()
 
-def display_result(fail_code, usb_error):
+def display_result(fail_code, usb_error, hp_sn = "0000"):
     pass_result =  """
 **************************************************
 *******************  PASS  ***********************
@@ -44,7 +44,7 @@ def display_result(fail_code, usb_error):
     error_sum = usb_error["Read to COM port failed with error code 995"] + \
                 usb_error["USB error \(update gain CAM2_ID\): 1004"] + \
                 usb_error["Stop everything"]
-
+    print("\nTEST RESULT FOR %s" %(hp_sn))
     if fail_code == 0 and error_sum == 0:
         print(pass_result)
     else:
@@ -107,7 +107,7 @@ def main2():
     # print(usb_error)
     df = log_parser.convert_listcsv_to_dataframe(log_parser.extract_stress_test_data(log_file))
     fail_flag = log_parser.acceptance_test(df, drop_frame_criteria=drop_frame_threshold, fps_criteria=fps_threshold)  # fps 29.95
-    display_result(fail_flag, usb_error)
+    display_result(fail_flag, usb_error, hp_serial)
     log_test_result(hp_serial, fail_flag, usb_error, test_data_dest_base_path)
     file_archive(log_file, test_data_dest_base_path)
 
