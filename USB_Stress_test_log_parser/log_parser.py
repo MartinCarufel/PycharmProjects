@@ -207,7 +207,7 @@ def create_test_result_summary_csv(hp_serial, df_summary):
         data_summary.write("\n")
     data_summary.write(hp_serial + ',' + 'Average drop frame,' + str(df_summary["Total Drop Frame"].mean()) + "\n")
     data_summary.write(hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].max()) + "\n")
-    data_summary.write(hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].min()) + "\n")
+    data_summary.write(hp_serial + ',' + 'Min drop frame,' + str(df_summary["Total Drop Frame"].min()) + "\n")
     data_summary.write(hp_serial + ',' + 'Avg FPS,' + str(df_summary["Avg FPS"].mean()) + "\n")
 
     data_summary.close()
