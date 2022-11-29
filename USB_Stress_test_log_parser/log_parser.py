@@ -3,6 +3,7 @@ import re
 import sys
 import os
 import shutil
+from numpy import mean
 
 result_path = "./result/"
 
@@ -123,6 +124,7 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     total_drop = []
     avg_fps_list = []
     avg_fps = []
+    stream_duration = []
     nb_line, nb_col = df.shape
     for i in range(0, nb_line):
         if i == 0:
@@ -134,11 +136,14 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
             avg_fps_list.append(average(avg_fps))
             avg_fps = []
             avg_fps.append(df["avg. fps"].iloc[i])
+            stream_duration.append(df["Duration"].iloc[i-1])
+
     df_summary = pd.DataFrame()
     df_summary["Total Drop Frame"] = total_drop
     df_summary["Total Drop Frame"] = df_summary["Total Drop Frame"].astype(int)
     df_summary["Avg FPS"] = avg_fps_list
     df_summary["Avg FPS"] = df_summary["Avg FPS"].round(decimals=3)
+    df_summary["Stream Duration"] = stream_duration
     df_summary.to_excel(result_path + "Export_summary " + hp_serial + ".xlsx")
     return df_summary
 
@@ -202,13 +207,16 @@ def create_test_result_summary_csv(hp_serial, df_summary):
     data_summary = open(result_path + "Data_summary.csv", mode='a')
     data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
     print('File Data_summary.csv created\n')
+    x, y = df_summary.shape
     for index, row in df_summary.iterrows():
         data_summary.write(hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
         data_summary.write("\n")
-    data_summary.write(hp_serial + ',' + 'Average drop frame,' + str(df_summary["Total Drop Frame"].mean()) + "\n")
+    data_summary.write(hp_serial + ',' + 'Nb iteration,' + str(x) + "\n")
+    data_summary.write(hp_serial + ',' + 'Avg Stream Duration,' + str(round(df_summary["Stream Duration"].mean(), 2)) + "\n")
+    data_summary.write(hp_serial + ',' + 'Average drop frame,' + str(round(df_summary["Total Drop Frame"].mean(), 2)) + "\n")
     data_summary.write(hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].max()) + "\n")
     data_summary.write(hp_serial + ',' + 'Min drop frame,' + str(df_summary["Total Drop Frame"].min()) + "\n")
-    data_summary.write(hp_serial + ',' + 'Avg FPS,' + str(df_summary["Avg FPS"].mean()) + "\n")
+    data_summary.write(hp_serial + ',' + 'Avg FPS,' + str(round(df_summary["Avg FPS"].mean(), 3)) + "\n")
 
     data_summary.close()
 
