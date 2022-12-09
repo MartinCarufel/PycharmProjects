@@ -4,6 +4,7 @@ import sys
 import os
 import shutil
 from numpy import mean
+import os.path
 
 result_path = "./result/"
 
@@ -14,8 +15,10 @@ def average(lst):
 def prog_setup():
     param_file_name = str(sys.argv[1])
     reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'    # Find in path/file the IO serial
+    reg_ex_hpc = 'DWIOK-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'
     hp_serial = re.search(pattern=reg_ex, string=param_file_name).group()
-    return (param_file_name, hp_serial)
+    hpc_serial = re.search(pattern=reg_ex_hpc, string=param_file_name).group()
+    return (param_file_name, hp_serial, hpc_serial)
 
 
 def check_for_usb_error(input_file):
@@ -33,7 +36,7 @@ def check_for_usb_error(input_file):
                     usb_error_count += 1
     return (input_file, usb_error_count)
 
-def check_for_usb_error_v2(input_file, hp_serial):
+def check_for_usb_error_v2(input_file, hp_serial, hpc_serial):
     """
     This function check for USB error. Take a text file and look for specific error string.
 
@@ -53,7 +56,7 @@ def check_for_usb_error_v2(input_file, hp_serial):
                     error_strings[error_str] += 1
 
     for error_str, err_count in error_strings.items():
-        data_summary.write(hp_serial + ',' + error_str + ',' + str(err_count) + "\n")
+        data_summary.write(hpc_serial + ',' + hp_serial + ',' + error_str + ',' + str(err_count) + "\n")
 
     return error_strings
 
@@ -117,7 +120,7 @@ def convert_listcsv_to_dataframe(csv_data, hp_serial="xxxxxxx"):
     df["Duration"] = df["Duration"].astype(float)
     df["avg. fps"] = df["avg. fps"].astype(float)
     df["# total dropped"] = df["# total dropped"].astype(int)
-    df.to_excel(result_path + "Export_data " + hp_serial + ".xlsx")
+    # df.to_excel(result_path + "Export_data " + hp_serial + ".xlsx")
     return df
 
 
@@ -145,7 +148,13 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     df_summary["Avg FPS"] = avg_fps_list
     df_summary["Avg FPS"] = df_summary["Avg FPS"].round(decimals=3)
     df_summary["Stream Duration"] = stream_duration
-    df_summary.to_excel(result_path + "Export_summary " + hp_serial + ".xlsx")
+
+    # if os.path.exists("result/Export_summary IO-04-002675.xlsx"):
+    #
+    #     print("FiLE ALREADY EXIST")
+    # else:
+    #     print("Data summarry create")
+    #     df_summary.to_excel(result_path + "Export_summary " + hp_serial + ".xlsx")
     return df_summary
 
 def acceptance_test(df, hp_serial="xxxxxxx", drop_frame_criteria=6, fps_criteria=29.95):
@@ -192,7 +201,7 @@ def acceptance_test(df, hp_serial="xxxxxxx", drop_frame_criteria=6, fps_criteria
     # return df_summary
 
 
-def create_test_result_summary_csv(hp_serial, df_summary):
+def create_test_result_summary_csv(hp_serial, df_summary, hpc_serial):
     """
     This function create a CSV file that summarize for the given HP the total of drop frame and the average FPS
     for each thread
@@ -206,18 +215,18 @@ def create_test_result_summary_csv(hp_serial, df_summary):
 
 
     data_summary = open(result_path + "Data_summary.csv", mode='a')
-    data_summary.writelines("hp serial,Thread,Total Drop Frame,Avg FPS\n")
+    data_summary.writelines("HPC serial,HP serial,Thread,Total Drop Frame,Avg FPS\n")
     print('File Data_summary.csv created\n')
     x, y = df_summary.shape
     for index, row in df_summary.iterrows():
-        data_summary.write(hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
+        data_summary.write(hpc_serial + ',' + hp_serial + ',' + str(int(index)+1) + ',' + str(int((row["Total Drop Frame"]))) + ',' + str(row["Avg FPS"]) + ',')
         data_summary.write("\n")
-    data_summary.write(hp_serial + ',' + 'Nb iteration,' + str(x) + "\n")
-    data_summary.write(hp_serial + ',' + 'Avg Stream Duration,' + str(round(df_summary["Stream Duration"].mean(), 2)) + "\n")
-    data_summary.write(hp_serial + ',' + 'Average drop frame,' + str(round(df_summary["Total Drop Frame"].mean(), 2)) + "\n")
-    data_summary.write(hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].max()) + "\n")
-    data_summary.write(hp_serial + ',' + 'Min drop frame,' + str(df_summary["Total Drop Frame"].min()) + "\n")
-    data_summary.write(hp_serial + ',' + 'Avg FPS,' + str(round(df_summary["Avg FPS"].mean(), 3)) + "\n")
+    data_summary.write(hpc_serial + ',' + hp_serial + ',' + 'Nb iteration,' + str(x) + "\n")
+    data_summary.write(hpc_serial + ',' + hp_serial + ',' + 'Avg Stream Duration,' + str(round(df_summary["Stream Duration"].mean(), 2)) + "\n")
+    data_summary.write(hpc_serial + ',' + hp_serial + ',' + 'Average drop frame,' + str(round(df_summary["Total Drop Frame"].mean(), 2)) + "\n")
+    data_summary.write(hpc_serial + ',' + hp_serial + ',' + 'Max drop frame,' + str(df_summary["Total Drop Frame"].max()) + "\n")
+    data_summary.write(hpc_serial + ',' + hp_serial + ',' + 'Min drop frame,' + str(df_summary["Total Drop Frame"].min()) + "\n")
+    data_summary.write(hpc_serial + ',' + hp_serial + ',' + 'Avg FPS,' + str(round(df_summary["Avg FPS"].mean(), 3)) + "\n")
 
     data_summary.close()
 
@@ -248,13 +257,21 @@ def main():
     for file in get_path_list_from_file('File_list_to_analyse.txt'):
         reg_ex = 'IO-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'  # Find in path/file the IO serial
         hp_serial = re.search(pattern=reg_ex, string=file).group()
+        
+        reg_ex_hpc = 'DWIOK-[0-9][0-9]-[0-9][0-9][0-9][0-9][0-9][0-9]'
+        try:
+            hpc_serial = re.search(pattern=reg_ex_hpc, string=file).group()
+        except AttributeError:
+            hpc_serial = "SN not Found"
+
+        
         print("Process the log for HP {}.".format(hp_serial))
         usb_err_summary.append(check_for_usb_error(file))
-        csv_data = extract_stress_test_data(file)
+        csv_data = extract_stress_test_data(file)  # CSV_data are a python table
         df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
-        summary = compile_test_data_per_minute(df, hp_serial)
-        create_test_result_summary_csv(hp_serial, summary)
-        check_for_usb_error_v2(file, hp_serial)
+        summary = compile_test_data_per_minute(df, hp_serial)   # return dataframe
+        create_test_result_summary_csv(hp_serial, summary, hpc_serial)
+        check_for_usb_error_v2(file, hp_serial, hpc_serial)
 
     print('DONE !')
 

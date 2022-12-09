@@ -1,20 +1,2 @@
-D:/log/Official test/usb_stress_testIO-04-005922.log
-D:/log/Official test/usb_stress_testIO-04-005936.log
-D:/log/Official test/usb_stress_testIO-04-004651.log
-D:/log/Official test/usb_stress_testIO-04-006197.log
-D:/log/Official test/usb_stress_testIO-04-005906.log
-D:/log/Official test/usb_stress_testIO-04-006192.log
-D:/log/Official test/usb_stress_testIO-04-006206.log
-D:/log/Official test/usb_stress_testIO-04-005910.log
-D:/log/Official test/usb_stress_testIO-04-005933.log
-D:/log/Official test/usb_stress_testIO-04-006057.log
-D:/log/Official test/usb_stress_testIO-04-005903.log
-D:/log/Official test/usb_stress_testIO-04-006152.log
-D:/log/Official test/usb_stress_testIO-04-004607.log
-D:/log/Official test/usb_stress_testIO-04-004622.log
-D:/log/Official test/usb_stress_testIO-04-005870.log
-D:/log/Official test/usb_stress_testIO-04-006139.log
-D:/log/Official test/usb_stress_testIO-04-006198.log
-D:/log/Official test/usb_stress_testIO-04-005914.log
-D:/log/Official test/usb_stress_testIO-04-005947.log
-D:/log/Official test/usb_stress_testIO-04-006022.log
+C:\Users\mcarufel\OneDrive - STG-Business\Desktop\temp\usb_stress_testIO-04-002675.log
+C:\Users\mcarufel\OneDrive - STG-Business\Desktop\temp\usb_stress_testIO-04-002675.log
