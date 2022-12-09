@@ -108,7 +108,7 @@ header = ["Duration", "# Total Frame", "# total bad pkt",  "# total dropped", "#
           "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
 
 
-def convert_listcsv_to_dataframe(csv_data, hp_serial="xxxxxxx"):
+def convert_listcsv_to_dataframe(csv_data, file_path):
     """
     This function take as input a list of list of string extracted from the USB Stress
     test and convert it to a dataframe.
@@ -120,11 +120,11 @@ def convert_listcsv_to_dataframe(csv_data, hp_serial="xxxxxxx"):
     df["Duration"] = df["Duration"].astype(float)
     df["avg. fps"] = df["avg. fps"].astype(float)
     df["# total dropped"] = df["# total dropped"].astype(int)
-    # df.to_excel(result_path + "Export_data " + hp_serial + ".xlsx")
+    df.to_excel(result_path + "Export_data for " + get_file_name(file_path) + ".xlsx")
     return df
 
 
-def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
+def compile_test_data_per_minute(df, log_file):
     total_drop = []
     avg_fps_list = []
     avg_fps = []
@@ -148,7 +148,7 @@ def compile_test_data_per_minute(df, hp_serial="xxxxxxx"):
     df_summary["Avg FPS"] = avg_fps_list
     df_summary["Avg FPS"] = df_summary["Avg FPS"].round(decimals=3)
     df_summary["Stream Duration"] = stream_duration
-
+    df_summary.to_excel(result_path + "Export_summary for " + log_file + ".xlsx")
     # if os.path.exists("result/Export_summary IO-04-002675.xlsx"):
     #
     #     print("FiLE ALREADY EXIST")
@@ -245,6 +245,8 @@ def get_path_list_from_file(file):
             path_list.append(line)
     return path_list
 
+def get_file_name(file_path):
+    return file_path.split(sep='/')[-1]
 
 def main():
     usb_err_summary = []
@@ -268,8 +270,8 @@ def main():
         print("Process the log for HP {}.".format(hp_serial))
         usb_err_summary.append(check_for_usb_error(file))
         csv_data = extract_stress_test_data(file)  # CSV_data are a python table
-        df = convert_listcsv_to_dataframe(csv_data, hp_serial=hp_serial)
-        summary = compile_test_data_per_minute(df, hp_serial)   # return dataframe
+        df = convert_listcsv_to_dataframe(csv_data, file)
+        summary = compile_test_data_per_minute(df, get_file_name(file))   # return dataframe
         create_test_result_summary_csv(hp_serial, summary, hpc_serial)
         check_for_usb_error_v2(file, hp_serial, hpc_serial)
 
