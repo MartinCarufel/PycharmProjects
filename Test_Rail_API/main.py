@@ -35,7 +35,7 @@ def get_attachment():
     from requests.auth import HTTPBasicAuth
 
 
-    client = APIClient('https://testrail.dwos.com/')
+    # client = APIClient('https://testrail.dwos.com/')
 
     URL = 'https://testrail.dwos.com/'
     credential = HTTPBasicAuth('martin.carufel@dental-wings.com', '18,Mac&Amo')
@@ -53,9 +53,23 @@ def name_id(id):
     return api.users.get_user(id)['name']
 
 
+def get_section(section_id):
+    import requests
+    from requests.auth import HTTPBasicAuth
+
+    # client = APIClient('https://testrail.dwos.com/')
+
+    response = requests.get('https://testrail.dwos.com/', data= {'index.php?/api/v2/get_section/11352'}, auth= HTTPBasicAuth('martin.carufel@dental-wings.com', '18,Mac&Amo'))
+    print(response)
+    # URL = 'https://testrail.dwos.com/'
+    # credential = HTTPBasicAuth('martin.carufel@dental-wings.com', '18,Mac&Amo')
+    # r = requests.get(URL, auth=credential, data=f"index.php?/api/v2/get_section/{section_id}")
+
+
 if __name__ == "__main__":
-    main()
+    # main()
     # get_attachment()
+    get_section(11352)
 
 
 
