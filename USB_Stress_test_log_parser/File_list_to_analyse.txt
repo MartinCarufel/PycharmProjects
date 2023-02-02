@@ -1,1 +1,2 @@
-C:\tmp\usb_stress_testIO-04-002741.log
+C:\Users\mcarufel\OneDrive - STG-Business\DHF\040 Design\POD4.0\Any USB Stress Test\Test on Cart PC Ryzen 1700\Test_1_usb_stress_testIO-04-000778_DWIOK-05-000001.log
+C:\Users\mcarufel\OneDrive - STG-Business\DHF\040 Design\POD4.0\Any USB Stress Test\Test on Cart PC Ryzen 1700\Test_2_usb_stress_testIO-04-001790_DWIOK-05-000000.log
