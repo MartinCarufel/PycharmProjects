@@ -15,7 +15,7 @@ df = pd.read_excel("list_documents.xlsx", sheet_name="Sheet1")
 
 
 for index, row in df.iterrows():
-    context_2  = {
+    context_2 = {
         'tr_objective': row['Objective'],
         'tr_scope': row['Scope'],
         'tr_requirement_list': row['Requirement']
