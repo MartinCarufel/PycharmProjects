@@ -1,0 +1,8 @@
+---
+testrail project id: 2
+objective: The objective is to validate the software
+scope: DW-IO-100
+Requirement: "002, 007, 031"
+table_mapping: {IQ: 2, OQ: 3, PQ: 4}
+testrail parent section id: 11473
+...
