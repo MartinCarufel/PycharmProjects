@@ -3,8 +3,21 @@ testrail project id: 2
 objective: The objective is to validate the software
 scope: DW-IO-100
 Requirement: "002, 007, 031"
-table_mapping: {IQ: 2, OQ: 3, PQ: 4}
-#table_mapping: {11476: 2, 11477: 3, 11478: 4}
+
+
+# use CSV template:
+# True: use the CSV Template pointed by "template path" 3 sections
+#    Installation Qualification, Operational Qualifiaction, Performance Qualification
+#    Use the variable "testrail parent section id" which is top level that include the 3 sections IQ, OQ, PQ.
+# False: use user defined template pointed by "template path"
+#    define in "table mapping" a dict of the section to import and corresponding word table ID
+#    {test rail section_id: table id in word doc, ...}  ex: {74567: 2, 74568: 3}
+#    the word doc should already tables created with one blank row.
+use CSV template: True
+table mapping: {9517: 2, 6369: 3, 9521: 4}
 testrail parent section id: 11473
-output doc name: 2.docx
+
+# output doc name is path and file name where the document is created
+output doc name: D:\temp\1.docx
+template path: D:\user_data\Martin\OneDrive\Documents\git\PycharmProjects\wordDoc\QUF63-5448 Template CSV Validation Specifications (v1.2).docx
 ...
