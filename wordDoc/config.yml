@@ -13,11 +13,13 @@ Requirement: "002, 007, 031"
 #    define in "table mapping" a dict of the section to import and corresponding word table ID
 #    {test rail section_id: table id in word doc, ...}  ex: {74567: 2, 74568: 3}
 #    the word doc should already tables created with one blank row.
-use CSV template: True
-table mapping: {9517: 2, 6369: 3, 9521: 4}
-testrail parent section id: 11473
+use CSV template: False
+table mapping: {11362: 2}    # Ex: {11362: 2, 6369: 3, 9521: 4}
+testrail parent section id: 11362
+
+test report: False          #True for test report False for test specification
 
 # output doc name is path and file name where the document is created
-output doc name: D:\temp\1.docx
+output doc name: D:\temp\pod_3.5.docx
 template path: D:\user_data\Martin\OneDrive\Documents\git\PycharmProjects\wordDoc\QUF63-5448 Template CSV Validation Specifications (v1.2).docx
 ...
