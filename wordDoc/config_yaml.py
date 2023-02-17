@@ -5,6 +5,7 @@ from docx.document import Document
 from docx.shared import Pt
 from docx import Document
 import logging
+import datetime
 
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 handler = logging.FileHandler(filename='test.log', mode='w')
@@ -167,49 +168,71 @@ class Create_csv_doc():
                         logging.debug("add row")
                 self.change_table_font(self.doc.tables[value], 9)
 
-    def docx_report_table_filling(self):
-        section = None
+    def get_actual_result(self, tc_result):
+        pass
+
+    def get_tc_list_from_section(self, section_id):
+        tc_list = []
         URL = "https://testrail.dwos.com//index.php?/api/v2/get_cases/2&section_id="
         authentication = (self.credential_user, self.credential_pwd)
         head = {"Content-Type": "application/json"}
+        r = requests.get(URL + str(section_id), auth=authentication, headers= head)
+        logging.debug("Get test cases list for section id {} from Test Rail response: {}" .format(section_id ,r.status_code))
+        for tc in range(len(r.json())):
+            tc_list.append(r.json()[tc]["id"])
+        return tc_list
 
+
+    def docx_report_table_filling(self):
+        section = None
+        URL = "https://testrail.dwos.com/index.php?/api/v2/get_results_for_case/"
+        authentication = (self.credential_user, self.credential_pwd)
+        head = {"Content-Type": "application/json"}
         for section, value in self.docx_table_ref_id.items():
+            tc_list = self.get_tc_list_from_section(str(section))
+            logging.debug("Following test case will exported to word {}".format(tc_list))
             logging.debug("Create table for section: {}" .format(section))
             logging.debug("writing in table: {}  name: {}" .format(value, section))
-            r = requests.get(URL + str(section), auth=authentication, headers=head)
-            if r.status_code == 200:
-                for i in range(len(r.json())):
-                    element = r.json()[i]
-                    logging.debug("There is {} table in word doc" .format(len(self.doc.tables)))
-                    logging.debug("Start write row {} for test case: {} in table {}".format(i, element["id"], value))
+            for tc in range(len(tc_list)):
+                logging.info("Write test case {}".format(tc_list[tc]))
+                print(tc_list[tc])
+                r = requests.get(URL + str(self.config["test report run id"]) + "/" + str(tc_list[tc]), auth=authentication, headers=head)
+                if r.status_code == 200:
+                    for last_result_id in range(len(r.json())):
+                        logging.info("Read result id {}, status id value is {}".format(last_result_id, r.json()[last_result_id]["status_id"]))
+                        if r.json()[last_result_id]["status_id"] != None:
+                            break       # skip in result list that have no results to get the first valid result
 
-                    self.doc.tables[value].cell(i+1, 0).text = str(i+1)
-                    self.doc.tables[value].cell(i+1, 1).text = element['title'][3:] + "\n" + "Ref Test Rail: " + str(
-                        element['id'])
-                    try:
-                        self.doc.tables[value].cell(i + 1, 2).text = element['custom_io_requirement']
-                    except TypeError:
-                        self.doc.tables[value].cell(i + 1, 2).text = "Not defined"
-                        logging.warning("Test Rail variable 'custom_io_requirement' not defined for {} - {}"
-                                        .format(element["id"], element["title"]))
-                    try:
-                        self.doc.tables[value].cell(i + 1, 3).text = o.get_step_expected_result(element)
-                    except TypeError:
-                        self.doc.tables[value].cell(i + 1, 3).text = "Not Defined"
-                        logging.warning("Test Rail variable 'custom_steps_separated' not defined for {} - {}"
-                                        .format(element["id"], element["title"]))
-                    try:
-                        self.doc.tables[value].cell(i + 1, 4).text = element['custom_string_objective_evidence'] + " / " \
-                                                                   + element['custom_test_objev']
-                    except TypeError:
-                        self.doc.tables[value].cell(i + 1, 4).text = "Not Defined"
-                        logging.warning("Test Rail variable 'custom_string_objective_evidence' or 'custom_test_objev' not defined for {} - {}"
-                                        .format(element["id"], element["title"]))
-                    logging.debug("Finish write row {} for test case: {} in table {}".format(i, element["id"], value))
-                    if i < len(r.json())-1:   # avoid adding extra line at the end of table
-                        self.doc.tables[value].add_row()
-                        logging.debug("add row")
+
+                    self.doc.tables[value].cell(tc + 1, 0).text = str(tc + 1)  # Fill step number 1, 2, 3 ....
+                    self.doc.tables[value].cell(tc + 1, 1).text = "actual result for {}".format(tc_list[tc])      # result text
+                    logging.info("Test case status: {}".format(self.status_list[r.json()[last_result_id]["status_id"]]))
+                    self.doc.tables[value].cell(tc + 1, 2).text = self.status_list[r.json()[last_result_id]["status_id"]]  # Pass / Fail
+
+                    self.doc.tables[value].cell(tc + 1, 3).text = datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"]).strftime("%Y-%m-%d")          # Date
+                    self.doc.tables[value].cell(tc + 1, 4).text = "Ini"       # Initial
+                    self.doc.tables[value].add_row()
+                    # logging.debug("Finish write row {} for test case: {} in table {}".format(tc, element["id"], value))
+                    # if tc < len(r.json()) - 1:  # avoid adding extra line at the end of table
+                    #     self.doc.tables[value].add_row()
+                    #     logging.debug("add row")
                 self.change_table_font(self.doc.tables[value], 9)
+
+                    # for i in range(len(r.json())):
+                    #     element = r.json()[i]
+                    #     logging.debug("There is {} table in word doc" .format(len(self.doc.tables)))
+                    #     logging.debug("Start write row {} for test case: {} in table {}".format(i, tc, value))
+                    #
+                    #     self.doc.tables[value].cell(i+1, 0).text = str(i+1)   # Fill step number 1, 2, 3 ....
+                    #     self.doc.tables[value].cell(i+1, 1).text = "actual result"
+                    #     self.doc.tables[value].cell(i + 1, 2).text = "Pass / fail"
+                    #     self.doc.tables[value].cell(i + 1, 3).text = "date"
+                    #     self.doc.tables[value].cell(i + 1, 4).text = "Ini"
+                    #     logging.debug("Finish write row {} for test case: {} in table {}".format(i, element["id"], value))
+                    #     if i < len(r.json())-1:   # avoid adding extra line at the end of table
+                    #         self.doc.tables[value].add_row()
+                    #         logging.debug("add row")
+                    # self.change_table_font(self.doc.tables[value], 9)
 
 
     def get_step_expected_result(self, test_case):
@@ -231,21 +254,26 @@ class Create_csv_doc():
 
 
 if __name__ == "__main__":
-    # data_admin = Data_admin('martin.carufel@dental-wings.com', '18,Mac&Amo')
-    # data_admin.create_user_initial()
+    data_admin = Data_admin('martin.carufel@dental-wings.com', '18,Mac&Amo')
+    data_admin.create_user_initial()
     # print(data_admin.id_initial)
-    # data_admin.create_status_list()
+    data_admin.create_status_list()
     # print(data_admin.status_list)
 
     o = Create_csv_doc('martin.carufel@dental-wings.com', '18,Mac&Amo')
-    print(o.status_list)
-    print(o.user_initial)
+    # print(o.status_list)
+    # print(o.user_initial)
+    o.docx_report_table_filling()
+
+    # print(o.get_tc_list_from_section(9517))
+
+
     # if o.config["use CSV template"]:
     #     o.get_child_section_id(o.testrail_parent_id)
     # if o.config["test report"]:
     #     pass
     # else:
     #     o.docx_spec_table_filling()
-    # o.save_doc()
+    o.save_doc()
 
 
