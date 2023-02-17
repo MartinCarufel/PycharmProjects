@@ -8,7 +8,7 @@ import logging
 import datetime
 
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
-handler = logging.FileHandler(filename='test.log', mode='w')
+handler = logging.FileHandler(filename='test.log', mode='w', encoding="UTF-8")
 handler.setFormatter(formatter)
 logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
@@ -65,7 +65,6 @@ class Create_csv_doc():
         self.credential_user = credential_user
         self.credential_pwd = credential_pwd
         self.config = self.read_yaml()
-        self.testrail_project_id = self.config["testrail project id"]
         self.testrail_parent_id = self.config["testrail parent section id"]
         self.docx_table_ref_id = {}
         if not self.config["use CSV template"]:
@@ -90,7 +89,7 @@ class Create_csv_doc():
         parent_id: (int) no de la section parente
         Return: List of integer of Test Rail section_id that have matching parent id
         """
-        URL = "https://testrail.dwos.com//index.php?/api/v2/get_sections/2"   # get as dict all section in the project
+        URL = "https://testrail.dwos.com//index.php?/api/v2/get_sections/" + str(self.config["project id"])   # get as dict all section in the project
                                                             # (id, name, description, parent_id, suite_id ...
         r = requests.get(URL, auth=(self.credential_user, self.credential_pwd),
                          headers={"Content-Type": "application/json"})
@@ -126,7 +125,7 @@ class Create_csv_doc():
 
     def docx_spec_table_filling(self):
         section = None
-        URL = "https://testrail.dwos.com//index.php?/api/v2/get_cases/2&section_id="
+        URL = "https://testrail.dwos.com//index.php?/api/v2/get_cases/" + str(self.config["project id"]) + "&section_id="
         authentication = (self.credential_user, self.credential_pwd)
         head = {"Content-Type": "application/json"}
 
@@ -139,7 +138,7 @@ class Create_csv_doc():
                     element = r.json()[i]
                     logging.debug("There is {} table in word doc" .format(len(self.doc.tables)))
                     logging.debug("Start write row {} for test case: {} in table {}".format(i, element["id"], value))
-
+                    self.doc.tables[value].add_row()
                     self.doc.tables[value].cell(i+1, 0).text = str(i+1)
                     self.doc.tables[value].cell(i+1, 1).text = element['title'][3:] + "\n" + "Ref Test Rail: " + str(
                         element['id'])
@@ -163,9 +162,9 @@ class Create_csv_doc():
                         logging.warning("Test Rail variable 'custom_string_objective_evidence' or 'custom_test_objev' not defined for {} - {}"
                                         .format(element["id"], element["title"]))
                     logging.debug("Finish write row {} for test case: {} in table {}".format(i, element["id"], value))
-                    if i < len(r.json())-1:   # avoid adding extra line at the end of table
-                        self.doc.tables[value].add_row()
-                        logging.debug("add row")
+                    # if i < len(r.json())-1:   # avoid adding extra line at the end of table
+                    #     self.doc.tables[value].add_row()
+                    #     logging.debug("add row")
                 self.change_table_font(self.doc.tables[value], 9)
 
     def get_actual_result(self, tc_result):
@@ -173,7 +172,7 @@ class Create_csv_doc():
 
     def get_tc_list_from_section(self, section_id):
         tc_list = []
-        URL = "https://testrail.dwos.com//index.php?/api/v2/get_cases/2&section_id="
+        URL = "https://testrail.dwos.com//index.php?/api/v2/get_cases/" + str(self.config["project id"]) + "&section_id="
         authentication = (self.credential_user, self.credential_pwd)
         head = {"Content-Type": "application/json"}
         r = requests.get(URL + str(section_id), auth=authentication, headers= head)
@@ -181,6 +180,20 @@ class Create_csv_doc():
         for tc in range(len(r.json())):
             tc_list.append(r.json()[tc]["id"])
         return tc_list
+
+    def extract_all_step_result(self, custom_step_result):
+        """
+        :param custom_step_result: Provide the content of the "get_results_for_case["custom_step_results"]" of
+        a valid result
+        :return:
+        """
+        steps_results = []
+        logging.debug("Content of field 'custom_step_results: {}".format(custom_step_result))
+        for actual_result_idx in range(len(custom_step_result)):
+            if custom_step_result[actual_result_idx]["actual"] != "":
+                steps_results.append("Step {}: ".format(actual_result_idx+1))
+                steps_results.append(custom_step_result[actual_result_idx]["actual"] + "\n")
+        return "\n".join(steps_results)
 
 
     def docx_report_table_filling(self):
@@ -194,25 +207,45 @@ class Create_csv_doc():
             logging.debug("Create table for section: {}" .format(section))
             logging.debug("writing in table: {}  name: {}" .format(value, section))
             for tc in range(len(tc_list)):
+                self.doc.tables[value].add_row()
                 logging.info("Write test case {}".format(tc_list[tc]))
-                r = requests.get(URL + str(self.config["test report run id"]) + "/" + str(tc_list[tc]), auth=authentication, headers=head)
-                if r.status_code == 200:
+                r = requests.get(URL + str(
+                    self.config["test report run id"]) + "/" + str(tc_list[tc]), auth=authentication, headers=head)
+                logging.debug("Request data: {}".format(r.json()))
+                if r.status_code == 200 and r.json() != []:
                     for last_result_id in range(len(r.json())):
-                        logging.info("Read result id {}, status id value is {}".format(last_result_id, r.json()[last_result_id]["status_id"]))
-                        if r.json()[last_result_id]["status_id"] != None:
-                            break       # skip in result list that have no results to get the first valid result
-                    self.doc.tables[value].cell(tc + 1, 0).text = str(tc + 1)  # Fill step number 1, 2, 3 ....
-                    self.doc.tables[value].cell(tc + 1, 1).text = "actual result for {}".format(tc_list[tc])      # result text
-                    logging.info("Test case status: {}".format(self.status_list[r.json()[last_result_id]["status_id"]]))
-                    self.doc.tables[value].cell(tc + 1, 2).text = self.status_list[r.json()[last_result_id]["status_id"]]  # Pass / Fail
-                    logging.info("datetime stamp: {} - {}".format(r.json()[last_result_id]["created_on"], datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"]).strftime("%Y-%m-%d")))
-                    self.doc.tables[value].cell(tc + 1, 3).text = datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"]).strftime("%Y-%m-%d")          # Date
-                    self.doc.tables[value].cell(tc + 1, 4).text = "Ini"       # Initial
-                    self.doc.tables[value].add_row()
+                        logging.info("Read result index {} - id: {}, status id value is {}"
+                                     .format(last_result_id, r.json()[last_result_id]["id"],
+                                             r.json()[last_result_id]["status_id"]))
+                        # if r.json()[last_result_id]["status_id"] != None:
+                        if isinstance(r.json()[last_result_id]["status_id"], int):
+                            logging.debug("Result accepted, status_id: {}".format(r.json()[last_result_id]["status_id"]))
+                            self.doc.tables[value].cell(tc + 1, 0).text = str(tc + 1)  # Fill step number 1, 2, 3 ....
+                            self.doc.tables[value].cell(tc + 1, 1).text = self.extract_all_step_result(r.json()[last_result_id]["custom_step_results"])
+                                # "actual result for {}".format(tc_list[tc])      # result text
+                            logging.info("Test case status: {}"
+                                         .format(self.status_list[r.json()[last_result_id]["status_id"]]))
+                            self.doc.tables[value].cell(tc + 1, 2).text = self.status_list[r.json()[last_result_id]["status_id"]]  # Pass / Fail
+                            logging.info("datetime stamp: {} - {}"
+                                         .format(r.json()[last_result_id]["created_on"],
+                                        datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"])
+                                                 .strftime("%Y-%m-%d")))
+                            self.doc.tables[value].cell(tc + 1, 3).text = datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"]).strftime("%Y-%m-%d")          # Date
+                            self.doc.tables[value].cell(tc + 1, 4).text = "Ini"       # Initial
+                            break
+                        else:
+                            logging.debug(
+                                "Result skipped, status_id: {}".format(r.json()[last_result_id]["status_id"]))
+
+                    # self.doc.tables[value].add_row()
                     # logging.debug("Finish write row {} for test case: {} in table {}".format(tc, element["id"], value))
                     # if tc < len(r.json()) - 1:  # avoid adding extra line at the end of table
                     #     self.doc.tables[value].add_row()
                     #     logging.debug("add row")
+
+                else:
+                    print("not test result")
+                    logging.debug("No test result for test case: {}".format(tc_list[tc]))
                 self.change_table_font(self.doc.tables[value], 9)
 
                     # for i in range(len(r.json())):
@@ -253,14 +286,16 @@ class Create_csv_doc():
 if __name__ == "__main__":
     data_admin = Data_admin('martin.carufel@dental-wings.com', '18,Mac&Amo')
     data_admin.create_user_initial()
-    # print(data_admin.id_initial)
     data_admin.create_status_list()
-    # print(data_admin.status_list)
-
     o = Create_csv_doc('martin.carufel@dental-wings.com', '18,Mac&Amo')
-    # print(o.status_list)
-    # print(o.user_initial)
-    o.docx_report_table_filling()
+    if o.config["test report"]:
+        o.docx_report_table_filling()
+    else:
+        if o.config["use CSV template"]:
+            o.get_child_section_id(o.testrail_parent_id)
+        else:
+            o.docx_spec_table_filling()
+    o.save_doc()
 
     # print(o.get_tc_list_from_section(9517))
 
@@ -271,6 +306,5 @@ if __name__ == "__main__":
     #     pass
     # else:
     #     o.docx_spec_table_filling()
-    o.save_doc()
 
 
