@@ -195,20 +195,17 @@ class Create_csv_doc():
             logging.debug("writing in table: {}  name: {}" .format(value, section))
             for tc in range(len(tc_list)):
                 logging.info("Write test case {}".format(tc_list[tc]))
-                print(tc_list[tc])
                 r = requests.get(URL + str(self.config["test report run id"]) + "/" + str(tc_list[tc]), auth=authentication, headers=head)
                 if r.status_code == 200:
                     for last_result_id in range(len(r.json())):
                         logging.info("Read result id {}, status id value is {}".format(last_result_id, r.json()[last_result_id]["status_id"]))
                         if r.json()[last_result_id]["status_id"] != None:
                             break       # skip in result list that have no results to get the first valid result
-
-
                     self.doc.tables[value].cell(tc + 1, 0).text = str(tc + 1)  # Fill step number 1, 2, 3 ....
                     self.doc.tables[value].cell(tc + 1, 1).text = "actual result for {}".format(tc_list[tc])      # result text
                     logging.info("Test case status: {}".format(self.status_list[r.json()[last_result_id]["status_id"]]))
                     self.doc.tables[value].cell(tc + 1, 2).text = self.status_list[r.json()[last_result_id]["status_id"]]  # Pass / Fail
-
+                    logging.info("datetime stamp: {} - {}".format(r.json()[last_result_id]["created_on"], datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"]).strftime("%Y-%m-%d")))
                     self.doc.tables[value].cell(tc + 1, 3).text = datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"]).strftime("%Y-%m-%d")          # Date
                     self.doc.tables[value].cell(tc + 1, 4).text = "Ini"       # Initial
                     self.doc.tables[value].add_row()
