@@ -6,6 +6,7 @@ from docx.shared import Pt
 from docx import Document
 import logging
 import datetime
+import re
 
 formatter = logging.Formatter("%(asctime)s - %(levelname)s - %(message)s")
 handler = logging.FileHandler(filename='test.log', mode='w', encoding="UTF-8")
@@ -19,11 +20,13 @@ class Data_admin:
     def __init__(self, credential_user, credential_pwd):
         self.credential_user = credential_user
         self.credential_pwd = credential_pwd
-
         self.status_list = {}
         self.id_initial = {}
 
     def create_user_initial(self):
+        """
+        Fill dictionary with user id: report initial as per Quality process.
+        """
         name_initial = {"Martin Carufel": "MCL",
                         "Deepa Nallappan": "DNN",
                         "Duke Vu": "DVU",
@@ -31,7 +34,6 @@ class Data_admin:
                         "Natalia Piworun": "NPN",
                         "Theo Legrais": "TLS",
                         "Vidian-Manuel Duraud": "VDD"}
-        id_initial = {}
         URL = "https://testrail.dwos.com/index.php?/api/v2/get_users"
         authentication = (self.credential_user, self.credential_pwd)
         head = {"Content-Type": "application/json"}
@@ -42,6 +44,9 @@ class Data_admin:
                     self.id_initial[ul["id"]] = initial
 
     def create_status_list(self):
+        """
+        Fill class dictionary with corresponding status_id: report text
+        """
         status_text = {1:"Pass",
                        2:"Blocked",
                        3:"Untested",
@@ -79,7 +84,7 @@ class Create_csv_doc():
         self.user_initial = data_admin.id_initial
 
     def read_yaml(self):
-        """ A function to read YAML file"""
+        """ A function to read YAML config file"""
         with open('config.yml') as f:
             config = yaml.safe_load(f)
         return config       # Return dict of the config file
@@ -100,6 +105,11 @@ class Create_csv_doc():
         logger.debug("Number of sub section found: {}".format(len(self.docx_table_ref_id)))
 
     def found_corresponding_section_id(self, t_case_json_object):
+        """
+        Method to identify by the section name where in word doc we should write
+        :param t_case_json_object: is json element from a request.get_sections
+        :return: Word table index to write data
+        """
         table_id = None
         if t_case_json_object["name"].upper() == 'INSTALLATION QUALIFICATION':
             table_id = 2
@@ -139,21 +149,26 @@ class Create_csv_doc():
                     logging.debug("There is {} table in word doc" .format(len(self.doc.tables)))
                     logging.debug("Start write row {} for test case: {} in table {}".format(i, element["id"], value))
                     self.doc.tables[value].add_row()
+                    # Write in word col 1 the step number (1,2,3,...)
                     self.doc.tables[value].cell(i+1, 0).text = str(i+1)
+                    # Write in word col 2 the TestRail test case name and truncate the first 3 char that should be TS_, VS_
                     self.doc.tables[value].cell(i+1, 1).text = element['title'][3:] + "\n" + "Ref Test Rail: " + str(
                         element['id'])
+                    # Write in word col 3 requirements if element custom_io_requirement is absent place alternative text
                     try:
                         self.doc.tables[value].cell(i + 1, 2).text = element['custom_io_requirement']
                     except TypeError:
                         self.doc.tables[value].cell(i + 1, 2).text = "Not defined"
                         logging.warning("Test Rail variable 'custom_io_requirement' not defined for {} - {}"
                                         .format(element["id"], element["title"]))
+                    # Write in word col 4 TC all expected result of every TC step.
                     try:
                         self.doc.tables[value].cell(i + 1, 3).text = o.get_step_expected_result(element)
                     except TypeError:
                         self.doc.tables[value].cell(i + 1, 3).text = "Not Defined"
                         logging.warning("Test Rail variable 'custom_steps_separated' not defined for {} - {}"
                                         .format(element["id"], element["title"]))
+                    # Write in word an aggregate of two element field into word col 5
                     try:
                         self.doc.tables[value].cell(i + 1, 4).text = element['custom_string_objective_evidence'] + " / " \
                                                                    + element['custom_test_objev']
@@ -162,13 +177,9 @@ class Create_csv_doc():
                         logging.warning("Test Rail variable 'custom_string_objective_evidence' or 'custom_test_objev' not defined for {} - {}"
                                         .format(element["id"], element["title"]))
                     logging.debug("Finish write row {} for test case: {} in table {}".format(i, element["id"], value))
-                    # if i < len(r.json())-1:   # avoid adding extra line at the end of table
-                    #     self.doc.tables[value].add_row()
-                    #     logging.debug("add row")
+                # Format the table font to 9pts
                 self.change_table_font(self.doc.tables[value], 9)
 
-    def get_actual_result(self, tc_result):
-        pass
 
     def get_tc_list_from_section(self, section_id):
         tc_list = []
@@ -187,17 +198,19 @@ class Create_csv_doc():
         a valid result
         :return:
         """
+        regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\)'
         steps_results = []
         logging.debug("Content of field 'custom_step_results: {}".format(custom_step_result))
         for actual_result_idx in range(len(custom_step_result)):
             if custom_step_result[actual_result_idx]["actual"] != "":
                 steps_results.append("Step {}: ".format(actual_result_idx+1))
-                steps_results.append(custom_step_result[actual_result_idx]["actual"] + "\n")
+                filtered_string = re.subn(regex_patern, "", custom_step_result[actual_result_idx]["actual"])
+                steps_results.append(filtered_string[0])
+                # steps_results.append(custom_step_result[actual_result_idx]["actual"] + "\n")
         return "\n".join(steps_results)
 
 
     def docx_report_table_filling(self):
-        section = None
         URL = "https://testrail.dwos.com/index.php?/api/v2/get_results_for_case/"
         authentication = (self.credential_user, self.credential_pwd)
         head = {"Content-Type": "application/json"}
@@ -214,14 +227,22 @@ class Create_csv_doc():
                 logging.debug("Request data: {}".format(r.json()))
                 if r.status_code == 200 and r.json() != []:
                     for last_result_id in range(len(r.json())):
+                        test_result_aggregate = []
                         logging.info("Read result index {} - id: {}, status id value is {}"
                                      .format(last_result_id, r.json()[last_result_id]["id"],
                                              r.json()[last_result_id]["status_id"]))
                         # if r.json()[last_result_id]["status_id"] != None:
                         if isinstance(r.json()[last_result_id]["status_id"], int):
                             logging.debug("Result accepted, status_id: {}".format(r.json()[last_result_id]["status_id"]))
+                            # Write to word step id in col 1
                             self.doc.tables[value].cell(tc + 1, 0).text = str(tc + 1)  # Fill step number 1, 2, 3 ....
-                            self.doc.tables[value].cell(tc + 1, 1).text = self.extract_all_step_result(r.json()[last_result_id]["custom_step_results"])
+                            # Write to word test result by collecting all step actual result field in col 2
+                            test_result_aggregate.append(f"Test case ID: {tc_list[tc]}")
+                            test_result_aggregate.append("Test Result ID: {}\n".format(r.json()[last_result_id]["test_id"]))
+                            test_result_aggregate.append(self.extract_all_step_result(r.json()[last_result_id]["custom_step_results"]))
+                            # self.doc.tables[value].cell(tc + 1, 1).text =
+                            # self.doc.tables[value].cell(tc + 1, 1).text =
+                            self.doc.tables[value].cell(tc + 1, 1).text = "\n".join(test_result_aggregate)
                                 # "actual result for {}".format(tc_list[tc])      # result text
                             logging.info("Test case status: {}"
                                          .format(self.status_list[r.json()[last_result_id]["status_id"]]))
