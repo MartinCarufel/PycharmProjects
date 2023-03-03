@@ -192,13 +192,18 @@ class Create_csv_doc():
             tc_list.append(r.json()[tc]["id"])
         return tc_list
 
+
     def extract_all_step_result(self, custom_step_result):
         """
         :param custom_step_result: Provide the content of the "get_results_for_case["custom_step_results"]" of
         a valid result
         :return:
         """
-        regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\)'
+        pattern_list = ['!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *\\n',
+                        '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *',
+                        '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\)']
+
+        regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *\n*'
         steps_results = []
         logging.debug("Content of field 'custom_step_results: {}".format(custom_step_result))
         for actual_result_idx in range(len(custom_step_result)):
@@ -206,7 +211,9 @@ class Create_csv_doc():
                 steps_results.append("Step {}: ".format(actual_result_idx+1))
                 filtered_string = re.subn(regex_patern, "", custom_step_result[actual_result_idx]["actual"])
                 steps_results.append(filtered_string[0])
-                # steps_results.append(custom_step_result[actual_result_idx]["actual"] + "\n")
+        for i in range(len(steps_results)):
+            if steps_results[i] == "":
+                steps_results[i].pop()
         return "\n".join(steps_results)
 
 
