@@ -192,21 +192,30 @@ class Create_csv_doc():
             tc_list.append(r.json()[tc]["id"])
         return tc_list
 
+
+    def remove_picture_placeholder(self, input_text):
+        regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *\n*'
+        output_text = re.subn(regex_patern, "", input_text)
+        return output_text[0]
+
     def extract_all_step_result(self, custom_step_result):
         """
         :param custom_step_result: Provide the content of the "get_results_for_case["custom_step_results"]" of
         a valid result
         :return:
         """
-        regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\)'
+        regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *\n*'
         steps_results = []
         logging.debug("Content of field 'custom_step_results: {}".format(custom_step_result))
         for actual_result_idx in range(len(custom_step_result)):
             if custom_step_result[actual_result_idx]["actual"] != "":
                 steps_results.append("Step {}: ".format(actual_result_idx+1))
-                filtered_string = re.subn(regex_patern, "", custom_step_result[actual_result_idx]["actual"])
+                # filtered_string = re.subn(regex_patern, "", custom_step_result[actual_result_idx]["actual"])
+                filtered_string = re.subn(regex_patern, "", self.remove_picture_placeholder(custom_step_result[actual_result_idx]["actual"]))
                 steps_results.append(filtered_string[0])
-                # steps_results.append(custom_step_result[actual_result_idx]["actual"] + "\n")
+        for i in range(len(steps_results)):
+            if steps_results[i] == "":
+                steps_results[i].pop()
         return "\n".join(steps_results)
 
 
@@ -252,7 +261,8 @@ class Create_csv_doc():
                                         datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"])
                                                  .strftime("%Y-%m-%d")))
                             self.doc.tables[value].cell(tc + 1, 3).text = datetime.datetime.fromtimestamp(r.json()[last_result_id]["created_on"]).strftime("%Y-%m-%d")          # Date
-                            self.doc.tables[value].cell(tc + 1, 4).text = "Ini"       # Initial
+                            self.doc.tables[value].cell(tc + 1, 4).text = self.user_initial[r.json()[last_result_id]["created_by"]]
+                                   # Initial
                             break
                         else:
                             logging.debug(
@@ -291,8 +301,8 @@ class Create_csv_doc():
         try:
             for i in test_case['custom_steps_separated']:
                 if i['expected'] != "":
-                    list_of_expected_result.append(i['expected'])
-                    return "\n".join(list_of_expected_result)
+                    list_of_expected_result.append(self.remove_picture_placeholder(i['expected']))
+            return "\n".join(list_of_expected_result)
         except TypeError:
             return "No expected result defined in step"
 
@@ -308,6 +318,7 @@ if __name__ == "__main__":
     data_admin = Data_admin('martin.carufel@dental-wings.com', '18,Mac&Amo')
     data_admin.create_user_initial()
     data_admin.create_status_list()
+    print(data_admin.id_initial)
     o = Create_csv_doc('martin.carufel@dental-wings.com', '18,Mac&Amo')
     if o.config["test report"]:
         o.docx_report_table_filling()

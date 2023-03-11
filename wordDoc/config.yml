@@ -22,7 +22,7 @@ test report: True          #True for test report False for test specification
 test report run id: 1494    # Enter the run id from test rail (Rxxxx)
 
 # output doc name is path and file name where the document is created
-output doc name: D:\temp\pod_3.5.docx
+output doc name: c:\tmp\pod_3.5.docx
 # template path: D:\user_data\Martin\OneDrive\Documents\git\PycharmProjects\wordDoc\QUF63-5448 Template CSV Validation Specifications (v1.2).docx
 template path: QUF73-2485 Template Test Report (v1.0).docx
 ...
