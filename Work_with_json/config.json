@@ -1,0 +1,13 @@
+{
+  "first block":
+  {
+    "Key1": "Value for key 1",
+    "Key2": "Value for key 2"
+  },
+
+  "second block":
+  {
+    "Block2 key 1": "tata",
+    "Block2 key 2": "toto"
+  }
+}
