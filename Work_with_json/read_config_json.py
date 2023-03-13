@@ -1,6 +1,6 @@
 import json
 
-config_path = r"D:\user_data\Martin\OneDrive\Documents\git\PycharmProjects\Work_with_json\config.json"
+config_path = r"config2.json"
 
 with open(config_path) as config_file:
     config = json.load(config_file)

@@ -1,6 +1,12 @@
 import pandas as pd
 import json
+from docx.document import Document
+from docx.shared import Pt
+from docx import Document
+import re
+import yaml
 
+pd.set_option("display.max_columns", 5)
 
 def get_expected_result(data):
     """
@@ -9,32 +15,144 @@ def get_expected_result(data):
     """
     expected_result = []
     for i in range(len(data)):
-        expected_result.append("Step: {}: {}".format(str(i+1), data[i]["expected"]))
+        if i == len(data) - 1:  # prevent to add empty line at the end of the table
+            expected_result.append("Step {}: {}".format(str(i+1), data[i]["expected"]))
+        else:
+            expected_result.append("Step {}: {}\n".format(str(i + 1), data[i]["expected"]))
 
     return "\n".join(expected_result)
 
+def extract_all_step_result(custom_step_result):
+    """
+    :param custom_step_result: Provide the content of the "get_results_for_case["custom_step_results"]" of
+    a valid result
+    :return:
+    """
+    regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *\n*'
+    steps_results = []
+    # logging.debug("Content of field 'custom_step_results: {}".format(custom_step_result))
+    for actual_result_idx in range(len(custom_step_result)):
+        if custom_step_result[actual_result_idx]["actual"] != "":
+            steps_results.append("Step {}: ".format(actual_result_idx + 1))
+            # filtered_string = re.subn(regex_patern, "", custom_step_result[actual_result_idx]["actual"])
+            filtered_string = re.subn(regex_patern, "", remove_picture_placeholder(
+                custom_step_result[actual_result_idx]["actual"]))
+            steps_results.append(filtered_string[0])
+    for i in range(len(steps_results)):
+        if steps_results[i] == "":
+            steps_results[i].pop()
+    return "\n".join(steps_results)
 
-pd.set_option("display.max_columns", 5)
+def write_to_doc_table(df, table_id, template_doc, output_doc):
+    d = Document(template_doc)
+    df_nb_row, df_nb_col = df.shape
+    for df_row_idx in range(df_nb_row):
+        table_row = df_row_idx + 1
+        d.tables[table_id].add_row()
+        for col_idx in range(df_nb_col):
+            d.tables[table_id].cell(table_row, col_idx).text = str(df.loc[df_row_idx][col_idx])
+    d.save(output_doc)
 
-with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_cases\11362.json") as f:
-    tspec = json.load(f)
-
-df = pd.DataFrame(columns=["Step", "Description", "Requirement", "Expected Result", "Test Method / Objective Evidence"])
-
-for i in range(len(tspec)):
-    df.loc[i] = [
-    i+1,
-    "Test Case: {}\n{}".format(str(tspec[i]["id"]), tspec[i]["title"][3:]),
-    str(tspec[i]["custom_io_requirement"]),
-    get_expected_result(tspec[i]["custom_steps_separated"]),
-    "z"
-    ]
-
-for i in range(len(df)):
-    print("-------------------------------------------------------------")
-    print(df.loc[i]["Description"])
-    print(df.loc[i]["Expected Result"])
-    print("-------------------------------------------------------------")
+def print_dataframe(df):
+    col_names = df.columns
+    print(col_names)
+    nb_row, nb_col = df.shape
+    for row_idx in range(nb_row):
+        print("-------------------------------------------------------------")
+        for col_idx in range(nb_col):
+            print("{}: {}".format(col_names[col_idx], df.loc[row_idx][col_idx]))
 
 
+def create_df_from_json(json_obj, col_list, col_content, tc=None):
+    df = pd.DataFrame(columns=col_list)
+    for row_idx in range(len(json_obj)):
+        row_data = []
+        for col_idx in range(len(col_list)):
+            row_data.append(col_content[col_idx](json_obj[row_idx], row_idx, tc))
+            # df.loc[row_idx][col_idx] = col_content[col_idx](json_obj[row_idx], row_idx)
+        df.loc[row_idx] = row_data
+    return df
+
+
+def step_num(json_obj, row_idx, tc):
+    return str(row_idx + 1)
+
+def tc_description(json_obj, row_idx, tc):
+    return "Test Case: {}\n{}".format(str(json_obj["id"]), json_obj["title"][3:])
+
+def tc_requirement(json_obj, row_idx, tc):
+    return str(json_obj["custom_io_requirement"])
+
+def tc_expected_result(json_obj, row_idx, tc):
+    return remove_picture_placeholder(get_expected_result(json_obj["custom_steps_separated"]))
+
+def tc_test_method(json_obj, row_idx, tc):
+    return "{} / {}".format(json_obj["custom_string_objective_evidence"], json_obj["custom_test_objev"])
+
+def tr_result_description(json_obj, row_idx, tc):
+    test_result = []
+    test_result.append("Test case ID: {}".format(tc))
+    test_result.append("Test Result ID: {}\n".format(json_obj["test_id"]))
+    test_result.append(extract_all_step_result(json_obj["custom_step_results"]))
+    return "\n".join(test_result)
+    pass
+
+def tr_result(json_obj, row_idx, tc):
+    pass
+    return "n/a"
+
+def tr_date(json_obj, row_idx, tc):
+    pass
+    return "n/a"
+
+def tr_initial(json_obj, row_idx, tc):
+    pass
+    return "n/a"
+
+def change_table_font(table, font_size_pt):
+    """Table: docx x table ex: d.table[0] where d in docx object"""
+    for row in table.rows:
+        for cell in row.cells:
+            for paragraph in cell.paragraphs:
+                for run in paragraph.runs:
+                    font = run.font
+                    font.size = Pt(font_size_pt)
+
+def remove_picture_placeholder(input_text):
+    regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *\n*'
+    output_text = re.subn(regex_patern, "", input_text)
+    return output_text[0]
+
+
+def main():
+    with open('config.yml') as f:
+        config = yaml.safe_load(f)
+
+
+
+    if config["test report"]:
+        print("Process test Report")
+        with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_results_for_case\58746.json") as f:
+            tspec = json.load(f)
+        df = create_df_from_json(tspec, ["Step", "Result Description", "Result", "Date", "Initial"],
+                                 [step_num, tr_result_description, tr_result, tr_date, tr_initial], 58746)
+    else:
+        with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_cases\11362.json") as f:
+            tspec = json.load(f)
+        df = create_df_from_json(tspec, ["Step", "Description", "Requirement", "Expected Result",
+                                         "Test Method / Objective Evidence"],
+                                 [step_num, tc_description, tc_requirement, tc_expected_result, tc_test_method])
+
+
+    # df = create_df_from_json(tspec, ["Step", "Description", "Requirement", "Expected Result", "Test Method / Objective Evidence"],
+    #                          [step_num, tc_description, tc_requirement, tc_expected_result, tc_test_method])
+    # print_dataframe(df)
+    # write_to_doc_table(df, 3, r"D:\user_data\Martin\OneDrive - Straumann Group\Template\QUF73-2484 Template Test Specification (v1.3).docx",
+    #                    "out.docx")
+
+    write_to_doc_table(df, 8,
+                       r"D:\user_data\Martin\OneDrive - Straumann Group\Template\QUF73-2485 Template Test Report (v1.0) (ID 3999).docx",
+                       "out.docx")
+
+main()
 
