@@ -1,0 +1,22 @@
+2023-03-03 13:51:09,172 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-03 13:51:09,299 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_users HTTP/1.1" 200 5837
+2023-03-03 13:51:09,301 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-03 13:51:09,420 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_statuses HTTP/1.1" 200 1022
+2023-03-03 13:51:09,431 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-03 13:51:09,545 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_statuses HTTP/1.1" 200 1022
+2023-03-03 13:51:09,547 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-03 13:51:09,667 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_users HTTP/1.1" 200 5837
+2023-03-03 13:51:09,668 - DEBUG - Create table for section: 9521
+2023-03-03 13:51:09,668 - DEBUG - writing in table: 2  name: 9521
+2023-03-03 13:51:09,669 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-03 13:51:09,794 - DEBUG - https://testrail.dwos.com:443 "GET //index.php?/api/v2/get_cases/2&section_id=9521 HTTP/1.1" 200 5302
+2023-03-03 13:51:09,796 - DEBUG - There is 4 table in word doc
+2023-03-03 13:51:09,796 - DEBUG - Start write row 0 for test case: 49168 in table 2
+2023-03-03 13:51:09,800 - DEBUG - Finish write row 0 for test case: 49168 in table 2
+2023-03-03 13:51:09,800 - DEBUG - There is 4 table in word doc
+2023-03-03 13:51:09,800 - DEBUG - Start write row 1 for test case: 49169 in table 2
+2023-03-03 13:51:09,802 - DEBUG - Finish write row 1 for test case: 49169 in table 2
+2023-03-03 13:51:09,802 - DEBUG - There is 4 table in word doc
+2023-03-03 13:51:09,803 - DEBUG - Start write row 2 for test case: 49170 in table 2
+2023-03-03 13:51:09,805 - DEBUG - Finish write row 2 for test case: 49170 in table 2
+2023-03-03 13:51:09,815 - DEBUG - File saved c:\tmp\spec9521.docx
