@@ -46,6 +46,11 @@ def check_for_usb_error_v2(input_file, hp_serial, hpc_serial):
                      "Write to COM port failed with error code 22": 0,
                      "USB error \(update gain CAM2_ID\): 1004": 0,
                      "Stop everything": 0,
+                     "USB error \(stop_cam_sequencer\)": 0,
+                     "Failed to read sensing head temperature": 0,
+                     "Failed to stop low-power heater": 0,
+                     "Failed to stop hi-power heater": 0,
+
                      }
 
     for error_str, err_count in error_strings.items():
@@ -98,6 +103,7 @@ def extract_stress_test_data(input_file):
 
     with open(input_file, mode='r') as f:
         for line in f:
+            # print(len(re.findall(match_pattern, line)))
             if re.match(match_data, line) is not None:
                 new_line = re.sub(pattern=match_pattern, repl=",", string=line)[1:-2]
                 csv_data.append(new_line.split(sep=','))
@@ -116,7 +122,13 @@ def convert_listcsv_to_dataframe(csv_data, file_path):
 
     header = ["Duration", "# Total Frame", "# total bad pkt", "# total dropped", "# frames",
               "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
-    df = pd.DataFrame(csv_data, columns=header)
+    header2 = ["Duration", "# Total Frame", "# Total Error", "# total dropped", "# Frame", "# Dropped", "avg. fps", "MB/s"]
+
+    if len(csv_data[0]) == 8:
+        df = pd.DataFrame(csv_data, columns=header2)
+    else:
+        df = pd.DataFrame(csv_data, columns=header)
+
     df["Duration"] = df["Duration"].astype(float)
     df["avg. fps"] = df["avg. fps"].astype(float)
     df["# total dropped"] = df["# total dropped"].astype(int)
