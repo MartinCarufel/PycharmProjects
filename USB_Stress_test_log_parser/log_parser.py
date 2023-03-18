@@ -66,6 +66,21 @@ def check_for_usb_error_v2(input_file, hp_serial, hpc_serial):
     return error_strings
 
 
+def extract_table_header_from_log(input_log):
+    match_string = "\| *Start Capture Loop *\|"
+    pattern_string = re.compile(match_string)
+    match_sep = " *\| *"
+    pattern_sep = re.compile(match_sep)
+    header_location = 0
+    with open(input_log, mode='r') as f:
+        for count, line in enumerate(f):
+            if pattern_string.match(line) is not None:
+                header_location = count
+            if count == header_location+2:
+                header = re.sub(pattern=pattern_sep, repl=",", string=line[:-2])
+                header = header.split(sep=',')[1:]
+    return header
+
 
 def extract_stress_test_data(input_file):
     """
@@ -99,7 +114,8 @@ def extract_stress_test_data(input_file):
 
     match_data = "\| +[0-9]+.[0-9][0-9]"    # Regex to find the test result data to filter out any other text
     match_pattern = "\| +"                  # Regex to find all separating character between to text column
-    csv_data = []
+    csv_data = [extract_table_header_from_log(input_file)]
+    # csv_data = []
 
     with open(input_file, mode='r') as f:
         for line in f:
@@ -110,8 +126,9 @@ def extract_stress_test_data(input_file):
     return csv_data
 
 
-header = ["Duration", "# Total Frame", "# total bad pkt",  "# total dropped", "# frames",
-          "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
+# header = ["Duration", "# Total Frame", "# total bad pkt",  "# total dropped", "# frames",
+#           "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
+
 
 
 def convert_listcsv_to_dataframe(csv_data, file_path):
@@ -120,18 +137,20 @@ def convert_listcsv_to_dataframe(csv_data, file_path):
     test and convert it to a dataframe.
      """
 
-    header = ["Duration", "# Total Frame", "# total bad pkt", "# total dropped", "# frames",
-              "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
-    header2 = ["Duration", "# Total Frame", "# Total Error", "# total dropped", "# Frame", "# Dropped", "avg. fps", "MB/s"]
+    # header = ["Duration", "# Total Frame", "# total bad pkt", "# total dropped", "# frames",
+    #           "# dropped", "avg. fps", "MB/s", "#C0 Dead img", "#C1 Dead img", "#C2 Dead img", "#C3 Dead img"]
+    # header2 = ["Duration", "# Total Frame", "# Total Error", "# total dropped", "# Frame", "# Dropped", "avg. fps", "MB/s"]
 
-    if len(csv_data[0]) == 8:
-        df = pd.DataFrame(csv_data, columns=header2)
-    else:
-        df = pd.DataFrame(csv_data, columns=header)
+    # if len(csv_data[0]) == 8:
+    #     df = pd.DataFrame(csv_data, columns=header2)
+    # else:
+    #     df = pd.DataFrame(csv_data, columns=header)
 
-    df["Duration"] = df["Duration"].astype(float)
+    df = pd.DataFrame(csv_data[1:], columns=csv_data[0])
+
+    df["duration"] = df["duration"].astype(float)
     df["avg. fps"] = df["avg. fps"].astype(float)
-    df["# total dropped"] = df["# total dropped"].astype(int)
+    df["#total dropped"] = df["#total dropped"].astype(int)
     df.to_excel(result_path + "Export_data for " + get_file_name(file_path) + ".xlsx")
     return df
 
@@ -145,14 +164,14 @@ def compile_test_data_per_minute(df, log_file):
     for i in range(0, nb_line):
         if i == 0:
             avg_fps.append(df["avg. fps"].iloc[i])
-        elif float(df["Duration"].iloc[i]) > float(df["Duration"].iloc[i-1]):
+        elif float(df["duration"].iloc[i]) > float(df["duration"].iloc[i-1]):
             avg_fps.append(df["avg. fps"].iloc[i])
         else:
-            total_drop.append(df["# total dropped"].iloc[i-1])
+            total_drop.append(df["#total dropped"].iloc[i-1])
             avg_fps_list.append(average(avg_fps))
             avg_fps = []
             avg_fps.append(df["avg. fps"].iloc[i])
-            stream_duration.append(df["Duration"].iloc[i-1])
+            stream_duration.append(df["duration"].iloc[i-1])
 
     df_summary = pd.DataFrame()
     df_summary["Total Drop Frame"] = total_drop
@@ -178,15 +197,15 @@ def acceptance_test(df, hp_serial="xxxxxxx", drop_frame_criteria=6, fps_criteria
         if i == 0:
             avg_fps.append(df["avg. fps"].iloc[i])
         elif i == nb_line-1:
-            total_drop.append(df["# total dropped"].iloc[i])
+            total_drop.append(df["#total dropped"].iloc[i])
             avg_fps_list.append(average(avg_fps))
             avg_fps = []
             avg_fps.append(df["avg. fps"].iloc[i])
-        elif float(df["Duration"].iloc[i]) > float(df["Duration"].iloc[i-1]):
+        elif float(df["duration"].iloc[i]) > float(df["duration"].iloc[i-1]):
             avg_fps.append(df["avg. fps"].iloc[i])
 
         else:
-            total_drop.append(df["# total dropped"].iloc[i-1])
+            total_drop.append(df["#total dropped"].iloc[i-1])
             avg_fps_list.append(average(avg_fps))
             avg_fps = []
             avg_fps.append(df["avg. fps"].iloc[i])
