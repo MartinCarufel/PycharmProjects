@@ -5,8 +5,42 @@ from docx.shared import Pt
 from docx import Document
 import re
 import yaml
+import datetime
 
 pd.set_option("display.max_columns", 5)
+status_text = {1:"Pass",
+               2:"Blocked",
+               3:"Untested",
+               4:"Retest",
+               5:"Fail",
+               7:"Pass w/Dev"}
+
+
+def create_user_initial():
+    user_initial = {60: "ATR",
+                    45: "AAR",
+                    11: "ABN",
+                    62: "BLT",
+                    18: "CPT",
+                    37: "CAA",
+                    32: "CGS",
+                    14: "DRR",
+                    31: "DGU",
+                    24: "JHE",
+                    54: "KTU",
+                    12: "MCE",
+                    41: "MCL",
+                    51: "NPN",
+                    29: "PUR",
+                    47: "PUR",
+                    61: "PCR",
+                    63: "SME",
+                    59: "TLS",
+                    950: "VDD"
+    }
+    return user_initial
+
+user_initial = create_user_initial()
 
 def get_expected_result(data):
     """
@@ -31,6 +65,7 @@ def extract_all_step_result(custom_step_result):
     regex_patern = '!\\[\\]\\(index\\.php\\?/attachments/get/\\d+\\) *\n*'
     steps_results = []
     # logging.debug("Content of field 'custom_step_results: {}".format(custom_step_result))
+
     for actual_result_idx in range(len(custom_step_result)):
         if custom_step_result[actual_result_idx]["actual"] != "":
             steps_results.append("Step {}: ".format(actual_result_idx + 1))
@@ -38,10 +73,13 @@ def extract_all_step_result(custom_step_result):
             filtered_string = re.subn(regex_patern, "", remove_picture_placeholder(
                 custom_step_result[actual_result_idx]["actual"]))
             steps_results.append(filtered_string[0])
-    for i in range(len(steps_results)):
-        if steps_results[i] == "":
-            steps_results[i].pop()
+    # for i in range(len(steps_results)):
+    #     if steps_results[i] == "":
+    #         steps_results[i].pop()
     return "\n".join(steps_results)
+
+
+
 
 def write_to_doc_table(df, table_id, template_doc, output_doc):
     d = Document(template_doc)
@@ -71,6 +109,7 @@ def create_df_from_json(json_obj, col_list, col_content, tc=None):
             row_data.append(col_content[col_idx](json_obj[row_idx], row_idx, tc))
             # df.loc[row_idx][col_idx] = col_content[col_idx](json_obj[row_idx], row_idx)
         df.loc[row_idx] = row_data
+    print(df)
     return df
 
 
@@ -95,19 +134,23 @@ def tr_result_description(json_obj, row_idx, tc):
     test_result.append("Test Result ID: {}\n".format(json_obj["test_id"]))
     test_result.append(extract_all_step_result(json_obj["custom_step_results"]))
     return "\n".join(test_result)
-    pass
+
+
 
 def tr_result(json_obj, row_idx, tc):
-    pass
-    return "n/a"
+    return status_text[json_obj["status_id"]]
 
 def tr_date(json_obj, row_idx, tc):
-    pass
-    return "n/a"
+    date = datetime.datetime.fromtimestamp(json_obj["created_on"]).strftime("%Y-%m-%d")
+    return date
 
 def tr_initial(json_obj, row_idx, tc):
-    pass
-    return "n/a"
+    try:
+        initial = user_initial[json_obj["created_by"]]
+
+    except KeyError:
+        initial = "Not found id {}".format(json_obj["created_by"])
+    return initial
 
 def change_table_font(table, font_size_pt):
     """Table: docx x table ex: d.table[0] where d in docx object"""
@@ -123,23 +166,35 @@ def remove_picture_placeholder(input_text):
     output_text = re.subn(regex_patern, "", input_text)
     return output_text[0]
 
+def get_last_valid_result(json_object):
+    for js_obj in json_object:
+        if isinstance(js_obj["status_id"], int):
+            return [js_obj]
+    return 0
 
 def main():
+    user_initial = create_user_initial()
     with open('config.yml') as f:
         config = yaml.safe_load(f)
 
 
 
-    if config["test report"]:
+    if config["test report"]:   # test report creation
         print("Process test Report")
-        with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_results_for_case\58746.json") as f:
-            tspec = json.load(f)
-        df = create_df_from_json(tspec, ["Step", "Result Description", "Result", "Date", "Initial"],
-                                 [step_num, tr_result_description, tr_result, tr_date, tr_initial], 58746)
-    else:
+        with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_results_for_case\1320_49222.json") as f:
+        # with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_results_for_case\58746.json") as f:
+            js = json.load(f)
+        js = get_last_valid_result(js)
+        print(js)
+        df = create_df_from_json(js, ["Step", "Result Description", "Result", "Date", "Initial"],
+                                 [step_num, tr_result_description, tr_result, tr_date, tr_initial], 49222)
+        # df = create_df_from_json(js, ["Step", "Result Description", "Result", "Date", "Initial"],
+        #                          [step_num, tr_result_description, tr_result, tr_date, tr_initial], 58746)
+    else:   # test spec creation
         with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_cases\11362.json") as f:
-            tspec = json.load(f)
-        df = create_df_from_json(tspec, ["Step", "Description", "Requirement", "Expected Result",
+            js = json.load(f)
+
+        df = create_df_from_json(js, ["Step", "Description", "Requirement", "Expected Result",
                                          "Test Method / Objective Evidence"],
                                  [step_num, tc_description, tc_requirement, tc_expected_result, tc_test_method])
 
