@@ -123,7 +123,7 @@ def step_num(json_obj, row_idx, tc):
     return str(row_idx + 1)
 
 def tc_description(json_obj, row_idx, tc):
-    return "Test Case: {}\n{}".format(str(json_obj["id"]), json_obj["title"][3:])
+    return "Test Case: C{}\n{}".format(str(json_obj["id"]), json_obj["title"][3:])
 
 def tc_requirement(json_obj, row_idx, tc):
     return str(json_obj["custom_io_requirement"])
@@ -136,8 +136,8 @@ def tc_test_method(json_obj, row_idx, tc):
 
 def tr_result_description(json_obj, row_idx, tc):
     test_result = []
-    test_result.append("Test case ID: {}".format(tc))
-    test_result.append("Test Result ID: {}\n".format(json_obj["test_id"]))
+    test_result.append("Test case ID: C{}".format(tc))
+    test_result.append("Test Result ID: T{}\n".format(json_obj["test_id"]))
     test_result.append(extract_all_step_result(json_obj["custom_step_results"]))
     return "\n".join(test_result)
 
