@@ -152,7 +152,7 @@ class Create_csv_doc():
                     # Write in word col 1 the step number (1,2,3,...)
                     self.doc.tables[value].cell(i+1, 0).text = str(i+1)
                     # Write in word col 2 the TestRail test case name and truncate the first 3 char that should be TS_, VS_
-                    self.doc.tables[value].cell(i+1, 1).text = element['title'][3:] + "\n" + "Ref Test Rail: " + str(
+                    self.doc.tables[value].cell(i+1, 1).text = element['title'][3:] + "\n" + "Ref Test Rail: C" + str(
                         element['id'])
                     # Write in word col 3 requirements if element custom_io_requirement is absent place alternative text
                     try:
@@ -246,8 +246,8 @@ class Create_csv_doc():
                             # Write to word step id in col 1
                             self.doc.tables[value].cell(tc + 1, 0).text = str(tc + 1)  # Fill step number 1, 2, 3 ....
                             # Write to word test result by collecting all step actual result field in col 2
-                            test_result_aggregate.append(f"Test case ID: {tc_list[tc]}")
-                            test_result_aggregate.append("Test Result ID: {}\n".format(r.json()[last_result_id]["test_id"]))
+                            test_result_aggregate.append(f"Test case ID: C{tc_list[tc]}")
+                            test_result_aggregate.append("Test Result ID: T{}\n".format(r.json()[last_result_id]["test_id"]))
                             test_result_aggregate.append(self.extract_all_step_result(r.json()[last_result_id]["custom_step_results"]))
                             # self.doc.tables[value].cell(tc + 1, 1).text =
                             # self.doc.tables[value].cell(tc + 1, 1).text =
@@ -309,8 +309,6 @@ class Create_csv_doc():
     def save_doc(self):
         self.doc.save(self.config["output doc name"])
         logging.debug("File saved {}".format(self.config["output doc name"]))
-
-
 
 
 
