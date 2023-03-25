@@ -1,60 +1,95 @@
 HPC serial,HP serial,Thread,Total Drop Frame,Avg FPS
-SN not Found,IO-04-002741,1,0,29.997,
-SN not Found,IO-04-002741,2,0,29.997,
-SN not Found,IO-04-002741,3,3,29.992,
-SN not Found,IO-04-002741,4,0,30.0,
-SN not Found,IO-04-002741,5,0,29.995,
-SN not Found,IO-04-002741,6,0,29.996,
-SN not Found,IO-04-002741,7,0,30.0,
-SN not Found,IO-04-002741,8,0,29.996,
-SN not Found,IO-04-002741,9,0,29.996,
-SN not Found,IO-04-002741,10,0,30.0,
-SN not Found,IO-04-002741,11,0,29.997,
-SN not Found,IO-04-002741,12,0,29.997,
-SN not Found,IO-04-002741,13,0,29.997,
-SN not Found,IO-04-002741,14,0,29.997,
-SN not Found,IO-04-002741,15,0,29.995,
-SN not Found,IO-04-002741,16,0,29.995,
-SN not Found,IO-04-002741,17,0,30.0,
-SN not Found,IO-04-002741,18,0,29.998,
-SN not Found,IO-04-002741,19,0,29.998,
-SN not Found,IO-04-002741,20,0,30.0,
-SN not Found,IO-04-002741,21,0,29.998,
-SN not Found,IO-04-002741,22,3,29.997,
-SN not Found,IO-04-002741,23,0,29.995,
-SN not Found,IO-04-002741,24,0,29.997,
-SN not Found,IO-04-002741,25,0,29.996,
-SN not Found,IO-04-002741,26,0,29.994,
-SN not Found,IO-04-002741,27,0,29.999,
-SN not Found,IO-04-002741,28,0,29.995,
-SN not Found,IO-04-002741,29,0,29.997,
-SN not Found,IO-04-002741,30,0,29.997,
-SN not Found,IO-04-002741,31,3,29.986,
-SN not Found,IO-04-002741,32,0,29.995,
-SN not Found,IO-04-002741,33,0,29.995,
-SN not Found,IO-04-002741,34,0,30.0,
-SN not Found,IO-04-002741,35,0,30.0,
-SN not Found,IO-04-002741,36,0,29.997,
-SN not Found,IO-04-002741,37,0,29.995,
-SN not Found,IO-04-002741,38,0,29.995,
-SN not Found,IO-04-002741,39,0,29.996,
-SN not Found,IO-04-002741,40,0,29.995,
-SN not Found,IO-04-002741,41,0,29.996,
-SN not Found,IO-04-002741,42,0,30.0,
-SN not Found,IO-04-002741,43,0,29.997,
-SN not Found,IO-04-002741,44,3,30.0,
-SN not Found,IO-04-002741,45,0,29.995,
-SN not Found,IO-04-002741,46,0,30.0,
-SN not Found,IO-04-002741,47,0,30.0,
-SN not Found,IO-04-002741,48,0,30.0,
-SN not Found,IO-04-002741,49,0,29.997,
-SN not Found,IO-04-002741,Nb iteration,49
-SN not Found,IO-04-002741,Avg Stream Duration,60.0
-SN not Found,IO-04-002741,Average drop frame,0.24
-SN not Found,IO-04-002741,Max drop frame,3
-SN not Found,IO-04-002741,Min drop frame,0
-SN not Found,IO-04-002741,Avg FPS,29.997
-SN not Found,IO-04-002741,Read to COM port failed with error code 995,0
-SN not Found,IO-04-002741,Write to COM port failed with error code 22,0
-SN not Found,IO-04-002741,USB error \(update gain CAM2_ID\): 1004,0
-SN not Found,IO-04-002741,Stop everything,0
+SN not Found,IO-04-000355,1,0,30.033,
+SN not Found,IO-04-000355,2,0,30.032,
+SN not Found,IO-04-000355,3,0,30.032,
+SN not Found,IO-04-000355,4,0,30.033,
+SN not Found,IO-04-000355,5,0,30.032,
+SN not Found,IO-04-000355,6,0,30.034,
+SN not Found,IO-04-000355,7,0,30.033,
+SN not Found,IO-04-000355,8,0,30.033,
+SN not Found,IO-04-000355,9,0,30.032,
+SN not Found,IO-04-000355,10,0,30.034,
+SN not Found,IO-04-000355,11,0,30.033,
+SN not Found,IO-04-000355,12,0,30.033,
+SN not Found,IO-04-000355,13,0,30.033,
+SN not Found,IO-04-000355,14,0,30.034,
+SN not Found,IO-04-000355,15,0,30.033,
+SN not Found,IO-04-000355,16,0,30.034,
+SN not Found,IO-04-000355,17,0,30.034,
+SN not Found,IO-04-000355,18,0,30.034,
+SN not Found,IO-04-000355,19,0,30.033,
+SN not Found,IO-04-000355,20,0,30.033,
+SN not Found,IO-04-000355,21,0,30.034,
+SN not Found,IO-04-000355,22,0,30.032,
+SN not Found,IO-04-000355,23,0,30.034,
+SN not Found,IO-04-000355,24,0,30.034,
+SN not Found,IO-04-000355,25,0,30.034,
+SN not Found,IO-04-000355,26,0,30.034,
+SN not Found,IO-04-000355,27,0,30.033,
+SN not Found,IO-04-000355,28,0,30.033,
+SN not Found,IO-04-000355,29,0,30.034,
+SN not Found,IO-04-000355,30,0,30.033,
+SN not Found,IO-04-000355,31,0,30.034,
+SN not Found,IO-04-000355,32,0,30.032,
+SN not Found,IO-04-000355,33,0,30.034,
+SN not Found,IO-04-000355,34,0,30.033,
+SN not Found,IO-04-000355,35,0,30.032,
+SN not Found,IO-04-000355,36,0,30.034,
+SN not Found,IO-04-000355,37,0,30.034,
+SN not Found,IO-04-000355,38,0,30.035,
+SN not Found,IO-04-000355,39,0,30.035,
+SN not Found,IO-04-000355,40,0,30.034,
+SN not Found,IO-04-000355,41,0,30.034,
+SN not Found,IO-04-000355,42,0,30.033,
+SN not Found,IO-04-000355,43,0,30.034,
+SN not Found,IO-04-000355,44,0,30.033,
+SN not Found,IO-04-000355,45,0,30.033,
+SN not Found,IO-04-000355,46,0,30.033,
+SN not Found,IO-04-000355,47,0,30.033,
+SN not Found,IO-04-000355,48,0,30.033,
+SN not Found,IO-04-000355,49,0,30.033,
+SN not Found,IO-04-000355,50,0,30.034,
+SN not Found,IO-04-000355,51,0,30.034,
+SN not Found,IO-04-000355,52,0,30.034,
+SN not Found,IO-04-000355,53,0,30.034,
+SN not Found,IO-04-000355,54,0,30.034,
+SN not Found,IO-04-000355,55,0,30.034,
+SN not Found,IO-04-000355,56,0,30.034,
+SN not Found,IO-04-000355,57,0,30.034,
+SN not Found,IO-04-000355,58,0,30.034,
+SN not Found,IO-04-000355,59,0,30.033,
+SN not Found,IO-04-000355,60,0,30.034,
+SN not Found,IO-04-000355,61,0,30.034,
+SN not Found,IO-04-000355,Nb iteration,61
+SN not Found,IO-04-000355,Avg Stream Duration,300.02
+SN not Found,IO-04-000355,Average drop frame,0.0
+SN not Found,IO-04-000355,Max drop frame,0
+SN not Found,IO-04-000355,Min drop frame,0
+SN not Found,IO-04-000355,Avg FPS,30.033
+SN not Found,IO-04-000355,Read to COM port failed with error code 995,0
+SN not Found,IO-04-000355,Write to COM port failed with error code 22,0
+SN not Found,IO-04-000355,USB error \(update gain CAM2_ID\): 1004,0
+SN not Found,IO-04-000355,Stop everything,0
+SN not Found,IO-04-000355,USB error \(stop_cam_sequencer\),2
+SN not Found,IO-04-000355,Failed to read sensing head temperature,21
+SN not Found,IO-04-000355,Failed to stop low-power heater,6
+SN not Found,IO-04-000355,Failed to stop hi-power heater,6
+HPC serial,HP serial,Thread,Total Drop Frame,Avg FPS
+DWIOK-04-005020,IO-04-002741,1,0,30.0,
+DWIOK-04-005020,IO-04-002741,2,3,29.986,
+DWIOK-04-005020,IO-04-002741,3,0,29.996,
+DWIOK-04-005020,IO-04-002741,4,0,29.996,
+DWIOK-04-005020,IO-04-002741,Nb iteration,4
+DWIOK-04-005020,IO-04-002741,Avg Stream Duration,60.0
+DWIOK-04-005020,IO-04-002741,Average drop frame,0.75
+DWIOK-04-005020,IO-04-002741,Max drop frame,3
+DWIOK-04-005020,IO-04-002741,Min drop frame,0
+DWIOK-04-005020,IO-04-002741,Avg FPS,29.994
+DWIOK-04-005020,IO-04-002741,Read to COM port failed with error code 995,0
+DWIOK-04-005020,IO-04-002741,Write to COM port failed with error code 22,0
+DWIOK-04-005020,IO-04-002741,USB error \(update gain CAM2_ID\): 1004,0
+DWIOK-04-005020,IO-04-002741,Stop everything,0
+DWIOK-04-005020,IO-04-002741,USB error \(stop_cam_sequencer\),0
+DWIOK-04-005020,IO-04-002741,Failed to read sensing head temperature,0
+DWIOK-04-005020,IO-04-002741,Failed to stop low-power heater,0
+DWIOK-04-005020,IO-04-002741,Failed to stop hi-power heater,0
