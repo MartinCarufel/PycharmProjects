@@ -1,22 +1,42 @@
-2023-03-03 13:51:09,172 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
-2023-03-03 13:51:09,299 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_users HTTP/1.1" 200 5837
-2023-03-03 13:51:09,301 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
-2023-03-03 13:51:09,420 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_statuses HTTP/1.1" 200 1022
-2023-03-03 13:51:09,431 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
-2023-03-03 13:51:09,545 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_statuses HTTP/1.1" 200 1022
-2023-03-03 13:51:09,547 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
-2023-03-03 13:51:09,667 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_users HTTP/1.1" 200 5837
-2023-03-03 13:51:09,668 - DEBUG - Create table for section: 9521
-2023-03-03 13:51:09,668 - DEBUG - writing in table: 2  name: 9521
-2023-03-03 13:51:09,669 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
-2023-03-03 13:51:09,794 - DEBUG - https://testrail.dwos.com:443 "GET //index.php?/api/v2/get_cases/2&section_id=9521 HTTP/1.1" 200 5302
-2023-03-03 13:51:09,796 - DEBUG - There is 4 table in word doc
-2023-03-03 13:51:09,796 - DEBUG - Start write row 0 for test case: 49168 in table 2
-2023-03-03 13:51:09,800 - DEBUG - Finish write row 0 for test case: 49168 in table 2
-2023-03-03 13:51:09,800 - DEBUG - There is 4 table in word doc
-2023-03-03 13:51:09,800 - DEBUG - Start write row 1 for test case: 49169 in table 2
-2023-03-03 13:51:09,802 - DEBUG - Finish write row 1 for test case: 49169 in table 2
-2023-03-03 13:51:09,802 - DEBUG - There is 4 table in word doc
-2023-03-03 13:51:09,803 - DEBUG - Start write row 2 for test case: 49170 in table 2
-2023-03-03 13:51:09,805 - DEBUG - Finish write row 2 for test case: 49170 in table 2
-2023-03-03 13:51:09,815 - DEBUG - File saved c:\tmp\spec9521.docx
+2023-03-21 10:22:55,980 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:56,162 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_users HTTP/1.1" 200 5837
+2023-03-21 10:22:56,166 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:56,321 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_statuses HTTP/1.1" 200 1022
+2023-03-21 10:22:56,337 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:56,475 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_statuses HTTP/1.1" 200 1022
+2023-03-21 10:22:56,477 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:56,619 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_users HTTP/1.1" 200 5837
+2023-03-21 10:22:56,623 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:56,761 - DEBUG - https://testrail.dwos.com:443 "GET //index.php?/api/v2/get_cases/2&section_id=10769 HTTP/1.1" 200 5719
+2023-03-21 10:22:56,764 - DEBUG - Get test cases list for section id 10769 from Test Rail response: 200
+2023-03-21 10:22:56,764 - DEBUG - Following test case will exported to word [55646, 58582, 58583]
+2023-03-21 10:22:56,764 - DEBUG - Create table for section: 10769
+2023-03-21 10:22:56,764 - DEBUG - writing in table: 6  name: 10769
+2023-03-21 10:22:56,767 - INFO - Write test case 55646
+2023-03-21 10:22:56,768 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:57,002 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_results_for_case/1534/55646 HTTP/1.1" 200 1715
+2023-03-21 10:22:57,003 - DEBUG - Request data: [{'id': 28115, 'test_id': 289351, 'status_id': 5, 'created_by': 41, 'created_on': 1679402136, 'assignedto_id': None, 'comment': None, 'version': None, 'elapsed': '2h', 'defects': '60062', 'custom_step_results': [{'content': 'Setup:\nOpen OSGViewer and add the temperature control to the main window (View --> Temperature control)\nAdd Scanner Parameters to main windows (View --> Scanner Parameters) \nCheck the box Global parameter sync thread\nSet LED power RGB to 0%\nSet LED power UV to at least 50%\n', 'expected': 'Preparation', 'actual': 'System used:\nAlienWare 17 R5 \nComputer id: VANDV5\n\nPreparation done', 'status_id': 1}, {'content': 'VVVVVVVVVVVVVVVVVVVVVVVVVVVV\n**WARNING  UV LIGHT**\n**Do not direct the LED toward your eyes**\nVVVVVVVVVVVVVVVVVVVVVVVVVVVV\n\n\n\n\nRepeat following for each sample to be tested:\n1- Connect the projector cable on the HP main PCB\n2- Plug the HP cable into the computer (USB-C or in an HP connector if you are using it)\n3- In OSG Viewer click on Start live update.', 'expected': 'Confirm that you see purple light is emit from the LED.\nConfirm that the temperature Control window report a valid temperature.\nValid temperature should be between 30°C to 50°C, temperature usually increase while projector is ON.', 'actual': 'On 60 projector cables tested 13 cables have an issue with at least one crimp that prevent the connector to properly clip in the HP connector.\n\n![](index.php?/attachments/get/31328)\n\n![](index.php?/attachments/get/31329)\n![](index.php?/attachments/get/31330)', 'status_id': 5}], 'custom_dwio_serial_number': 'DWIO(C/P)-XX-XXXXX', 'custom_handpiece_serial_number': None, 'custom_pod_serial_number': None, 'custom_sample_size_used': '60', 'custom_vivo': '0'}]
+2023-03-21 10:22:57,003 - INFO - Read result index 0 - id: 28115, status id value is 5
+2023-03-21 10:22:57,003 - DEBUG - Result accepted, status_id: 5
+2023-03-21 10:22:57,003 - DEBUG - Content of field 'custom_step_results: [{'content': 'Setup:\nOpen OSGViewer and add the temperature control to the main window (View --> Temperature control)\nAdd Scanner Parameters to main windows (View --> Scanner Parameters) \nCheck the box Global parameter sync thread\nSet LED power RGB to 0%\nSet LED power UV to at least 50%\n', 'expected': 'Preparation', 'actual': 'System used:\nAlienWare 17 R5 \nComputer id: VANDV5\n\nPreparation done', 'status_id': 1}, {'content': 'VVVVVVVVVVVVVVVVVVVVVVVVVVVV\n**WARNING  UV LIGHT**\n**Do not direct the LED toward your eyes**\nVVVVVVVVVVVVVVVVVVVVVVVVVVVV\n\n\n\n\nRepeat following for each sample to be tested:\n1- Connect the projector cable on the HP main PCB\n2- Plug the HP cable into the computer (USB-C or in an HP connector if you are using it)\n3- In OSG Viewer click on Start live update.', 'expected': 'Confirm that you see purple light is emit from the LED.\nConfirm that the temperature Control window report a valid temperature.\nValid temperature should be between 30°C to 50°C, temperature usually increase while projector is ON.', 'actual': 'On 60 projector cables tested 13 cables have an issue with at least one crimp that prevent the connector to properly clip in the HP connector.\n\n![](index.php?/attachments/get/31328)\n\n![](index.php?/attachments/get/31329)\n![](index.php?/attachments/get/31330)', 'status_id': 5}]
+2023-03-21 10:22:57,005 - INFO - Test case status: Fail
+2023-03-21 10:22:57,006 - INFO - datetime stamp: 1679402136 - 2023-03-21
+2023-03-21 10:22:57,008 - INFO - Write test case 58582
+2023-03-21 10:22:57,009 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:57,182 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_results_for_case/1534/58582 HTTP/1.1" 200 924
+2023-03-21 10:22:57,184 - DEBUG - Request data: [{'id': 28116, 'test_id': 289352, 'status_id': 1, 'created_by': 41, 'created_on': 1679403484, 'assignedto_id': None, 'comment': None, 'version': None, 'elapsed': '2h', 'defects': None, 'custom_step_results': [{'content': 'After the cable have been soldered to the PCB, bend one wire from the cable from one side to the other until the conductor break(1), each 90° bend count as 1 bend.\n\n![](index.php?/attachments/get/28235)\n\nNote:\n(1) A continuity test can be used to confirm the conductor breakage.\n', 'expected': 'The average number of bend shall be greater than or equal to 10 and no wire bend number should be less than 5.', 'actual': 'Test 32 samples\nAverage bend count: 27\nMinimum bend count: 11\n\n![](index.php?/attachments/get/31334)', 'status_id': 1}], 'custom_dwio_serial_number': 'DWIO(C/P)-XX-XXXXX', 'custom_handpiece_serial_number': None, 'custom_pod_serial_number': None, 'custom_sample_size_used': '32', 'custom_vivo': '0'}]
+2023-03-21 10:22:57,184 - INFO - Read result index 0 - id: 28116, status id value is 1
+2023-03-21 10:22:57,184 - DEBUG - Result accepted, status_id: 1
+2023-03-21 10:22:57,184 - DEBUG - Content of field 'custom_step_results: [{'content': 'After the cable have been soldered to the PCB, bend one wire from the cable from one side to the other until the conductor break(1), each 90° bend count as 1 bend.\n\n![](index.php?/attachments/get/28235)\n\nNote:\n(1) A continuity test can be used to confirm the conductor breakage.\n', 'expected': 'The average number of bend shall be greater than or equal to 10 and no wire bend number should be less than 5.', 'actual': 'Test 32 samples\nAverage bend count: 27\nMinimum bend count: 11\n\n![](index.php?/attachments/get/31334)', 'status_id': 1}]
+2023-03-21 10:22:57,186 - INFO - Test case status: Pass
+2023-03-21 10:22:57,187 - INFO - datetime stamp: 1679403484 - 2023-03-21
+2023-03-21 10:22:57,189 - INFO - Write test case 58583
+2023-03-21 10:22:57,190 - DEBUG - Starting new HTTPS connection (1): testrail.dwos.com:443
+2023-03-21 10:22:57,352 - DEBUG - https://testrail.dwos.com:443 "GET /index.php?/api/v2/get_results_for_case/1534/58583 HTTP/1.1" 200 978
+2023-03-21 10:22:57,353 - DEBUG - Request data: [{'id': 28117, 'test_id': 289353, 'status_id': 1, 'created_by': 41, 'created_on': 1679404031, 'assignedto_id': None, 'comment': None, 'version': None, 'elapsed': '2h', 'defects': None, 'custom_step_results': [{'content': 'Setup:\nPull force tester\nClamp the crimp on and clamp the wire on the pull for tester.\nSet pull force tester to record maximum value.\nApply pull force until the break point and note it.\n\n![](index.php?/attachments/get/28532)\n', 'expected': 'All tested wire pull force shall be greater than or equal to 8.9 N (2lbf).', 'actual': 'Setup:\nForce meter Imada, ES 617, Cal due date 2023-09-30 \nTest samples: 25\nMinimum pull force before crimp failure: 8.9 N\n\n![](index.php?/attachments/get/31335)\n\n![](index.php?/attachments/get/31332)\n![](index.php?/attachments/get/31333)', 'status_id': 3}], 'custom_dwio_serial_number': 'DWIO(C/P)-XX-XXXXX', 'custom_handpiece_serial_number': None, 'custom_pod_serial_number': None, 'custom_sample_size_used': '25', 'custom_vivo': '0'}]
+2023-03-21 10:22:57,353 - INFO - Read result index 0 - id: 28117, status id value is 1
+2023-03-21 10:22:57,353 - DEBUG - Result accepted, status_id: 1
+2023-03-21 10:22:57,354 - DEBUG - Content of field 'custom_step_results: [{'content': 'Setup:\nPull force tester\nClamp the crimp on and clamp the wire on the pull for tester.\nSet pull force tester to record maximum value.\nApply pull force until the break point and note it.\n\n![](index.php?/attachments/get/28532)\n', 'expected': 'All tested wire pull force shall be greater than or equal to 8.9 N (2lbf).', 'actual': 'Setup:\nForce meter Imada, ES 617, Cal due date 2023-09-30 \nTest samples: 25\nMinimum pull force before crimp failure: 8.9 N\n\n![](index.php?/attachments/get/31335)\n\n![](index.php?/attachments/get/31332)\n![](index.php?/attachments/get/31333)', 'status_id': 3}]
+2023-03-21 10:22:57,355 - INFO - Test case status: Pass
+2023-03-21 10:22:57,355 - INFO - datetime stamp: 1679404031 - 2023-03-21
+2023-03-21 10:22:57,370 - DEBUG - File saved D:\user_data\Martin\OneDrive - Straumann Group\DHF\100 Verification & Validation\101 Verification\Hardware\IO HP3\CR-230206 Projector wire change\Test Run 1 (R1534)\1534.docx

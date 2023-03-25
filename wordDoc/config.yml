@@ -17,14 +17,14 @@ use CSV template: False
 testrail parent section id: 11362   # Use only for option Use CSV = True
 
 # table mapping: {11362: 6}    # Ex: {11362: 2, 6369: 3, 9521: 4}
-table mapping: {9521: 2}    # Ex: {11362: 2, 6369: 3, 9521: 4}
+table mapping: {10769: 6}    # Ex: {11362: 2, 6369: 3, 9521: 4}
 
-test report: False          #True for test report False for test specification
-test report run id: 1494    # Enter the run id from test rail (Rxxxx)
+test report: True          #True for test report False for test specification
+test report run id: 1534    # Enter the run id from test rail (Rxxxx)
 
 # output doc name is path and file name where the document is created
-output doc name: c:\tmp\spec9521.docx
+output doc name: D:\user_data\Martin\OneDrive - Straumann Group\DHF\100 Verification & Validation\101 Verification\Hardware\IO HP3\CR-230206 Projector wire change\Test Run 1 (R1534)\1534.docx
 # template path: D:\user_data\Martin\OneDrive\Documents\git\PycharmProjects\wordDoc\QUF63-5448 Template CSV Validation Specifications (v1.2).docx
 # template path: QUF73-2485 Template Test Report (v1.0).docx
-template path: QUF73-2484 Template Test Specification automated.docx
+template path: D:\user_data\Martin\OneDrive\Documents\git\PycharmProjects\wordDoc\QUF73-2485 Template Test Report (v1.0).docx
 ...
