@@ -19,6 +19,11 @@ status_text = {1:"Pass",
                5:"Fail",
                7:"Pass w/Dev"}
 
+global test_run_step_counter
+test_run_step_counter = 0
+
+with open('config.yml') as f:
+    config = yaml.safe_load(f)
 
 def create_user_initial():
     user_initial = {60: "ATR",
@@ -84,17 +89,16 @@ def extract_all_step_result(custom_step_result):
 
 
 def write_to_doc_table(df, table_id, template_doc, output_doc):
+    # print(df)
     d = Document(template_doc)
     df_nb_row, df_nb_col = df.shape
     for df_row_idx in range(df_nb_row):
         table_row = df_row_idx + 1
         d.tables[table_id].add_row()
         for col_idx in range(df_nb_col):
+            # print("row: {}   col: {}".format(df_row_idx, col_idx))
             d.tables[table_id].cell(table_row, col_idx).text = str(df.loc[df_row_idx][col_idx])
-
     change_table_font(d.tables[table_id], 9)
-
-
     d.save(output_doc)
 
 def print_dataframe(df):
@@ -115,7 +119,7 @@ def create_df_from_json(json_obj, col_list, col_content, tc=None):
             row_data.append(col_content[col_idx](json_obj[row_idx], row_idx, tc))
             # df.loc[row_idx][col_idx] = col_content[col_idx](json_obj[row_idx], row_idx)
         df.loc[row_idx] = row_data
-    print(df)
+    # print(df)
     return df
 
 
@@ -133,6 +137,9 @@ def tc_expected_result(json_obj, row_idx, tc):
 
 def tc_test_method(json_obj, row_idx, tc):
     return "{} / {}".format(json_obj["custom_string_objective_evidence"], json_obj["custom_test_objev"])
+
+def tr_step_num(json_obj, row_idx, tc):
+    return "5"
 
 def tr_result_description(json_obj, row_idx, tc):
     test_result = []
@@ -183,28 +190,48 @@ def my_http_request(url, user, password):
     head = {"Content-Type": "application/json"}
     return requests.get(url, auth=authentication, headers=head).json()
 
+def get_tc_list_from_section(tr_section_id):
+    tc_list = []
+    URL = "https://testrail.dwos.com//index.php?/api/v2/get_cases/" + str(config["project id"]) + "&section_id="
+    authentication = (USER, PASSWORD)
+    head = {"Content-Type": "application/json"}
+    r = requests.get(URL + str(tr_section_id), auth=authentication, headers=head)
+    for tc in range(len(r.json())):
+        tc_list.append(r.json()[tc]["id"])
+    return tc_list
+
+
 def main():
     user_initial = create_user_initial()
-    with open('config.yml') as f:
-        config = yaml.safe_load(f)
+
 
     if config["test report"]:   # test report creation
         print("Process test Report")
-        with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_results_for_case\1320_49222.json") as f:
+        # with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_results_for_case\1320_49222.json") as f:
         # with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_results_for_case\58746.json") as f:
-            js = json.load(f)
-        js = get_last_valid_result(js)
-        print(js)
-        df = create_df_from_json(js, ["Step", "Result Description", "Result", "Date", "Initial"],
-                                 [step_num, tr_result_description, tr_result, tr_date, tr_initial], 49222)
-        # df = create_df_from_json(js, ["Step", "Result Description", "Result", "Date", "Initial"],
-        #                          [step_num, tr_result_description, tr_result, tr_date, tr_initial], 58746)
+        #     js = json.load(f)
+        for tr_section_id, table_id in config["table mapping"].items():
+            tc_list = get_tc_list_from_section(tr_section_id)
+            df_orginal = None
+            for test_case_id in tc_list:
+                url = "https://testrail.dwos.com//index.php?/api/v2/get_results_for_case/" + \
+                      str(config["test report run id"]) + "/" + str(test_case_id)
+                js = my_http_request(url, USER, PASSWORD)
+                js = get_last_valid_result(js)
+                # print(js)
+                df = create_df_from_json(js, ["Step", "Result Description", "Result", "Date", "Initial"],
+                                         [tr_step_num, tr_result_description, tr_result, tr_date, tr_initial], test_case_id)
+                # df = create_df_from_json(js, ["Step", "Result Description", "Result", "Date", "Initial"],
+                #                          [step_num, tr_result_description, tr_result, tr_date, tr_initial], 58746)
+                df_orginal = pd.concat([df_orginal, df], ignore_index=True)
+            # print(df_orginal)
+        write_to_doc_table(df_orginal, table_id, config["template path"], config["output doc name"])
     else:   # test spec creation
         # with open(r"D:\user_data\Martin\OneDrive\Documents\json_response\get_cases\11362.json") as f:
         #     js = json.load(f)
 
         for tr_section_id, table_id in config["table mapping"].items():
-            print("section : {}, table_id : {}".format(tr_section_id, table_id))
+            # print("section : {}, table_id : {}".format(tr_section_id, table_id))
             url = "https://testrail.dwos.com//index.php?/api/v2/get_cases/" + str(config["project id"]) + "&section_id=" + str(tr_section_id)
             js = my_http_request(url, USER, PASSWORD)
             df = create_df_from_json(js, ["Step", "Description", "Requirement", "Expected Result",
