@@ -1,5 +1,5 @@
 import tkinter as tk
-from tkinter import ttk as ttk
+from tkinter import ttk
 from tkinter import filedialog
 
 from tkinter import filedialog
@@ -7,10 +7,13 @@ import os
 import requests
 import json
 
-class Form(tk.Frame):
-    def __init__(self, root, cont):
-        super().__init__(root)
-        self.root = cont
+class Form:
+    def __init__(self, root):
+        self.root = root
+        self.mainframe = ttk.Frame(self.root, padding="3 3 12 12")
+        self.mainframe.grid(column=0, row=0, sticky=(tk.N, tk.W, tk.E, tk.S))
+        self.root.columnconfigure(0, weight=1)
+        self.root.rowconfigure(0, weight=1)
         self.dir_path = ""
         self.project_id = ""
         self.section_id = ""
@@ -20,29 +23,28 @@ class Form(tk.Frame):
         self.project_var.set("2")
         self.section_var = tk.StringVar()
         self._create_gui()
-        self.pack()
 
     def _create_gui(self):
         # self.root.title("Test Tkinter")
         # self.root.geometry("700x200")
-        dir_lbl = tk.Label(self, text="Parent folder")
+        dir_lbl = tk.Label(self.mainframe, text="Parent folder")
         dir_lbl.grid(column=0, row=0, sticky=tk.W, padx=5, pady=5)
-        dir_entry = tk.Entry(self, textvariable=self.dir_var)
+        dir_entry = tk.Entry(self.mainframe, textvariable=self.dir_var)
         dir_entry.grid(column=1, row=0, sticky=tk.EW, padx=5, pady=5)
-        browse = tk.Button(self, text="Browse", command=self.browse, width=10)
+        browse = tk.Button(self.mainframe, text="Browse", command=self.browse, width=10)
         browse.grid(column=2, row=0, sticky=tk.EW, padx=5, pady=5)
 
-        project_lbl = tk.Label(self, text="Project")
+        project_lbl = tk.Label(self.mainframe, text="Project")
         project_lbl.grid(column=0, row=1, padx=5, pady=5)
-        project_entry = tk.Entry(self, textvariable=self.project_var)
+        project_entry = tk.Entry(self.mainframe, textvariable=self.project_var)
         project_entry.grid(column=1, row=1, padx=5, pady=5, sticky=tk.W)
-        section_lbl = tk.Label(self, text="Section")
+        section_lbl = tk.Label(self.mainframe, text="Section")
         section_lbl.grid(column=0, row=2, padx=5, pady=5)
-        section_entry = tk.Entry(self, textvariable=self.section_var)
+        section_entry = tk.Entry(self.mainframe, textvariable=self.section_var)
         section_entry.grid(column=1, row=2, padx=5, pady=5, sticky=tk.W)
-        submit = tk.Button(self, text="Run", command=self.submit, width=8)
+        submit = tk.Button(self.mainframe, text="Run", command=self.submit, width=8)
         submit.grid(column=0, row=3, padx=5, pady=5)
-        exit_button = tk.Button(self, text="Exit", command=self.root.destroy, width=12)
+        exit_button = tk.Button(self.mainframe, text="Exit", command=self.root.destroy, width=12)
         exit_button.grid(column=1, row=3, )
 
     def submit(self):
@@ -85,15 +87,14 @@ class Folder_creator:
             os.mkdir(parent_folder + "/" + subfolder)
 
 app = tk.Tk()
-cont = ttk.Frame(app, padding=(3,3,10,10))
 # app.title("Test Tkinter")
-cont.columnconfigure(0, weight=1)
-cont.columnconfigure(1, weight=20)
-cont.columnconfigure(2, weight=1)
-cont.columnconfigure(3, weight=1)
-app.geometry('700x300')
-app.columnconfigure(0, weight=1)
-app.columnconfigure(1, weight=20)
-app.columnconfigure(3, weight=1)
-Form(app, cont)
+# cont.columnconfigure(0, weight=1)
+# cont.columnconfigure(1, weight=20)
+# cont.columnconfigure(2, weight=1)
+# cont.columnconfigure(3, weight=1)
+# app.geometry('700x300')
+# app.columnconfigure(0, weight=1)
+# app.columnconfigure(1, weight=20)
+# app.columnconfigure(3, weight=1)
+Form(app)
 app.mainloop()
