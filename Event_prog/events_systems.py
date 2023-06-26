@@ -18,8 +18,6 @@ def dispatch(event: str, data):
     print(event)
     if event is None:
         raise ValueError(f"Event {event} was not found")
-
-
     for  handler in handlers:
         handler(data)
 
