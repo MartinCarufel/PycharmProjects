@@ -9,9 +9,21 @@ from matplotlib.patches import FancyArrowPatch
 class T_data:
     def __init__(self):
         " 2024-02-01 10:46:37"
-        self.df = pd.read_csv("temperature_IO-04-007131_2024-02-15.csv")
-        self.df2 = pd.read_csv("tamb 20c 7131_0215_154550.csv", skiprows=8)
-        self.plt_title = "Pre-heating HP IO-04-007131 with sleeve 1"
+        self.f_path = r"C:\Users\mcarufel\OneDrive - STG-Business\project\Test préchauffe HP\Test shine control ON"
+        self.export_path = r"D:\T amb 20C sleeve 013122"
+        self.export_name = r"summary_IO-04-007131_sleeve13122"
+        # file name of OSG viewer temperature
+        self.osg_file = "temperature_IO-04-003056_2024-02-22.csv"
+        self.df = pd.read_csv(self.f_path + "\\" + self.osg_file)
+
+        # file name of Thermocouple recorder
+        self.tcouple_file = "tamb 20c 7131_0219_143723.csv"
+        try:
+            self.df2 = pd.read_csv(self.f_path + "\\" + self.tcouple_file, skiprows=8)
+        except FileNotFoundError:
+            pass
+
+        self.plt_title = "Pre-heating HP IO-04-007131 with sleeve HS-01-013122"
         self.D_ZERO = self.df.iloc[0, 0][1:12]
         print(self.D_ZERO)
         self.T_ZERO = self.df.iloc[0, 0][12:]
@@ -62,7 +74,7 @@ class T_data:
             u_time.append(self.delta_time_count(self.D_ZERO, self.T_ZERO, self.df["time_ms"][ind][1:11],
                                                 self.df["time_ms"][ind][12:]))
         self.df["uTime"] = u_time
-        self.df.to_csv("export.csv")
+        self.df.to_csv(self.osg_file[:-4] + "_rel_time.csv")
         return u_time
 
     def create_summary_dataframe(self):
@@ -114,13 +126,13 @@ def main():
     # print(dt.df["uTime"])
     plt.close("all")
     # dt.df.plot.line(x="uTime", y="heater_C")
-    dt.df.to_csv("export.csv")
+    # dt.df.to_csv(dt.export_part + "\\" +"export.csv")
+    dt.df.to_csv(dt.export_path + "\\" + dt.export_name + ".csv")
     # dt.plot_b()
     ax = new_df1.plot(x="OSG Time", y="Heater", x_compat=True)
     new_df1.plot(ax=ax, x="OSG Time", y="Ready")
     new_df2.plot(ax=ax, x="time Tcouple", y="amb")
     new_df2.plot(ax=ax, x="time Tcouple", y="Mirror")
-    plt.text(100, 25, "allo")
     plt.title(dt.plt_title)
     plt.xlabel('Time (s)')
     plt.xticks(rotation='vertical')
@@ -132,17 +144,18 @@ def main():
     plt.grid()
     plt.ylim(15, 47)
     plt.xlim(0, max(new_df1["OSG Time"]))
+    plt.savefig(fname=dt.export_path + "\\" + dt.export_name + ".png")
     plt.show()
-
     # dt.df.plot.scatter(x="uTime", y="heater_C")
     # # ts = dt.df["heater_C"]
     # arrow = FancyArrowPatch((512, 34), (743, 43.2))
 
-
-
+def create_relative_time():
+    dt = T_data()
+    dt.create_universal_time_list()
 
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
-    main()
-
+    # main()
+    create_relative_time()
