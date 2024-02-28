@@ -45,8 +45,19 @@ class App_grid(tk.Tk):
 
         self.config(menu=self.mainmenu)
 
+        self.txt_box = tk.Text(self, width=70, height=5)
+        self.txt_box.grid(column=0, row=5, rowspan=3, columnspan=2)
+        self.txt_box_but = tk.Button(self, text="print", command=self.button_print)
+        self.txt_box_but.grid(column=3, row=5)
 
+        self.clear_but = tk.Button(self, text="Clear", command=self.button_clear)
+        self.clear_but.grid(column=3, row=6)
+    def button_print(self):
+        print(self.txt_box.get("1.0", "end"))
+        pass
 
+    def button_clear(self):
+        self.txt_box.delete("1.0", "end")
 
 def main():
     app = App_grid()
