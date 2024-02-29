@@ -2,7 +2,6 @@
 
 # Press Shift+F10 to execute it or replace it with your code.
 # Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
 import serial
 from time import sleep
 
@@ -23,9 +22,9 @@ def main(name):
             # print("data in")
             # sleep(0.01)
             try:
-                print("Force: {}                  ".format(float(s.readline()[:-2])), end="\r")   # remove \r\n
+                print("Force: {}                  ".format(float(s.readline())), end="\r")   # remove \r\n
             except ValueError:
-                print("Force: {}".format(str(s.readline()[:-2])), end="\r")  # remove \r\n
+                print("Force: {}".format(str(s.readline().decode('utf-8'))), end="\r")  # remove \r\n
             sleep(0.05)
 
 
