@@ -1,64 +1,32 @@
-GridLayout:
-
-<GridLayout@GridLayout>:
-    cols: 4
+TopGrid:
 
 
-    CheckBox:
-        size_hint_x: None
-        size_hint_y: None
-        width: 20
-        height: 30
-        text: "A"
-    Label:
-        size_hint_x: None
-        size_hint_y: None
-        width: 100
-        height: 30
-        text: "CH0"
 
-    Label:
-        size_hint_x: None
-        size_hint_y: None
-        width: 100
-        height: 30
-        color: 0, 1, 0, 1
-        bold: True
-        text: "temp"
+<TopGrid>:
+    GridLayout:
+        cols: 1
+        size: root.width, root.height
 
-    Label:
-        size_hint_x: None
-        size_hint_y: None
-        width: 100
-        height: 30
-        text: "deg C"
-    CheckBox:
-        size_hint_x: None
-        size_hint_y: None
-        width: 20
-        height: 30
-        text: "A"
-    Label:
-        size_hint_x: None
-        size_hint_y: None
-        width: 100
-        height: 30
-        text: "CH1"
+        GridLayout:
+            cols: 2
 
-    Label:
-        size_hint_x: None
-        size_hint_y: None
-        width: 100
-        height: 30
-        color: 0, 1, 0, 1
-        bold: True
-        text: "temp"
+            Label:
+                text: "Name"
+            TextInput:
+                id: name
+                multiline: False
+            Label:
+                text: "Favorite Pizza"
+            TextInput:
+            id: pizza
+                multiline: False
+            Label:
+                text: "Favorite Color"
+            TextInput:
+                id: color
+                multiline: False
 
-    Label:
-        size_hint_x: None
-        size_hint_y: None
-        width: 100
-        height: 30
-        text: "deg C"
+        Button:
+            text: "Submit"
+            font_size: 32
 
-<MainWidget>:
