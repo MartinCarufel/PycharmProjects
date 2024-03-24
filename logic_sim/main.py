@@ -4,8 +4,8 @@ import ttl_7408
 import connection
 import switch
 p = pin.Pin()
-sw1 = switch.Switch(p, 'sw1')
-u1 = ttl_7408.TTL_7408(p, 'u1')
+sw1 = switch.Switch('sw1')
+u1 = ttl_7408.TTL_7408('u1')
 # w1 = connection.Connection(p, 'w1', sw1, 'sw1_out', 'u1_a1')
 sw1.set_state(1)
 print(p.pin)
