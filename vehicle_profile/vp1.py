@@ -10,6 +10,7 @@ from CANInterface import CANInterface
 sys.path.append('C:/Drive-W/Internal_tools/Libraries/CANOBDIILibrary/trunk/out/')
 from time import sleep
 
+#add comments
 
 can_port = os.environ['ev_can_port']
 can = CANInterface()
