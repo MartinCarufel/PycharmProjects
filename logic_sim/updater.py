@@ -11,7 +11,7 @@ class Updater:
             for x in self.update_list:
                 x.update()
                 # print('Update chip {}'.format(x.name))
-                sleep(0.1)
+                # sleep(1)
 
     def add_device(self, device):
         self.update_list.append(device)
