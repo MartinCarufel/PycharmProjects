@@ -1,0 +1,100 @@
+#:set temp_row_height 17
+
+<MainWidget>
+
+
+
+    BoxLayout:
+        orientation: 'vertical'
+        size: root.width, root.height
+        padding: 12, 12
+        spacing: 5
+
+        BoxLayout:
+            orientation: 'horizontal'
+            size_hint_x: 0.2
+            size_hint_y: None
+            height: temp_row_height
+            pos_hint: {'x': 0.2, 'y': 1}
+            CheckBox:
+                id: chk_box_ch0
+                size_hint_x: None
+                width: 40
+                #size_hint: self.width, self.height
+
+            Label:
+                text: 'CH0'
+                text_size: self.size
+                #size_hint: self.width, self.height
+                valign: 'center'      #The default is 'bottom'
+                halign: 'left'
+                # padding: 10,0
+                # pos_hint: {'x': 0.1, 'y': 0}
+            Label:
+                id: val_ch0
+                text: 'no value'
+                #size_hint: self.width, self.height
+        BoxLayout
+            orientation: 'horizontal'
+            size_hint_x: 0.2
+            size_hint_y: None
+            height: temp_row_height
+            pos_hint: {'x': 0.2, 'y': 1}
+            CheckBox:
+                id: chk_box_ch1
+                size_hint_x: None
+                width: 40
+                #size_hint: self.width, self.height
+
+            Label:
+                text: 'CH1'
+                text_size: self.size
+                #size_hint: self.width, self.height
+                valign: 'center'      #The default is 'bottom'
+                halign: 'left'
+                # padding: 10,0
+                # pos_hint: {'x': 0.1, 'y': 0}
+            Label:
+                id: val_ch1
+                text: 'no value'
+                #size_hint: self.width, self.height
+        BoxLayout
+            orientation: 'horizontal'
+            size_hint_x: 0.2
+            size_hint_y: None
+            height: temp_row_height
+            pos_hint: {'x': 0.2, 'y': 1}
+            CheckBox:
+                id: chk_box_ch2
+                size_hint_x: None
+                width: 40
+                #size_hint: self.width, self.height
+
+            Label:
+                text: 'CH2'
+                text_size: self.size
+                #size_hint: self.width, self.height
+                valign: 'center'      #The default is 'bottom'
+                halign: 'left'
+                # padding: 10,0
+                # pos_hint: {'x': 0.1, 'y': 0}
+            Label:
+                id: val_ch2
+                text: 'no value'
+                #size_hint: self.width, self.height
+        Button:
+            text: "Allo"
+            on_press: root.press_OK()
+
+        BoxLayout:
+            orientation:'horizontal'
+            padding: 50, 50
+            spacing: 5
+            Button:
+                text: '1'
+            Button:
+                text: '2'
+            Button:
+                text: '3'
+
+
