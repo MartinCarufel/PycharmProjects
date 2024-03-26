@@ -34,3 +34,9 @@ class Sn_7404:
         self.pin[8]['state'] = self._invert(self.pin[9]['state'])
         self.pin[10]['state'] = self._invert(self.pin[11]['state'])
         self.pin[12]['state'] = self._invert(self.pin[13]['state'])
+
+    def set_pin_state(self, pin, state):
+        self.pin[pin]['state'] = state
+
+    def get_pin_state(self, pin):
+        return self.pin[pin]['state']

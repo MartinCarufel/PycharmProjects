@@ -31,3 +31,9 @@ class Sn_7408:
         self.pin[6]['state'] = self._and(self.pin[4]['state'], self.pin[5]['state'])
         self.pin[8]['state'] = self._and(self.pin[9]['state'], self.pin[10]['state'])
         self.pin[11]['state'] = self._and(self.pin[12]['state'], self.pin[13]['state'])
+
+    def set_pin_state(self, pin, state):
+        self.pin[pin]['state'] = state
+
+    def get_pin_state(self, pin):
+        return self.pin[pin]['state']
