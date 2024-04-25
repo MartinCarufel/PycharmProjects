@@ -34,7 +34,7 @@ def find_last_line(file_path):
     last_data_line = None
 
     # Open the CSV file
-    with open(csv_file_path, 'r') as file:
+    with open(file_path, 'r') as file:
         # Iterate through each line in the file
         for line in file:
             # Strip whitespace from the line
@@ -72,16 +72,9 @@ def format_data_in_df(data, header):
 
 
 files_path = filedialog.askopenfilename()
-
-for file in files_path:
-
-    csv_file_path = 'batchMetrologySummary.csv'
-
-    last_line = find_last_line(csv_file_path)
-
-
-    avg_line = read_specific_line(csv_file_path, last_line-3)
-    print(format_data_in_df(avg_line, ["avg mean", "avg amd", "avg stdev", "avg 1sig", "avg 2sig", "avg rms"]))
-    print()
-    max_line = read_specific_line(csv_file_path, last_line)
-    print(format_data_in_df(max_line, ["max mean", "max amd", "max stdev", "max 1sig", "max 2sig", "max rms"]))
+last_line = find_last_line(files_path)
+avg_line = read_specific_line(files_path, last_line-3)
+print(format_data_in_df(avg_line, ["avg mean", "avg amd", "avg stdev", "avg 1sig", "avg 2sig", "avg rms"]))
+print()
+max_line = read_specific_line(files_path, last_line)
+print(format_data_in_df(max_line, ["max mean", "max amd", "max stdev", "max 1sig", "max 2sig", "max rms"]))
