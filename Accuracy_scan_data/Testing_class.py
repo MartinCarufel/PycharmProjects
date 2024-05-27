@@ -1,6 +1,9 @@
 import unittest
 import scan_data
 import regex
+import pandas as pd
+import matplotlib.pyplot as plt
+
 
 class data_test(unittest.TestCase):
     def setUp(self):
@@ -33,8 +36,29 @@ class data_test(unittest.TestCase):
         self.range_band_count = []
         df = self.data_class.read_csv("./Test_data/batchMetrologySummary.csv")
         data_table = []
-        data_expected_table = [0, 0, 0, 2, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0]
+        data_expected_table = [0, 0, 0, 2, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         for i in range(len(range_band)-1):
             data_table.append(self.data_class.value_within_range_count(range_band[i], range_band[i+1], df['RMS']))
             pass
+
+
+    def test_range_index_creator(self):
+        range_band = [0, 0.005, 0.010, 0.015, 0.020, 0.025, 0.030, 0.035, 0.040, 0.045, 0.050, 0.055, 0.060, 0.065,
+                      0.070, 0.075, 0.080]
+
+        expected_result = ['1 - 5', '6 - 10', '11 - 15', '16 - 20', '21 - 25', '26 - 30', '31 - 35', '36 - 40',
+                           '40 - 45', '46 - 50', '51 - 55', '55 - 60', '61 - 65', '66 - 70', '71 - 75', '76 - 80']
+        index = self.data_class.create_range_index(range_band)
+        print(index)
+        self.assertListEqual(index, expected_result)
+
+    def test_plot_data(self):
+        data = {
+            'range': ['1 - 5', '6 - 10', '11 - 15', '16 - 20', '21 - 25', '26 - 30', '31 - 35', '36 - 40',
+                           '40 - 45', '46 - 50', '51 - 55', '55 - 60', '61 - 65', '66 - 70', '71 - 75', '76 - 80'],
+            'Martin scan': [0, 0, 0, 2, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+        df = pd.DataFrame(data)
+
+        self.data_class.plot_bar_graph(df)
 
