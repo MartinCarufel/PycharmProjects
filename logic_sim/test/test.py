@@ -11,6 +11,7 @@ from wire import Wire
 from switch import Switch_SPDT, Push_SPNO
 from updater import Updater
 from bus import Bus
+from flip_flop import Sn74ls279a
 
 class Testsuite(unittest.TestCase):
 
@@ -102,3 +103,21 @@ class Testsuite(unittest.TestCase):
             if current_time_ms >= stop:
                 self.updater.stop_updater()
                 break
+
+
+    def test_flip_flop_1_simple(self):
+        u1 = Sn74ls279a('U1')
+        self.updater.add_device(u1)
+        self.updater.start_update()
+
+        pin_sequence = [[1, 1, 1, 'Latch 0', 0],
+                        [1, 0, 0, 'Set', 1],
+                        [1, 1, 1, 'latch prev', 1],
+                        [0, 1, 1, 'Reset', 0]]
+        for pin in pin_sequence:
+            u1.set_pin_state(1, pin[0])
+            u1.set_pin_state(2, pin[1])
+            u1.set_pin_state(3, pin[2])
+            sleep(0.2)
+            self.assertEqual(pin[4], u1.get_pin_state(4))
+            print('Test {} : {}'.format(pin[3], u1.get_pin_state(4)))
