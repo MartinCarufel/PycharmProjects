@@ -62,3 +62,14 @@ class data_test(unittest.TestCase):
 
         self.data_class.plot_bar_graph(df)
 
+    def test_file_dialog(self):
+        path = self.data_class.select_file()
+        print(path)
+
+    def test_entry_window(self):
+        self.data_class.choose_data_name()
+        print(self.data_class.entry_box_text)
+
+    def test_continue_window(self):
+        self.data_class.ask_continue()
+
