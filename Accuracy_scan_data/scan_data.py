@@ -17,7 +17,15 @@ class Data_analyser:
     def read_csv(self, file_path):
         self.file_path = file_path
         header = ['Scan', 'Mean', 'AMD', 'StdDev', '1sig', '2sig', 'RMS']
-        df = pd.read_csv(file_path, skiprows=5, nrows=10, names= header)
+        # df = pd.read_csv(file_path, skiprows=5, nrows=10, names= header)
+        df = pd.read_csv(file_path, skiprows=5, names=header)
+
+        df = pd.read_csv(file_path, skiprows=5, names=header, skip_blank_lines=False)
+        blank_df = df.loc[df.isnull().all(1)]
+        if len(blank_df) > 0:
+            first_blank_index = blank_df.index[0]
+            df = df[:first_blank_index]
+        print(df)
         return df
 
     def value_within_range_count(self, range_min, range_max, df_col):
@@ -33,7 +41,7 @@ class Data_analyser:
         # print(f'range_max: {range_max}')
         for data in df_col:
             # print(f'Data analisé: {data}')
-            if range_min < data <= range_max:
+            if range_min < float(data) <= range_max:
                 count = count + 1
         return count
 
@@ -58,8 +66,9 @@ class Data_analyser:
     def convert_list_in_purcentage(self, list_in):
         converted_list = []
         sum_of_element = sum([x for x in list_in])
+        print(sum_of_element)
         for i in list_in:
-            converted_list.append(i/sum_of_element*100)
+            converted_list.append((i/sum_of_element)*100)
         return converted_list
 
     def select_file(self):
