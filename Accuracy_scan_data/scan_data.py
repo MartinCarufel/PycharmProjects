@@ -18,14 +18,12 @@ class Data_analyser:
         self.file_path = file_path
         header = ['Scan', 'Mean', 'AMD', 'StdDev', '1sig', '2sig', 'RMS']
         # df = pd.read_csv(file_path, skiprows=5, nrows=10, names= header)
-        df = pd.read_csv(file_path, skiprows=5, names=header)
-
         df = pd.read_csv(file_path, skiprows=5, names=header, skip_blank_lines=False)
         blank_df = df.loc[df.isnull().all(1)]
         if len(blank_df) > 0:
             first_blank_index = blank_df.index[0]
             df = df[:first_blank_index]
-        print(df)
+        # print(df)
         return df
 
     def value_within_range_count(self, range_min, range_max, df_col):
@@ -66,7 +64,7 @@ class Data_analyser:
     def convert_list_in_purcentage(self, list_in):
         converted_list = []
         sum_of_element = sum([x for x in list_in])
-        print(sum_of_element)
+        # print(sum_of_element)
         for i in list_in:
             converted_list.append((i/sum_of_element)*100)
         return converted_list
@@ -83,7 +81,9 @@ class Data_analyser:
         button.pack(pady=10, ipadx=20)
         self.entry.focus_set()
         self.entry.bind('<Return>', self._kill_entry_window)
+        self.entry.focus_set()
         self.root.mainloop()
+
 
     def _kill_entry_window(self, *args):
         self.entry_box_text = self.entry.get()
@@ -121,7 +121,7 @@ def main():
     for i in range(len(range_band) - 1):
         data_table.append(data_class.value_within_range_count(range_band[i], range_band[i + 1], df['RMS']))
     data_table = data_class.convert_list_in_purcentage(data_table)
-    print(data_table)
+    # print(data_table)
 
 
     result_df = pd.DataFrame()
@@ -129,7 +129,7 @@ def main():
     result_df['range'] = index
     result_df['Martin scan'] = data_table
 
-    print(result_df)
+    # print(result_df)
     data_class.plot_bar_graph(result_df)
 
 def main_2():
@@ -154,7 +154,7 @@ def main_2():
     now = datetime.now()
     formatted_now = now.strftime("%Y-%m-%d_%H%M%S")
     result_df.to_csv(f"Repro_analysis_{formatted_now}.csv")
-    print(result_df)
+    # print(result_df)
 
 if __name__ == '__main__':
     main_2()

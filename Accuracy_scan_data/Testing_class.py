@@ -3,6 +3,11 @@ import scan_data
 import regex
 import pandas as pd
 import matplotlib.pyplot as plt
+import cv2
+import pyautogui
+from time import sleep
+import numpy as np
+import threading
 
 
 class data_test(unittest.TestCase):
@@ -70,6 +75,25 @@ class data_test(unittest.TestCase):
         self.data_class.choose_data_name()
         print(self.data_class.entry_box_text)
 
+    def take_screenshot(self, wait_time):
+        sleep(wait_time)
+        screenshot = pyautogui.screenshot()
+        return screenshot
     def test_continue_window(self):
+        img_exp = cv2.imread("./Test_data/Expected Screenshot/2024-05-30 14_55_07-More data _.png")
+        # th = threading.Thread(target=self.take_screenshot, args=[2])
+        # th.run()
         self.data_class.ask_continue()
-
+        screenshot = pyautogui.screenshot()
+        screenshot = np.array(screenshot)  # Convert to a NumPy array
+        screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
+        result = cv2.matchTemplate(image=screenshot, templ=img_exp, method=cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+        # cv2.imshow('Detected', screenshot)
+        # cv2.waitKey(0)
+        # print(min_loc, max_loc)
+        h, w, _ = img_exp.shape
+        top_left = max_loc
+        pyautogui.click(x=top_left[0] + w -5, y=top_left[1] -5)
+        self.assertGreaterEqual(max_val, 0.70)
+        print(max_val)
