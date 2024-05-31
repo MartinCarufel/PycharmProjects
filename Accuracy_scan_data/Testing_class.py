@@ -2,7 +2,6 @@ import unittest
 import scan_data
 import regex
 import pandas as pd
-import matplotlib.pyplot as plt
 import cv2
 import pyautogui
 from time import sleep
@@ -11,6 +10,10 @@ import threading
 
 
 class data_test(unittest.TestCase):
+
+    # def __init__(self, *args):
+    #     super().__init__()
+    #     self.screenshot = None
     def setUp(self):
         self.data_class = scan_data.Data_analyser()
         pass
@@ -75,25 +78,64 @@ class data_test(unittest.TestCase):
         self.data_class.choose_data_name()
         print(self.data_class.entry_box_text)
 
-    def take_screenshot(self, wait_time):
+    def take_screenshot(self, wait_time, img_exp):
         sleep(wait_time)
-        screenshot = pyautogui.screenshot()
-        return screenshot
-    def test_continue_window(self):
-        img_exp = cv2.imread("./Test_data/Expected Screenshot/2024-05-30 14_55_07-More data _.png")
-        # th = threading.Thread(target=self.take_screenshot, args=[2])
-        # th.run()
-        self.data_class.ask_continue()
-        screenshot = pyautogui.screenshot()
-        screenshot = np.array(screenshot)  # Convert to a NumPy array
-        screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)
-        result = cv2.matchTemplate(image=screenshot, templ=img_exp, method=cv2.TM_CCOEFF_NORMED)
-        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
-        # cv2.imshow('Detected', screenshot)
-        # cv2.waitKey(0)
-        # print(min_loc, max_loc)
+        self.screenshot = pyautogui.screenshot()
+        self.screenshot = np.array(self.screenshot)  # Convert to a NumPy array
+        self.screenshot = cv2.cvtColor(self.screenshot, cv2.COLOR_RGB2BGR)
+        self.screenshot = self.screenshot.astype(np.uint8)
+        self.result = cv2.matchTemplate(image=self.screenshot, templ=img_exp, method=cv2.TM_CCOEFF_NORMED)
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(self.result)
         h, w, _ = img_exp.shape
         top_left = max_loc
-        pyautogui.click(x=top_left[0] + w -5, y=top_left[1] -5)
+        pyautogui.click(x=top_left[0] + w - 10, y=top_left[1] + 10)
+
+
+    def close_window(self):
+        pass
+
+
+    def test_continue_window(self):
+        img_exp = cv2.imread("./Test_data/Expected Screenshot/More data.png")
+        img_exp = img_exp.astype(np.uint8)
+        th = threading.Thread(target=self.take_screenshot, args=[0.5, img_exp])
+        th.start()
+        self.data_class.ask_continue()
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(self.result)
         self.assertGreaterEqual(max_val, 0.70)
         print(max_val)
+        th.join()
+
+    def test_screen(self):
+
+        screenshot = pyautogui.screenshot()
+        screenshot = np.array(screenshot)  # Convert to a NumPy array
+        screenshot = cv2.cvtColor(screenshot, cv2.COLOR_RGB2BGR)  # Convert from RGB to BGR
+        screenshot = screenshot.astype(np.uint8)
+        target_image_path = "./Test_data/image1.png"
+        target_image = cv2.imread(target_image_path)
+        if target_image is None:
+            raise FileNotFoundError(f"Target image not found at path: {target_image_path}")
+        target_image = target_image.astype(np.uint8)
+
+        # Perform template matching
+        result = cv2.matchTemplate(screenshot, target_image, cv2.TM_CCOEFF_NORMED)
+
+        # Get the best match position
+        min_val, max_val, min_loc, max_loc = cv2.minMaxLoc(result)
+
+        # Get the dimensions of the target image
+        h, w, _ = target_image.shape
+
+        # Draw a rectangle around the matched region
+        top_left = max_loc
+        bottom_right = (top_left[0] + w, top_left[1] + h)
+        cv2.rectangle(screenshot, top_left, bottom_right, (0, 255, 0), 2)
+
+        # Show the result (optional)
+        cv2.imshow('Detected', screenshot)
+        cv2.waitKey(0)
+        cv2.destroyAllWindows()
+
+        # Save the result image (optional)
+        cv2.imwrite('result.png', screenshot)

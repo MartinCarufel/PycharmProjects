@@ -11,6 +11,7 @@ class Data_analyser:
     def __init__(self):
         self.entry_box_text = ""
         self.var_ask_continue = True
+
         pass
 
 
