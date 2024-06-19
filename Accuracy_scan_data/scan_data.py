@@ -48,7 +48,7 @@ class Data_analyser:
         range_index = []
 
         for i in range[1:]:
-            range_index.append("{} - {}".format(int((i-0.004)*1000), int(i*1000)))
+            range_index.append("{} - {}".format(int(i*1000)-4, int(i*1000)))
         return range_index
 
 
@@ -110,7 +110,42 @@ class Data_analyser:
         self.var_ask_continue = False
         self.win_cont.destroy()  # Optionally close the window
 
+    def split_cvs_blocks(self, file_path):
+        """This function find line number for each text block
+        return: List of tupple start , end of each text block"""
 
+        self.file_path = file_path
+        header = ['Scan', 'Mean', 'AMD', 'StdDev', '1sig', '2sig', 'RMS']
+
+        blocks = []
+        start_line = None
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+
+        for i, line in enumerate(lines):
+            if line.strip():  # If the line is not empty
+                if start_line is None:
+                    start_line = i + 1  # Line numbers start from 1
+            else:
+                if start_line is not None:
+                    end_line = i
+                    blocks.append((start_line, end_line))
+                    start_line = None
+
+            # Handle the last block if the file does not end with an empty line
+
+        if start_line is not None:
+            blocks.append((start_line, len(lines)))
+
+        return blocks
+
+    def read_cvs_block(self, file_path, block):
+        self.block = block
+        self.file_path = file_path
+        header = ['Scan', 'Mean', 'AMD', 'StdDev', '1sig', '2sig', 'RMS']
+        df = pd.read_csv(file_path, skiprows=int(block[0])+3, nrows=int(block[1])-(int(block[0]+3)), names=header)
+        # df = pd.read_csv(file_path, skiprows=5, names=header, skip_blank_lines=False)
+        return df
 
 def main():
 
@@ -143,7 +178,11 @@ def main_2():
     result_df['range'] = index
 
     while data_class.var_ask_continue:
-        df = data_class.read_csv(data_class.select_file())
+        file_path = data_class.select_file()
+        result_blocks = data_class.split_cvs_blocks(file_path)
+        df = data_class.read_cvs_block(file_path, result_blocks[-3:-2][0])
+
+        # df = data_class.read_csv(data_class.select_file())
         data_class.choose_data_name()
         data_set_name = data_class.entry_box_text
         data_table = []

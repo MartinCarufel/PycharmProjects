@@ -54,8 +54,9 @@ class data_test(unittest.TestCase):
         range_band = [0, 0.005, 0.010, 0.015, 0.020, 0.025, 0.030, 0.035, 0.040, 0.045, 0.050, 0.055, 0.060, 0.065,
                       0.070, 0.075, 0.080]
 
+
         expected_result = ['1 - 5', '6 - 10', '11 - 15', '16 - 20', '21 - 25', '26 - 30', '31 - 35', '36 - 40',
-                           '40 - 45', '46 - 50', '51 - 55', '55 - 60', '61 - 65', '66 - 70', '71 - 75', '76 - 80']
+                           '41 - 45', '46 - 50', '51 - 55', '56 - 60', '61 - 65', '66 - 70', '71 - 75', '76 - 80']
         index = self.data_class.create_range_index(range_band)
         print(index)
         self.assertListEqual(index, expected_result)
@@ -63,7 +64,7 @@ class data_test(unittest.TestCase):
     def test_plot_data(self):
         data = {
             'range': ['1 - 5', '6 - 10', '11 - 15', '16 - 20', '21 - 25', '26 - 30', '31 - 35', '36 - 40',
-                           '40 - 45', '46 - 50', '51 - 55', '55 - 60', '61 - 65', '66 - 70', '71 - 75', '76 - 80'],
+                           '41 - 45', '46 - 50', '51 - 55', '55 - 60', '61 - 65', '66 - 70', '71 - 75', '76 - 80'],
             'Martin scan': [0, 0, 0, 2, 6, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
         }
         df = pd.DataFrame(data)
@@ -139,3 +140,15 @@ class data_test(unittest.TestCase):
 
         # Save the result image (optional)
         cv2.imwrite('result.png', screenshot)
+
+    def test_split_blocks(self):
+        blocks = self.data_class.split_cvs_blocks("./Test_data/batchMetrologySummary_block.csv")
+        print(blocks[-3:-2])
+
+
+    def test_read_block(self):
+        block = self.data_class.split_cvs_blocks("./Test_data/batchMetrologySummary_block.csv")
+        print(block)
+        df = self.data_class.read_cvs_block("./Test_data/batchMetrologySummary_block.csv", block[-3:-2][0])
+        print(df)
+
