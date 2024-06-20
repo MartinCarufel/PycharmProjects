@@ -193,7 +193,8 @@ def main_2():
         data_class.ask_continue()
     now = datetime.now()
     formatted_now = now.strftime("%Y-%m-%d_%H%M%S")
-    result_df.to_csv(f"Repro_analysis_{formatted_now}.csv")
+    # result_df.to_csv(f"Repro_analysis_{formatted_now}.csv")
+    result_df.to_excel(f"Repro_analysis_{formatted_now}.xlsx")
     # print(result_df)
 
 if __name__ == '__main__':
