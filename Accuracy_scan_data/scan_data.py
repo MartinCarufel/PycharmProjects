@@ -16,6 +16,13 @@ class Data_analyser:
 
 
     def read_csv(self, file_path):
+
+        """
+        Read the result from Software Accuracy Software Tool and get the first result
+        :param file_path: file path
+        :return: pandas dataframe
+        """
+
         self.file_path = file_path
         header = ['Scan', 'Mean', 'AMD', 'StdDev', '1sig', '2sig', 'RMS']
         # df = pd.read_csv(file_path, skiprows=5, nrows=10, names= header)
@@ -29,11 +36,11 @@ class Data_analyser:
 
     def value_within_range_count(self, range_min, range_max, df_col):
         """
-
+        Count the number of result that meet the minimum value and max passed in arg.
         :param range_min:
         :param range_max:
         :param data: dataframe colum to be analysed ex: df['max']
-        :return:
+        :return: int count of number occurence
         """
         count = 0
         # print(f'range_min: {range_min}')
@@ -45,6 +52,11 @@ class Data_analyser:
         return count
 
     def create_range_index(self, range):
+        """
+        Create the range tag with interval of 5 ex: 1 to 5, 6 to 10 ....
+        :param range: list of values
+        :return: list of string label the interval ex: '1 - 5'
+        """
         range_index = []
 
         for i in range[1:]:
