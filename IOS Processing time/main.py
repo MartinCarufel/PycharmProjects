@@ -1,5 +1,6 @@
 
 import regex
+from tkinter import filedialog
 class Process_time:
 
     def __init__(self):
@@ -65,10 +66,12 @@ class Process_time:
                          stop_minute + stop_second) - (start_hour * 3600 + start_minute * 60 + start_second )
         return proc_time
 
+
 def main():
     process_time_calc = []
     pt = Process_time()
-    path = r"C:\Users\u120230\git\PycharmProjects\IOS Processing time\Test data\IOClient.txt_05-28-2024_13-23-42.617.txt"
+    path = filedialog.askopenfilename()
+    # path = r"C:\Users\u120230\git\PycharmProjects\IOS Processing time\Test data\IOClient.txt_05-28-2024_13-23-42.617.txt"
     start_process_time = pt.get_start_process_time(path)
     stop_process_time = pt.get_stop_process_time(path)
     start_stop_time = pt.create_start_stop_tupple_list(start_process_time, stop_process_time)
