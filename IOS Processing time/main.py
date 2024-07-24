@@ -21,16 +21,47 @@ class Process_time:
                     pass
         return start_process_time_list
 
+    def get_start_process_line_number(self, file_path):
+        start_process_line_number = []
+        start_regex_pattern = "IOBridgeThread - startPostProcessing"
+        compile_regex_start = regex.compile(start_regex_pattern)
+        with open(file_path, mode='r') as f:
+            lines = f.readlines()
+            for i in range(len(lines)):
+                if compile_regex_start.search(lines[i]) != None:
+                    start_process_line_number.append(i)
+                    pass
+                else:
+                    pass
+        return start_process_line_number
+
+    def get_next_switch_view(self, file_path, start_list):
+        start_list = start_list.copy()
+        stop_process_time_list = []
+        # stop_regex_pattern = "Post processing popup closed"
+        stop_regex_pattern = "View entered : Review view"
+        compile_regex_stop = regex.compile(stop_regex_pattern)
+        with open(file_path, mode='r') as f:
+            lines = f.readlines()
+            start_list.append(len(lines))
+            for st_list_id in range(len(start_list)-1):
+                for line_id in range(start_list[st_list_id], start_list[st_list_id+1], +1):
+                    if compile_regex_stop.search(lines[line_id]) != None:
+                        stop_process_time_list.append(line_id)
+                        break
+        return stop_process_time_list
+
+
     def get_stop_process_time(self, file_path):
         stop_process_time_list = []
-        stop_regex_pattern = "Post processing popup closed"
+        # stop_regex_pattern = "Post processing popup closed"
+        stop_regex_pattern = "View exited : Review view"
         compile_regex_stop = regex.compile(stop_regex_pattern)
         with open(file_path, mode='r') as f:
             lines = f.readlines()
             for line in lines:
                 if compile_regex_stop.search(line) != None:
                     stop_process_time_list.append(line[0:14])
-                    pass
                 else:
                     pass
         return stop_process_time_list
@@ -66,6 +97,11 @@ class Process_time:
                          stop_minute + stop_second) - (start_hour * 3600 + start_minute * 60 + start_second )
         return proc_time
 
+    def get_line_time_stamp(self, file_path, line_no):
+        with open(file_path, 'r') as f:
+            lines = f.readlines()
+            return lines[line_no][0:14]
+
 
 def main():
     process_time_calc = []
@@ -79,6 +115,25 @@ def main():
         process_time_calc.append(pt.process_time_calculation(start, stop))
     print(process_time_calc)
 
+def main2():
+    process_time_calc = []
+    pt = Process_time()
+    path = filedialog.askopenfilename()
+    # path = r"C:\Users\u120230\git\PycharmProjects\IOS Processing time\Test data\IOClient.txt_05-28-2024_13-23-42.617.txt"
+
+    start_proc_line_number_list = pt.get_start_process_line_number(path)
+    stop_proc_line_number_list = pt.get_next_switch_view(path, start_proc_line_number_list)
+    print(start_proc_line_number_list)
+    print(stop_proc_line_number_list)
+    start_stop_list = pt.create_start_stop_tupple_list(start_proc_line_number_list, stop_proc_line_number_list)
+
+    for start, stop in start_stop_list:
+        process_time_calc.append(pt.process_time_calculation(pt.get_line_time_stamp(path, start),
+                                                             pt.get_line_time_stamp(path, stop)))
+    print(process_time_calc)
+
+
+
 if __name__ == '__main__':
-    main()
+    main2()
 

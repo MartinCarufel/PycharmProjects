@@ -44,4 +44,27 @@ class test_script(unittest.TestCase):
         self.assertEqual(test_result, pt)
 
 
+    def test_start_proc_line(self):
+        start_time = self.Process_time.get_start_process_line_number("../Test data/IOClient.txt_05-28-2024_13-23-42.617.txt")
+        print(start_time)
+
+    def test_stop_line_id_new_view(self):
+        start_time = self.Process_time.get_start_process_line_number("../Test data/IOClient.txt_05-28-2024_13-23-42.617.txt")
+        stop_process_line_id = self.Process_time.get_next_switch_view("../Test data/IOClient.txt_05-28-2024_13-23-42.617.txt", start_time)
+        print(stop_process_line_id)
+
+    def test_merge_line_number_id(self):
+        start_list = [1731, 2021, 2432, 2737, 3017, 3278, 3592, 4198, 4522, 4812, 5053, 5846]
+        stop_list = [1769, 2063, 2468, 2772, 3051, 3349, 3626, 4235, 4557, 4846, 5617, 5982]
+        merge_list = self.Process_time.create_start_stop_tupple_list(start_list, stop_list)
+        print("\n", merge_list)
+
+    def test_get_time_stamp(self):
+        print()
+        print(self.Process_time.get_line_time_stamp("../Test data/IOClient.txt_05-28-2024_13-23-42.617.txt", 17))
+        print(self.Process_time.get_line_time_stamp("../Test data/IOClient.txt_05-28-2024_13-23-42.617.txt", 18))
+
+
+
+
 
