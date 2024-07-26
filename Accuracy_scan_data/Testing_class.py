@@ -7,7 +7,7 @@ import pyautogui
 from time import sleep
 import numpy as np
 import threading
-
+import matplotlib.pyplot as plt
 
 class data_test(unittest.TestCase):
 
@@ -151,4 +151,41 @@ class data_test(unittest.TestCase):
         print(block)
         df = self.data_class.read_cvs_block("./Test_data/batchMetrologySummary_block.csv", block[-3:-2][0])
         print(df)
+
+    def test_bar_graph(self):
+        df = pd.read_csv("./Test_data/Test_result_3_user.csv", index_col=0)
+        fig, ax = plt.subplots(layout='constrained', figsize=(10,5))
+
+        width = 0.8 / (len(df.columns)-1)  # the width of the bars
+        multiplier = 0
+        # lbl = ["tata", "toto", "tutu"]
+        lbl = np.asarray(df["range"])
+        # print(lbl)
+        x = np.arange(len(lbl))  # the label locations
+        for (user, user_data) in df.items():
+            # print(user, user_data)
+
+            offset = width * multiplier
+            if user != "range":
+                # print(list(user_data))
+                print(x)
+                rects = ax.bar(x + offset, np.asarray(user_data), width, label=user, align='center')
+                # ax.bar_label(rects, padding=3)
+                multiplier += 1
+
+        # Add some text for labels, title and custom x-axis tick labels, etc.
+        ax.set_ylabel('%')
+        # ax.set_title('Penguin attributes by species')
+        ax.set_xticks(x + width, lbl)
+        ax.tick_params(axis='x', labelrotation=90)
+        #labelrotationfloat
+        # ax.legend(loc='upper left', ncols=3)
+        leg = ['tata', 'toto', 'tutu']
+        ax.legend()
+        ax.set_ylim(0, 100)
+
+
+        plt.show()
+
+
 

@@ -73,7 +73,6 @@ class Data_analyser:
         plt.gca().yaxis.set_major_formatter(PercentFormatter())
         plt.show()
 
-
     def convert_list_in_purcentage(self, list_in):
         converted_list = []
         sum_of_element = sum([x for x in list_in])
