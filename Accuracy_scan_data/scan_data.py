@@ -7,6 +7,10 @@ from tkinter import messagebox
 from datetime import datetime
 
 class Data_analyser:
+    """
+    Input the file created by the Accuracy software tool batchMetrologySummary.csv
+    And it generate an accuracy distribution table  in range by setp of 5 micron.
+    """
 
     def __init__(self):
         self.entry_box_text = ""
