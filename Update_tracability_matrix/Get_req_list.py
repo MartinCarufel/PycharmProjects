@@ -30,11 +30,14 @@ class Extrace_req:
         pass
 
     def _create_array_of_req(self, text):
-        first_line = text.split("\n")[0]
-        first_line = first_line.replace(";", ",")
-        req_split = first_line.split(", ")
-        cleaned_list = [re.sub(r"\[[0-9]\]", "", s) for s in req_split]
-        cleaned_list = [s.rstrip() for s in cleaned_list]
+        cleaned_list = re.findall(r"[0-9]{1,3}\.[0-9]{3}", text)
+
+        #
+        # first_line = text.split("\n")[0]
+        # first_line = first_line.replace(";", ",")
+        # req_split = first_line.split(", ")
+        # cleaned_list = [re.sub(r"\[[0-9]\]", "", s) for s in req_split]
+        # cleaned_list = [s.rstrip() for s in cleaned_list]
         return cleaned_list
 
     def pd_dataframe_from_dict(self, data):
