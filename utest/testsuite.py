@@ -1,7 +1,7 @@
 import unittest
 import sys
 
-class TestSuite(unittest.TestCase):
+    class TestSuite(unittest.TestCase):
 
     def setUp(self):
         print('setup')
