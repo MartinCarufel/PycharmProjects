@@ -33,13 +33,40 @@ def get_table(file_structure, para_index):
 
     return None  # No table found after the specified paragraph index
 
+def get_test_case(document):
+    par = document.paragraphs
+    test_case_list = []
+    for i in range(len(par)):
+        x = re.match("TC[0-9]{5}", par[i].text)
+        if x != None:
+            test_case_list.append((i, par[i].text))
+            # print(i, end="- ")
+            # print(par[i].text)
+            pass
+    return test_case_list
+
+def main():
+    path_file = "DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx"
+    document = Document(path_file)
+    s = get_doc_structure(document)
+
+    print(get_test_case(document))
+
+    next_table = get_table(s, 9)
+    for row in next_table.rows:
+        print([cell.text for cell in row.cells])
+    pass
 
 # "DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx"
 
 if __name__ == "__main__":
+    main()
+
+
+
     # d = Word_collector("DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx")
-    path_file = "DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx"
-    document = Document(path_file)
+    # path_file = "DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx"
+    # document = Document(path_file)
     # document.LoadFromFile(path_file)
     # layoutDoc = FixedLayoutDocument(document)
     # layoutPage = layoutDoc.Pages[1]
@@ -47,30 +74,30 @@ if __name__ == "__main__":
     # print(page_text)
 
 
-    par = document.paragraphs
-    for i in range(len(par)):
-        if par[i].text.lower() == "test specifications":
-            # print(i)
-            # print(par[i].text)
-            pass
+    # par = document.paragraphs
+    # for i in range(len(par)):
+    #     if par[i].text.lower() == "test specifications":
+    #         # print(i)
+    #         # print(par[i].text)
+    #         pass
 
     # Find the test case
-    for i in range(len(par)):
-        x = re.match("TC[0-9]{5}", par[i].text)
-        if x != None:
-            # print(i, end="- ")
-            # print(par[i].text)
-            pass
+    # for i in range(len(par)):
+    #     x = re.match("TC[0-9]{5}", par[i].text)
+    #     if x != None:
+    #         # print(i, end="- ")
+    #         # print(par[i].text)
+    #         pass
 
 
-    s = get_doc_structure(document)
+    # s = get_doc_structure(document)
     # for idx, elem in enumerate(s):
     #     if isinstance(elem, Paragraph):
     #         print(elem.text)
 
-    next_table = get_table(s, 9)
-    for row in next_table.rows:
-        print([cell.text for cell in row.cells])
+    # next_table = get_table(s, 9)
+    # for row in next_table.rows:
+    #     print([cell.text for cell in row.cells])
 
 
 """
