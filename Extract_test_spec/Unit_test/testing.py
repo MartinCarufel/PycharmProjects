@@ -17,3 +17,12 @@ class TestSuite(unittest.TestCase):
     def test_2(self):
         a = 10
         self.assertIsInstance(a, int)
+
+    def test_clean_string(self):
+        test_string = "6894_004, 6894_007,     6894_007\n\r, 342523"
+        output = []
+        main.clean_and_split(test_string, output)
+        for i in output:
+            print(i)
+
+

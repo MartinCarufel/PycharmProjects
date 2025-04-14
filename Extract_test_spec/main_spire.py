@@ -1,64 +1,60 @@
 import re
 from spire.doc import *
-from spire.doc.documents import *
-from spire.doc.fields import *
+from spire.doc.common import *
 
-# Load the Word document
-doc = Document()
-doc.LoadFromFile("your_document.docx")
+# Load the document
+document = Document()
+document.LoadFromFile("DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx")
 
-# Regex to match TC followed by 5 digits
-pattern = re.compile(r"TC\d{5}")
+# Dictionary to hold TC codes and their following tables
+tc_tables = {}
 
-# Store results
-matches = []
-
-# Flag to indicate next table after a match
-looking_for_table = False
-current_match_info = None
-
-# Loop through all sections and body items
-for section in doc.Sections:
+for i in range(document.Sections.Count):
+    section = document.Sections.get_Item(i)
     body_items = section.Body.ChildObjects
-    i = 0
-    while i < body_items.Count:
-        item = body_items[i]
 
-        # Check for matching paragraphs
-        if isinstance(item, Paragraph):
-            para_text = item.Text
-            if pattern.search(para_text):
-                print(f"Found match: {para_text}")
-                current_match_info = {
-                    "match_text": para_text,
-                    "table": None,
-                    "images": []
-                }
-                looking_for_table = True
-                i += 1
-                continue
+    j = 0
+    while j < body_items.Count:
+        item = body_items.get_Item(j)
 
-        # If we're looking for a table after a match
-        if looking_for_table:
-            if isinstance(item, Table):
-                current_match_info["table"] = item
-                matches.append(current_match_info)
-                current_match_info = None
-                looking_for_table = False
-            elif isinstance(item, Paragraph):
-                # Check for images in paragraphs while looking
-                for obj in item.ChildObjects:
-                    if isinstance(obj, DocPicture):
-                        current_match_info["images"].append(obj)
+        # Check if the item is a paragraph
+        if item.DocumentObjectType == DocumentObjectType.Paragraph:
+            para_text = item.Text.strip()
+            match = re.match(r"TC[0-9]{5}", para_text)
+            if match:
+                tc_code = match.group()
 
-        i += 1
+                # Look ahead for the next table
+                for k in range(j + 1, body_items.Count):
+                    next_item = body_items.get_Item(k)
+                    if next_item.DocumentObjectType == DocumentObjectType.Table:
+                        table = next_item
+                        table_data = []
 
-# Output result
-for idx, match in enumerate(matches):
-    print(f"\n--- Match {idx + 1} ---")
-    print("Text:", match["match_text"])
-    print("Table:", "Found" if match["table"] else "Not Found")
-    print("Images:", f"{len(match['images'])} image(s) found")
+                        for r in range(table.Rows.Count):
+                            row = table.Rows.get_Item(r)
+                            row_data = []
+                            for c in range(row.Cells.Count):
+                                cell = row.Cells.get_Item(c)
+                                """cell_text = ' '.join(cell.Paragraphs.get_Item(p).Text.strip()
+                                                     for p in range(cell.Paragraphs.Count))"""
+                                cell_lines = []
+                                for p in range(cell.Paragraphs.Count):
+                                    para = cell.Paragraphs.get_Item(p)
+                                    para_text = para.Text.strip().replace('\r', '\n').replace('\v', '\n')
+                                    cell_lines.append(para_text)
+                                cell_text = '\n'.join(cell_lines)
+                                row_data.append(cell_text)
+                            table_data.append(row_data)
 
-    # If you want to save the found table and images, you could export them here
-    # Example: match["table"].SaveToFile(...) or save images to disk
+                        tc_tables[tc_code] = table_data
+                        break  # Stop looking once we found the next table
+        j += 1
+
+# Print results
+for tc, table in tc_tables.items():
+    print(f"\n--- Table for {tc} ---")
+    for row in table:
+        print(row)
+
+document.Close()
