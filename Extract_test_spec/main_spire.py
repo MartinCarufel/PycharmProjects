@@ -36,8 +36,30 @@ def fetch_doc_in_dict(document):
                                         cell = row.Cells.get_Item(c)
                                         cell_lines = []
                                         for p in range(cell.Paragraphs.Count):
+                                            new_para = []
                                             para = cell.Paragraphs.get_Item(p)
                                             para_text = para.Text.strip().replace('\r', '\n').replace('\v', '\n')
+                                            # Check for double-quote and replace by opening-closing double quote
+                                            if para.Text.count("\"") >= 2:
+                                                if para.Text.count("\"") % 2 == 0:
+                                                    quote = "opening"
+                                                    for c in para.Text:
+                                                        if c == "\"" and quote == "opening":
+                                                            new_para.append("“")
+                                                            quote = "close"
+                                                        elif c == "\"" and quote == "close":
+                                                            new_para.append("”")
+                                                            quote = "open"
+                                                        else:
+                                                            new_para.append(c)
+                                                else:
+                                                    print(f"This paragraph <<{para_text}>> have even quotation")
+                                                    raise Exception
+                                                para_text = "".join(new_para)
+
+                                            elif para.Text.count("\"") == 1:
+                                                print(f"This paragraph <<{para_text}>> have even quotation")
+                                                raise Exception
                                             cell_lines.append(para_text)
                                         cell_text = '\\n'.join(cell_lines)
                                         row_data.append(cell_text)
@@ -51,27 +73,33 @@ def fetch_doc_in_dict(document):
 
 
 def csv_construct_header(header_l):
-    return ";".join(header_l) + "\n"
+    return ",".join(header_l) + "\n"
 
 
 def csv_construct_tc(table):
-    return f";\"Test Case\"; \"{table}\";;;\n"
+    return f",\"Test Case\", \"{table}\",,,\n"
 
 def csv_construct_test_step(id, text):
-    return f";;;\"{id}\";\"{text}\"\\n\\n"
+    return f",,,\"{id}\",\"{text}\\n\\n"
 
 
 def csv_construct_req(text):
-    return f"\"Requirement(s): {text}\";"
-    pass
+    # print("Test string:",text)
+    pattern = r"\d{4}_\d{3}"
+    req_list = re.findall(pattern, text)
+    if len(req_list) > 0:
+        output = ", ".join(req_list)
+    else:
+        output = "n/a"
+    return f"Requirement(s): {output}\","
 
 
 def csv_construct_exp_res(text):
-    return f"\"{text}\"\\n\\n"
+    return f"\"{text}\\n\\n"
 
 
-def csv_construct_TM_OE(text):
-    return f"TM / OE:\"{text}\"\n"
+def csv_construct_tm_oe(text):
+    return f"TM / OE:{text}\"\n"
 
 
 def debug_print(tc_tables):
@@ -83,7 +111,6 @@ def debug_print(tc_tables):
             print(row)
 
 
-
 def main():
     # Load the document
     document = Document()
@@ -92,7 +119,7 @@ def main():
     tc_tables = fetch_doc_in_dict(document)
     # debug_print(tc_tables)
     document.Close()
-    print(tc_tables)
+    # print(tc_tables)
     with open("export.csv", mode="w", encoding="UTF-8") as f:
         f.write(csv_construct_header(["ID","Work Item Type","Title","Test Step","Step Action","Step Expected"]))
         # Cycle test case
@@ -104,13 +131,8 @@ def main():
                 f.write(csv_construct_test_step(i, table[i][1]))
                 f.write(csv_construct_req(table[i][2]))
                 f.write(csv_construct_exp_res(table[i][3]))
-                f.write(csv_construct_TM_OE(table[i][4]))
+                f.write(csv_construct_tm_oe(table[i][4]))
                 # print(table[i][2])
-                pass
-
-
-
-
 
 
 if __name__ == "__main__":
