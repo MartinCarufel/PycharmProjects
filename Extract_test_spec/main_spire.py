@@ -3,7 +3,7 @@ import string
 from spire.doc import *
 from spire.doc.common import *
 from tkinter import filedialog
-
+from datetime import datetime
 
 def fetch_doc_in_dict(document):
     tc_tables = {}
@@ -129,7 +129,9 @@ def main():
     # debug_print(tc_tables)
     document.Close()
     # print(tc_tables)
-    with open("export.csv", mode="w", encoding="UTF-8") as f:
+    now = datetime.now()
+    formatted_now = now.strftime("%Y-%m-%d_%H%M%S")
+    with open(f"export_{formatted_now}.csv", mode="w", encoding="UTF-8") as f:
         f.write(csv_construct_header(["ID","Work Item Type","Title","Test Step","Step Action","Step Expected"]))
         # Cycle test case
         for tc, table in tc_tables.items():
