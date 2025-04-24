@@ -2,6 +2,7 @@ import re
 import string
 from spire.doc import *
 from spire.doc.common import *
+from tkinter import filedialog
 
 
 def fetch_doc_in_dict(document):
@@ -71,6 +72,8 @@ def fetch_doc_in_dict(document):
     return tc_tables
 
 
+def ask_word_file():
+    return filedialog.askopenfilename()
 
 def csv_construct_header(header_l):
     return ",".join(header_l) + "\n"
@@ -114,7 +117,8 @@ def debug_print(tc_tables):
 def main():
     # Load the document
     document = Document()
-    document.LoadFromFile("DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx")
+    # document.LoadFromFile("DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx")
+    document.LoadFromFile(ask_word_file())
     # Dictionary to hold TC codes and their following tables
     tc_tables = fetch_doc_in_dict(document)
     # debug_print(tc_tables)
