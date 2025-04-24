@@ -82,6 +82,11 @@ def csv_construct_header(header_l):
 def csv_construct_tc(table):
     return f",\"Test Case\", \"{table}\",,,\n"
 
+
+def csv_setup_step(id, text):
+    return f",,,\"{id}\",\"Setup: {text}\\n\\n"
+
+
 def csv_construct_test_step(id, text):
     return f",,,\"{id}\",\"{text}\\n\\n"
 
@@ -132,7 +137,11 @@ def main():
 
             # cycle test step in test case
             for i in range(1, len(table)):
-                f.write(csv_construct_test_step(i, table[i][1]))
+
+                if table[i][0].lower() == "setup":
+                    f.write(csv_setup_step(i, table[i][1]))
+                else:
+                    f.write(csv_construct_test_step(i, table[i][1]))
                 f.write(csv_construct_req(table[i][2]))
                 f.write(csv_construct_exp_res(table[i][3]))
                 f.write(csv_construct_tm_oe(table[i][4]))
