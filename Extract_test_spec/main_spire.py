@@ -62,7 +62,7 @@ def fetch_doc_in_dict(document):
                                                 print(f"This paragraph <<{para_text}>> have even quotation")
                                                 raise Exception
                                             cell_lines.append(para_text)
-                                        cell_text = '\\n'.join(cell_lines)
+                                        cell_text = '\r\n'.join(cell_lines)
                                         row_data.append(cell_text)
                                     table_data.append(row_data)
 
@@ -80,15 +80,15 @@ def csv_construct_header(header_l):
 
 
 def csv_construct_tc(table):
-    return f",\"Test Case\", \"{table}\",,,\n"
+    return f",\"Test Case\",\"{table}\",,,\n"
 
 
 def csv_setup_step(id, text):
-    return f",,,\"{id}\",\"Setup: {text}\\n\\n"
+    return f",,,\"{id}\",\"Setup: {text}\r\n\r\n"
 
 
 def csv_construct_test_step(id, text):
-    return f",,,\"{id}\",\"{text}\\n\\n"
+    return f",,,\"{id}\",\"{text}\r\n\r\n"
 
 
 def csv_construct_req(text):
@@ -103,11 +103,11 @@ def csv_construct_req(text):
 
 
 def csv_construct_exp_res(text):
-    return f"\"{text}\\n\\n"
+    return f"\"{text}\r\n\r\n"
 
 
 def csv_construct_tm_oe(text):
-    return f"TM / OE:{text}\"\n"
+    return f"Test Method/Objective Evidence: {text}\"\n"
 
 
 def debug_print(tc_tables):
@@ -131,7 +131,7 @@ def main():
     # print(tc_tables)
     now = datetime.now()
     formatted_now = now.strftime("%Y-%m-%d_%H%M%S")
-    with open(f"export_{formatted_now}.csv", mode="w", encoding="UTF-8") as f:
+    with open(f"export_{formatted_now}.csv", mode="w", encoding="UTF-8", newline='') as f:
         f.write(csv_construct_header(["ID","Work Item Type","Title","Test Step","Step Action","Step Expected"]))
         # Cycle test case
         for tc, table in tc_tables.items():
