@@ -6,6 +6,20 @@ from tkinter import filedialog
 from datetime import datetime
 
 def fetch_doc_in_dict(document):
+    """
+        Parses a Word document using Spire.Doc and extracts test case data.
+
+        The function scans for paragraphs that match a test case ID pattern (e.g., "TC12345").
+        Once a match is found, it looks ahead for the next table, parses its rows and cells,
+        and stores structured content in a dictionary keyed by test case ID.
+
+        Args:
+            document (Document): A Spire.Doc Document object.
+
+        Returns:
+            dict: A dictionary mapping test case IDs to their corresponding table data.
+                  Format: { "TCxxxxx": [title, [row1_data], [row2_data], ...] }
+        """
     tc_tables = {}
     for i in range(document.Sections.Count):
         section = document.Sections.get_Item(i)
@@ -73,25 +87,80 @@ def fetch_doc_in_dict(document):
 
 
 def ask_word_file():
+    """
+        Opens a file dialog to allow the user to select a Word document.
+
+        Returns:
+            str: The selected file path.
+        """
     return filedialog.askopenfilename()
 
 def csv_construct_header(header_l):
+    """
+        Constructs the CSV header row.
+
+        Args:
+            header_l (list): List of header field names.
+
+        Returns:
+            str: Comma-separated header row.
+        """
     return ",".join(header_l) + "\n"
 
 
 def csv_construct_tc(table):
+    """
+        Formats the title row for a test case in CSV.
+
+        Args:
+            table (str): Test case title or identifier.
+
+        Returns:
+            str: CSV row for the test case header.
+        """
     return f",\"Test Case\",\"{table}\",,,\n"
 
 
 def csv_setup_step(id, text):
+    """
+        Constructs a setup step row for a test case.
+
+        Args:
+            id (int): Step number.
+            text (str): Description of the setup step.
+
+        Returns:
+            str: Formatted CSV line for the setup step.
+        """
     return f",,,\"{id}\",\"Setup: {text}\r\n\r\n"
 
 
 def csv_construct_test_step(id, text):
+    """
+        Constructs a normal test step row for a test case.
+
+        Args:
+            id (int): Step number.
+            text (str): Step description.
+
+        Returns:
+            str: CSV formatted row for the test step.
+        """
     return f",,,\"{id}\",\"{text}\r\n\r\n"
 
 
 def csv_construct_req(text):
+    """
+        Extracts and formats requirement references from a text block.
+
+        The expected format is numeric IDs separated by an underscore (e.g., 1234_001).
+
+        Args:
+            text (str): Input text possibly containing requirement IDs.
+
+        Returns:
+            str: CSV field for requirements.
+        """
     # print("Test string:",text)
     pattern = r"\d{4}_\d{3}"
     req_list = re.findall(pattern, text)
@@ -103,14 +172,38 @@ def csv_construct_req(text):
 
 
 def csv_construct_exp_res(text):
+    """
+        Constructs the expected result field for a test step.
+
+        Args:
+            text (str): Expected result text.
+
+        Returns:
+            str: Formatted expected result CSV field.
+        """
     return f"\"{text}\r\n\r\n"
 
 
 def csv_construct_tm_oe(text):
+    """
+        Constructs the Test Method/Objective Evidence field.
+
+        Args:
+            text (str): TM/OE information.
+
+        Returns:
+            str: Formatted TM/OE CSV field.
+        """
     return f"Test Method/Objective Evidence: {text}\"\n"
 
 
 def debug_print(tc_tables):
+    """
+        Prints the content of test case tables to console (for debugging).
+
+        Args:
+            tc_tables (dict): Dictionary of test cases and their associated table data.
+        """
     # Print results
     # print(tc_tables)
     for tc, table in tc_tables.items():
@@ -120,6 +213,12 @@ def debug_print(tc_tables):
 
 
 def main():
+    """
+        Main function:
+        - Prompts user to select a DOCX file
+        - Extracts test cases and associated data
+        - Exports the structured content to a CSV file
+        """
     # Load the document
     document = Document()
     # document.LoadFromFile("DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx")
