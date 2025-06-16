@@ -1,5 +1,6 @@
 import unittest
 import main
+import main_spire
 
 class TestSuite(unittest.TestCase):
 
@@ -24,5 +25,20 @@ class TestSuite(unittest.TestCase):
         main.clean_and_split(test_string, output)
         for i in output:
             print(i)
+
+
+    def test_title_filter(self):
+        test_strings = ["TC07001 – Indicating the battery level of the scanner",
+                       "TC07003 - No scanner is detected - Manual connection (First time use)"]
+
+        expected_string = [",Test Case,TC07001 - Indicating the battery level of the scanner,,,",
+                           ",Test Case,TC07003 - No scanner is detected - Manual connection (First time use),,,"]
+
+        for i in range(len(test_strings)):
+
+            print(main_spire.csv_construct_tc(test_strings[i]))
+
+
+
 
 

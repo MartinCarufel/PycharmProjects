@@ -118,7 +118,11 @@ def csv_construct_tc(table):
         Returns:
             str: CSV row for the test case header.
         """
-    return f",\"Test Case\",\"{table}\",,,\n"
+    print(table)
+    pattern = r"(TC\d{5})( \W )(.*)"
+    split_title = re.split(pattern, table)
+    # return f",\"Test Case\",\"{table}\",,,\n"
+    return f",\"Test Case\",\"{split_title[1]} - {split_title[3]}\",,,\n"
 
 
 def csv_setup_step(id, text):
