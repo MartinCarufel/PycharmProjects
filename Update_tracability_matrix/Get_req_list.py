@@ -11,6 +11,22 @@ class Extrace_req:
     def __init__(self):
         pass
 
+    old_new_doc_num = {"DES73-6894": "DEV-0044559", "DES73-6606": "DEV-0044560", "DES73-7095": "DEV-0044581",
+                       "DES73-6896": "DEV-0044561", "DES73-6897": "DEV-0044562", "DES73-6985": "DEV-0044568",
+                       "DES73-6881": "DEV-0044563", "DES73-6877": "DEV-0044565", "DES73-6997": "DEV-0044569",
+                       "DES73-6878": "DEV-0044566", "DES73-6973": "DEV-0044564", "DES73-6984": "DEV-0044567",
+                       "DES73-6895": "DEV-0044570", "DES73-6899": "DEV-0044580", "DES73-6900": "DEV-0044573",
+                       "DES73-6901": "DEV-0044574", "DES73-6902": "DEV-0044575", "DES73-7100": "DEV-0044571",
+                       "DES73-6904": "DEV-0044576", "DES73-": "DEV-0044", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-6882": "DEV-0044577", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-": "DEV-0044", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-": "DEV-0044", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-": "DEV-0044", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-": "DEV-0044", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-": "DEV-0044", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-": "DEV-0044", "DES73-": "DEV-0044",
+                       "DES73-": "DEV-0044", "DES73-": "DEV-0044", "DES73-": "DEV-0044",}
+
     def list_folder(self, path):
         """
                 Lists all file paths in the specified directory.
@@ -42,7 +58,6 @@ class Extrace_req:
             cell = tbl.cell(2, 1)
             text = cell.text
             result[(self._extract_doc_number_from_path(file))] = self._create_array_of_req(text)
-            # print("{};{}".format(file, text))
         return result
 
     def _extract_doc_number_from_path(self, path):
@@ -55,8 +70,12 @@ class Extrace_req:
                 Returns:
                     str: First 10 characters of the file name.
                 """
+
         sep_path = path.split("\\")
-        return sep_path[-1][0:10]
+        if sep_path[-1][0:3] == "DES":
+            return self.old_new_doc_num[sep_path[-1][0:10]]
+        else:
+            return sep_path[-1][0:11]
         pass
 
     def _create_array_of_req(self, text):
@@ -70,13 +89,6 @@ class Extrace_req:
                    list: List of matching requirement references.
                """
         cleaned_list = re.findall(r"[0-9]{1,3}\.[0-9]{3}", text)
-
-        #
-        # first_line = text.split("\n")[0]
-        # first_line = first_line.replace(";", ",")
-        # req_split = first_line.split(", ")
-        # cleaned_list = [re.sub(r"\[[0-9]\]", "", s) for s in req_split]
-        # cleaned_list = [s.rstrip() for s in cleaned_list]
         return cleaned_list
 
     def pd_dataframe_from_dict(self, data):
@@ -176,6 +188,18 @@ class Excel_manager:
             except Exception as e:
                 print(f"The text requirement is: {req}")
                 print(f"{e}")
+
+
+    def generate_doc_id_corolation(self):
+        document_list = {}
+        starting_col = 8
+        ending_col = 71
+        collect_row = 3
+        for col_id in range(starting_col, ending_col):
+            document_list[self.ws.cell(collect_row, col_id).value[0:11]] = self.ws.cell(collect_row, col_id).column_letter
+        return document_list
+
+
 def main():
     """
         Main execution function that:
@@ -184,71 +208,14 @@ def main():
         - Marks corresponding cells in the Excel sheet.
         - Saves the result in a new Excel file.
         """
-    col_id_relation = {
-"DEV-0044559": "G",
-"DEV-0044560": "H",
-"DES73-6607": "I",
-"DEV-0044561": "J",
-"DEV-0044562": "K",
-"DEV-0044568": "L",
-"DEV-0044563": "M",
-"DEV-0044564": "N",
-"DEV-0044565": "O",
-"DEV-0044569": "P",
-"DEV-0044566": "Q",
-"DEV-0044567": "R",
-"DEV-0044567": "S",
-"DEV-0044573": "T",
-"DEV-0044574": "U",
-"DEV-0044575": "V",
-"DEV-0044576": "W",
-"DEV-0044577": "X",
-"DEV-0044579": "Y",
-"DEV-0044581": "Z",
-"DEV-0044580": "AA",
-"DEV-0044571": "AB",
-"DEV-0044600": "AC",
-"DEV-0044597": "AD",
-"DEV-0044601": "AE",
-"DEV-0044602": "AF",
-"DEV-0044629": "AG",
-"DEV-0044623": "AH",
-"DEV-0044621": "AI",
-"DEV-0045649": "AJ",
-"DEV-0045608": "AK",
-"DEV-0045609": "AL",
-"DEV-0044596": "AM",
-"DEV-0044594": "AN",
-"DEV-0044593": "AO",
-"DEV-0044625": "AP",
-"DEV-0044628": "AQ",
-"DEV-0044604": "AR",
-"DEV-0044605": "AS",
-"DEV-0044612": "AT",
-"DEV-0044606": "AU",
-"DEV-0044607": "AV",
-"DEV-0044608": "AW",
-"DEV-0044609": "AX",
-"DEV-0044610": "AY",
-"DEV-0044578": "AZ",
-"DEV-0044611": "BA",
-"DEV-0044599": "BB",
-"DEV-0044599": "BC",
-"DEV-0044656": "BD",
-"DEV-0044650": "BE",
-"DEV-0044591": "BF",
-"DEV-0044646": "BG",
-"DEV-0044613": "BH",
-"DEV-0044592": "BI",
-"DEV-0044643": "BJ",
-"UC_007": "BK",
-"UC_008": "BL",
-                    }
+
 
     o = Extrace_req()
     exl = Excel_manager()
-    ws = exl.open_excel("DEL73-6871 STMN IOS Software Traceability Matrix (v1.2)_Effective.xlsx", "1.0.2")
+    ws = exl.open_excel("DEV-0044585 STMN IOS Software Traceability Matrix Rev 5.xlsx", "1.0.3")
     folder_list = [r"C:\Users\u120230\temp\SDD", r"C:\Users\u120230\temp\VER", r"C:\Users\u120230\temp\VAL"]
+
+    col_id_relation = exl.generate_doc_id_corolation()
 
     for folder in folder_list:
         file_list = o.list_folder(folder)
@@ -258,6 +225,9 @@ def main():
             exl.marking(col_id_relation[key], value)
     exl.wb.save("out.xlsx")
 
+def main2():
+    exl = Excel_manager()
+    exl.generate_doc_id_corolation()
 
 if __name__ == "__main__":
     main()
