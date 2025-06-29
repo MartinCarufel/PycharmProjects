@@ -1,7 +1,7 @@
 import re
-import string
+# import string
 from spire.doc import *
-from spire.doc.common import *
+# from spire.doc.common import *
 from tkinter import filedialog
 from datetime import datetime
 
