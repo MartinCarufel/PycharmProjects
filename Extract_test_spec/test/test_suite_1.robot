@@ -8,11 +8,18 @@ ${result}    ${none}
 
 *** Test Cases ***
 
-Test Fetch Doc Returns Empty Dict
+Scenario: Test Fetch Doc Returns Empty Dict
     Given a test spec word file
     When read and process the word file
     Then the resulting is a dictionary structure
     And the dictionary is not empty
+
+Scenario outline: Test formating requirement list
+    Given a text block
+    When process the text
+    Then the result is formated
+    And remove line break
+
 
 
 
