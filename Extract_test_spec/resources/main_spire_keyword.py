@@ -5,7 +5,7 @@ import main_spire
 
 
 @keyword("load document")
-def fetch_doc_in_dict(doc):
+def x_fetch_doc_in_dict(doc):
     document = spire.doc.Document()
     document.LoadFromFile(doc)
     return document
@@ -22,3 +22,4 @@ def result_is_a_dictionary(obj):
 @keyword("result dict is not empty")
 def result_is_not_empty(obj):
     return len(obj)
+
