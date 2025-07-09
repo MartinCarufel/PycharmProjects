@@ -133,7 +133,7 @@ def csv_construct_test_step(o):
     return f",,,\"{clean_text}\"\n"
 
 def main():
-    path_file = "DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx"
+    path_file = "Unit_test/test_data/DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx"
     document = Document(path_file)
     s = get_doc_structure(document)
     test_case_list = get_test_case(document)

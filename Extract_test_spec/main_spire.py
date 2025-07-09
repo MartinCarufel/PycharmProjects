@@ -1,11 +1,11 @@
 import re
-import string
-from spire.doc import *
-from spire.doc.common import *
+# import string
+from spire.doc import Document, DocumentObjectType
+# from spire.doc.common import *
 from tkinter import filedialog
 from datetime import datetime
 
-def fetch_doc_in_dict(document):
+def fetch_doc_in_dict(pathfile):
     """
         Parses a Word document using Spire.Doc and extracts test case data.
 
@@ -20,6 +20,9 @@ def fetch_doc_in_dict(document):
             dict: A dictionary mapping test case IDs to their corresponding table data.
                   Format: { "TCxxxxx": [title, [row1_data], [row2_data], ...] }
         """
+
+    document = Document()
+    document.LoadFromFile(pathfile)
     tc_tables = {}
     for i in range(document.Sections.Count):
         section = document.Sections.get_Item(i)
@@ -83,6 +86,7 @@ def fetch_doc_in_dict(document):
                             tc_tables[tc_code] = table_data
                             break  # Stop looking once we found the next table
             j += 1
+    document.Close()
     return tc_tables
 
 
@@ -163,7 +167,7 @@ def csv_construct_req(text):
             text (str): Input text possibly containing requirement IDs.
 
         Returns:
-            str: CSV field for requirements.
+            str: CSV field for requirements. ex: 6900-001, 6900-002, 6900-003
         """
     # print("Test string:",text)
     pattern = r"\d{4}_\d{3}"
@@ -223,15 +227,7 @@ def main():
         - Extracts test cases and associated data
         - Exports the structured content to a CSV file
         """
-    # Load the document
-    document = Document()
-    # document.LoadFromFile("DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx")
-    document.LoadFromFile(ask_word_file())
-    # Dictionary to hold TC codes and their following tables
-    tc_tables = fetch_doc_in_dict(document)
-    # debug_print(tc_tables)
-    document.Close()
-    # print(tc_tables)
+    tc_tables = fetch_doc_in_dict(ask_word_file())
     now = datetime.now()
     formatted_now = now.strftime("%Y-%m-%d_%H%M%S")
     with open(f"export_{formatted_now}.csv", mode="w", encoding="UTF-8", newline='') as f:

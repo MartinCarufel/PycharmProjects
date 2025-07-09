@@ -1,0 +1,38 @@
+{
+  "1":{
+    "file name": "./test_data/DEV-0044600 STMN IOS Main Application Verification Specifications Rev 4.docx",
+    "number of test case": 4,
+    "test cases":{
+      "name": "TC01001 – Open the software and perform the 1st time setup on touch screen",
+      "number of steps": 7,
+      "setup":{
+        "requirements": "n/a",
+        "expect result": "n/a",
+        "tm oe": "n/a"
+      },
+      "1": {
+        "requirements": "6894_005",
+        "expect result": "The product name “Straumann SIRIOS” and the product icon shall be displayed in compliance with the marketing branding guidelines.",
+        "tm oe": "Observation/ Screenshot"
+      }
+    }
+},
+  "2":{
+    "file name": "./test_data/Extrac requirement challenge.docx",
+    "number of test case": 1,
+    "test cases":{
+      "name": "TC01001 – Open the software and perform the 1st time setup on touch screen",
+      "number of steps": 2,
+      "setup":{
+        "requirements": "n/a",
+        "expect result": "n/a",
+        "tm oe": "n/a"
+      },
+      "1": {
+        "requirements": "6894_001, 6894_002, 6894_003, 6894_004, 6894_005",
+        "expect result": "The product name “Straumann SIRIOS” and the product icon shall be displayed in compliance with the marketing branding guidelines.",
+        "tm oe": "Observation/ Screenshot"
+      }
+    }
+}
+}
