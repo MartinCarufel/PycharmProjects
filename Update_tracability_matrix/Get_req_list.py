@@ -225,7 +225,7 @@ def main():
             exl.marking(col_id_relation[key], value)
     exl.wb.save("out.xlsx")
 
-def main2():
+def test():
     exl = Excel_manager()
     exl.generate_doc_id_corolation()
 
