@@ -34,5 +34,23 @@
         "tm oe": "Observation/ Screenshot"
       }
     }
+},
+  "3":{
+    "file name": "./test_data/DEV-0044420 DWOS Easy Validation Specifications UC001 Single Crown Rev 5.docx",
+    "number of test case": 0,
+    "test cases":{
+      "name": "abc",
+      "number of steps": 0,
+      "setup":{
+        "requirements": "n/a",
+        "expect result": "n/a",
+        "tm oe": "n/a"
+      },
+      "1": {
+        "requirements": "1234_123",
+        "expect result": "abc",
+        "tm oe": "Observation/ Screenshot"
+      }
+    }
 }
 }

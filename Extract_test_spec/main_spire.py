@@ -5,7 +5,7 @@ from spire.doc import Document, DocumentObjectType
 from tkinter import filedialog
 from datetime import datetime
 
-def fetch_doc_in_dict(pathfile):
+def fetch_doc_in_dict(pathfile, extract_type):
     """
         Parses a Word document using Spire.Doc and extracts test case data.
 
@@ -35,13 +35,21 @@ def fetch_doc_in_dict(pathfile):
             if item.DocumentObjectType == DocumentObjectType.Paragraph:
 
                 para_text = item.Text.strip()
-                match = re.match(r"TC[0-9]{5}", para_text)
+                # print(para_text)
+                if extract_type == "sirios":
+                    match = re.match(r"TC[0-9]{5}", para_text)   # SIRIOS
+                if extract_type == "dwos":
+                    match = re.match(r"UC\d\d\d\.\d{1,2}", para_text)   # DWOS
+                # print(match)
                 if match:
                     tc_code = match.group()
 
                     # Look ahead for the next table
                     for k in range(j + 1, body_items.Count):
-                        next_item = body_items.get_Item(k)
+                        if extract_type == "sirios":
+                            next_item = body_items.get_Item(k)    # SIRIOS
+                        if extract_type == "dwos":
+                            next_item = body_items.get_Item(k + 1)  # DWOS
                         if next_item.DocumentObjectType == DocumentObjectType.Table:
                             table = next_item
                             table_data = [para_text]
@@ -112,7 +120,7 @@ def csv_construct_header(header_l):
     return ",".join(header_l) + "\n"
 
 
-def csv_construct_tc(table):
+def csv_construct_tc(table, extract_type):
     """
         Formats the title row for a test case in CSV.
 
@@ -123,7 +131,10 @@ def csv_construct_tc(table):
             str: CSV row for the test case header.
         """
     print(table)
-    pattern = r"(TC\d{5})( \W )(.*)"
+    if extract_type == "sirios":
+        pattern = r"(TC\d{5})( \W )(.*)"           # SIRIOS
+    if extract_type == "dwos":
+        pattern = r"(UC\d\d\d\.\d{1,2})( \W )(.*)"   # DWOS
     split_title = re.split(pattern, table)
     # return f",\"Test Case\",\"{table}\",,,\n"
     return f",\"Test Case\",\"{split_title[1]} - {split_title[3]}\",,,\n"
@@ -227,14 +238,16 @@ def main():
         - Extracts test cases and associated data
         - Exports the structured content to a CSV file
         """
-    tc_tables = fetch_doc_in_dict(ask_word_file())
+    extract_type = "sirios"        # set to: sirios, dwos
+    tc_tables = fetch_doc_in_dict(ask_word_file(), extract_type)
+    # debug_print(tc_tables)
     now = datetime.now()
     formatted_now = now.strftime("%Y-%m-%d_%H%M%S")
     with open(f"export_{formatted_now}.csv", mode="w", encoding="UTF-8", newline='') as f:
         f.write(csv_construct_header(["ID","Work Item Type","Title","Test Step","Step Action","Step Expected"]))
         # Cycle test case
         for tc, table in tc_tables.items():
-            f.write(csv_construct_tc(table[0]))
+            f.write(csv_construct_tc(table[0], extract_type))
 
             # cycle test step in test case
             for i in range(1, len(table)):

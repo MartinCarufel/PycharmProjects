@@ -33,4 +33,11 @@ class TestSuiteMainSpireFetchDOcInDict(unittest.TestCase):
         print(self.test_data["2"]["file name"])
 
 
+    def test_fetch_doc_in_dict_test_title(self):
+        test_file = self.test_data["3"]["file name"]
+        output_result = fetch_doc_in_dict(test_file)
+        print(output_result)
+        self.assertIsInstance(output_result, dict)
+
+
 
