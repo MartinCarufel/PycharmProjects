@@ -1,0 +1,7 @@
+person:
+  name: Martin
+  age: 49
+  sex: Male
+  prog_skill: Python, Java, "C++", "C#"
+
+city: Montreal
